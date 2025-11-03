@@ -1,0 +1,15 @@
+import DuplicateModel;
+import SysML2Lionweb;
+
+modeltype Ecore uses ecore('http://www.eclipse.org/emf/2002/Ecore');
+
+transformation TransformMetaModel2LW(in source: Ecore, out target: Ecore)
+	access DuplicateModel, SysML2Lionweb;
+
+main() {	
+	var duplicateMM = new DuplicateModel(source, target);
+	var sysml2LW = new SysML2Lionweb(target);
+	
+	duplicateMM.transform();
+	sysml2LW.transform();
+}

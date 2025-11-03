@@ -1,0 +1,121 @@
+modeltype Ecore uses ecore('http://www.eclipse.org/emf/2002/Ecore');
+
+transformation SysML2Lionweb(inout sysml2MM: Ecore);//, out sysml2LW: Ecore);
+
+//property currentPackage: EPackage;
+
+main() {
+	sysml2MM.objectsOfType(EAttribute) -> map attributeWithHighMultiplicity();
+	sysml2MM.objectsOfType(EClass) -> map mapMultipleInheritance();
+}
+
+// For the attributes with high multiplicity, replace those with a containment of an intermediate class
+mapping inout EAttribute::attributeWithHighMultiplicity() : EReference
+	when {self.many} 
+{
+	init {
+		// An intermediate class is introduced to hold the attribute
+		var intermClass: EClass;		
+		var intermClassName := self.name.firstToUpper() + "Container";
+		
+		// Check whether such an intermediate class already exist: by name and type of the attribute
+		var searchForIntermClass := self.eContainingClass.ePackage.eClassifiers -> select(c | 
+										c.name = intermClassName and 
+										c.oclAsType(EClass).eAttributes -> exists(a |
+											a.name = self.name and a.eType = self.eType));
+		
+		if (searchForIntermClass -> isEmpty()) {
+			intermClass := object EClass {
+				name := intermClassName;
+				_abstract := false;
+				eAnnotations += new EAnnotation( "LionWeb-AttributeWithHighMultiplicity", "Intermediate class"); 
+			};
+			self.eContainingClass.ePackage.eClassifiers += intermClass;
+		} else {
+			intermClass := (searchForIntermClass -> first()).oclAsType(EClass);
+		}
+	}
+
+	// The attribute is replaced by a containment with high multiplicity
+	result.containment := true;
+	result.upperBound := -1;
+	result.eType := intermClass;
+	result.name := self.name + "Container";
+	self.eContainingClass.eStructuralFeatures += result;
+	result.eAnnotations += new EAnnotation ("LionWeb-AttributeWithHighMultiplicity", "Containtainment feature replaces the attribute"); 
+
+	// As a last step: move the attribute from its class to the new intermediate class
+	if (searchForIntermClass -> isEmpty()) {
+		intermClass.eStructuralFeatures += self;
+		self.upperBound := 1;
+	} else {
+		sysml2MM.removeElement(self);
+	}
+}
+
+// For the classes that have multiple super types, transform all but the first one into the interfaces
+mapping inout EClass::mapMultipleInheritance()
+	when {self.eSuperTypes -> size() > 1 and not self.interface}
+{
+	var superNotInterfaces := self.eSuperTypes -> select(s | not s.interface) -> asList();
+	var excessiveSuperTypes := superNotInterfaces -> subSequence(2, superNotInterfaces -> size());
+	
+	excessiveSuperTypes -> map Class2Interface();
+	
+	self.eAnnotations += new EAnnotation ("LionWeb-MultipleInheritance", "Set of super types changed"); 
+}
+
+// Recursive transformation of a class and its super classes into the corresponding hierarchy of interfaces  
+//mapping inout EClass::Class2Interface() : EClass {
+//	init {
+//		result := self.deepclone();
+//	}
+//	
+//	// Adjust copy to the interface context	
+//	name := self.name + "_LWInterface";
+//	_abstract := true;
+//	interface := true;
+//	self.ePackage.eClassifiers += result;
+//	self.eSuperTypes := (result);
+//	self.eStructuralFeatures -> forEach (feature) {
+//		feature._derived := true;
+//	};
+////	result.eReferences -> forEach (ref) {
+////		ref.eOpposite.eType := result;
+////	};
+//	
+//	// Recursively invoke this mapping for the super types of this interface, that are not interfaces
+//	var superTypeNotInterface := result.eSuperTypes -> select(s | not s.interface);
+//	result.eSuperTypes := result.eSuperTypes -> select(s | s.interface);
+//	result.eSuperTypes += superTypeNotInterface -> map Class2Interface();
+//}
+
+// Transform a class and its super classes into the corresponding hierarchy of interfaces  
+mapping inout EClass::Class2Interface() : EClass {
+	// The output is the class that implements this interface
+	result.name := self.name;
+	result.eAnnotations := self.eAnnotations.deepclone();	// move or copy?
+	result.interface := false;
+	result.eSuperTypes := (self);
+	self.ePackage.eClassifiers += result;
+
+	// Transform the input class into the interface
+	self.name := "I" + name; //+ "_LWInterface";
+	self._abstract := true;
+	self.interface := true;
+
+	// Recursively invoke this mapping for the super types, that are not interfaces already
+	self.eSuperTypes -> select(s | not s.interface) -> map Class2Interface();
+	
+	// Document with annotations for the reverse mappings
+	self.eAnnotations += new EAnnotation("LionWeb-MultipleInheritance", "Changed this class into interface");	
+	result.eAnnotations += new EAnnotation("LionWeb-MultipleInheritance", "Added this class to implement LW interface");
+}
+
+constructor EAnnotation :: EAnnotation(set_key : String, set_value : String) {
+	source := "http://lionweb.io/metametamodel/2024.1";
+	details += object EStringToStringMapEntry {
+		key := set_key;
+		value := set_value; 
+	};
+}
