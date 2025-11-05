@@ -1,0 +1,15 @@
+language types
+    version: 1
+    entities (↓name):
+
+        primitive type Boolean
+
+        primitive type Integer
+
+        primitive type Real
+
+        primitive type String
+
+        primitive type UnlimitedNatural
+
+
