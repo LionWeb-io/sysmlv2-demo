@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "build": "tsc",
+    "pregenerate": "npm run build",
+    "generate": "node dist/generate.js"
+  },
+  "dependencies": {
+    "@lionweb/core": "0.7.1",
+    "@lionweb/json": "0.7.1",
+    "@lionweb/utilities": "0.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.0",
+    "typescript": "5.9.3"
+  }
+}

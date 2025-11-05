@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@lionweb/class-core": "0.7.1",
+    "@lionweb/class-core-generator": "0.7.1",
+    "@lionweb/core": "0.7.1",
+    "@lionweb/utilities": "0.7.1"
+  }
+}
