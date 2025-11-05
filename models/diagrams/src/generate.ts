@@ -1,5 +1,6 @@
 import { writeFileSync } from "fs"
 import { asString } from "littoral-templates"
+import { setEOLStyleFromOS } from "littoral-templates-node"
 import { defaultSimplisticHandler, deserializeLanguagesWithHandler } from "@lionweb/core"
 import { LionWebJsonChunk } from "@lionweb/json"
 import { generatePlantUmlForLanguage, languageAsText, readFileAsJson } from "@lionweb/utilities"
@@ -8,6 +9,8 @@ import { focusedDiagram } from "./custom-diagram"
 
 const typesLanguage = deserializeLanguagesWithHandler(readFileAsJson("../types_lionweb.json") as LionWebJsonChunk, defaultSimplisticHandler)[0]
 const sysMLv2Language = deserializeLanguagesWithHandler(readFileAsJson("../SysML_lionweb_lionweb.json") as LionWebJsonChunk, defaultSimplisticHandler, typesLanguage)[0]
+
+setEOLStyleFromOS()
 
 writeFileSync("artifacts/types.puml", generatePlantUmlForLanguage(typesLanguage))
 writeFileSync("artifacts/sysml.puml", generatePlantUmlForLanguage(sysMLv2Language))
