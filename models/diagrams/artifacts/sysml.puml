@@ -1,0 +1,1004 @@
+@startuml
+hide empty members
+
+' qualified name: "sysml"
+
+
+class AcceptActionUsage implements IActionUsage
+
+class ActionDefinition extends OccurrenceDefinition implements IBehavior
+
+class ActionUsage implements IActionUsage
+
+class ActorMembership extends ParameterMembership
+
+class AliasIdsContainer {
+  aliasIds: String?
+}
+
+class AllocationDefinition extends ConnectionDefinition
+
+class AllocationUsage extends ConnectionUsage
+
+class AnalysisCaseDefinition extends CaseDefinition
+
+class AnalysisCaseUsage extends CaseUsage
+
+class AnnotatingElement implements IAnnotatingElement
+
+class Annotation implements IRelationship
+
+class AssertConstraintUsage implements IAssertConstraintUsage
+
+class AssignmentActionUsage implements IActionUsage
+
+class Association implements IAssociation
+
+class AssociationStructure implements IAssociationStructure
+
+class AttributeDefinition extends Definition implements IDataType
+
+class AttributeUsage implements IUsage
+
+class Behavior implements IBehavior
+
+class BindingConnector implements IBindingConnector
+
+class BindingConnectorAsUsage extends ConnectorAsUsage implements IBindingConnector
+
+class BooleanExpression implements IBooleanExpression
+
+class CalculationDefinition extends ActionDefinition implements IFunction
+
+class CalculationUsage implements IActionUsage, IExpression
+
+class CaseDefinition extends CalculationDefinition
+
+class CaseUsage extends CalculationUsage
+
+class Class implements IClass
+
+class Classifier implements IClassifier
+
+class CollectExpression extends OperatorExpression
+
+class Comment implements IAnnotatingElement {
+  locale: String?
+  body: String
+}
+
+class ConcernDefinition extends RequirementDefinition
+
+class ConcernUsage extends RequirementUsage
+
+class ConjugatedPortDefinition extends PortDefinition
+
+class ConjugatedPortTyping extends FeatureTyping
+
+class Conjugation implements IRelationship
+
+class ConnectionDefinition extends PartDefinition implements IAssociationStructure
+
+class ConnectionUsage extends ConnectorAsUsage implements IPartUsage
+
+class Connector implements IConnector
+
+abstract class ConnectorAsUsage implements IConnector, IUsage
+
+class ConstraintDefinition extends OccurrenceDefinition implements IPredicate
+
+class ConstraintUsage implements IConstraintUsage
+
+abstract class ControlNode implements IActionUsage
+
+class CrossSubsetting extends Subsetting
+
+class DataType implements IDataType
+
+class DecisionNode extends ControlNode
+
+class Definition implements IClassifier {
+  isVariation: Boolean
+}
+
+class Dependency implements IRelationship
+
+class Differencing implements IRelationship
+
+class Disjoining implements IRelationship
+
+class Documentation extends Comment
+
+class Element implements IElement
+
+class ElementFilterMembership extends OwningMembership
+
+class EndFeatureMembership extends FeatureMembership
+
+class EnumerationDefinition extends AttributeDefinition
+
+class EnumerationUsage extends AttributeUsage
+
+class EventOccurrenceUsage implements IEventOccurrenceUsage
+
+class ExhibitStateUsage extends StateUsage implements IPerformActionUsage
+
+class Expose implements IExpose
+
+class Expression implements IExpression
+
+class Feature implements IFeature
+
+class FeatureChainExpression extends OperatorExpression
+
+class FeatureChaining implements IRelationship
+
+enum FeatureDirectionKind {
+  in
+  inout
+  out
+}
+
+class FeatureInverting implements IRelationship
+
+class FeatureMembership extends OwningMembership implements IFeaturing
+
+class FeatureReferenceExpression implements IExpression
+
+class FeatureTyping extends Specialization
+
+class FeatureValue extends OwningMembership {
+  isInitial: Boolean
+  isDefault: Boolean
+}
+
+class Featuring implements IFeaturing
+
+class FlowConnectionDefinition extends ActionDefinition implements IInteraction
+
+class FlowConnectionUsage extends ConnectorAsUsage implements IActionUsage, IItemFlow
+
+class ForLoopActionUsage extends LoopActionUsage
+
+class ForkNode extends ControlNode
+
+class FramedConcernMembership extends RequirementConstraintMembership
+
+class Function implements IFunction
+
+interface IActionUsage extends IOccurrenceUsage, IStep
+interface IAnnotatingElement extends IElement
+interface IAssertConstraintUsage extends IConstraintUsage, IInvariant
+interface IAssociation extends IClassifier, IRelationship
+interface IAssociationStructure extends IAssociation, IStructure
+interface IBehavior extends IClass
+interface IBindingConnector extends IConnector
+interface IBooleanExpression extends IExpression
+interface IClass extends IClassifier
+interface IClassifier extends IType
+interface IConnector extends IFeature, IRelationship
+interface IConstraintUsage extends IOccurrenceUsage, IBooleanExpression
+interface IDataType extends IClassifier
+interface IElement {
+  elementId: String
+  declaredShortName: String?
+  declaredName: String?
+  shortName: String?
+  name: String?
+  qualifiedName: String?
+  isImpliedIncluded: Boolean
+  isLibraryElement: Boolean
+}
+
+interface IEventOccurrenceUsage extends IOccurrenceUsage
+interface IExpose extends IImport
+interface IExpression extends IStep {
+  isModelLevelEvaluable: Boolean
+}
+
+interface IFeature extends IType {
+  isUnique: Boolean
+  isOrdered: Boolean
+  isComposite: Boolean
+  isEnd: Boolean
+  isDerived: Boolean
+  isReadOnly: Boolean
+  isPortion: Boolean
+  direction: FeatureDirectionKind?
+  isNonunique: Boolean
+}
+
+interface IFeaturing extends IRelationship
+interface IFunction extends IBehavior {
+  isModelLevelEvaluable: Boolean
+}
+
+interface IImport extends IRelationship {
+  visibility: VisibilityKind
+  isRecursive: Boolean
+  isImportAll: Boolean
+}
+
+interface IInteraction extends IAssociation, IBehavior
+interface IInvariant extends IBooleanExpression {
+  isNegated: Boolean
+}
+
+interface IItemFlow extends IConnector, IStep
+interface IItemUsage extends IOccurrenceUsage
+interface IMetaclass extends IStructure
+interface INamespace extends IElement
+interface IOccurrenceUsage extends IUsage {
+  isIndividual: Boolean
+  portionKind: PortionKind?
+}
+
+interface IPartUsage extends IItemUsage
+interface IPerformActionUsage extends IActionUsage, IEventOccurrenceUsage
+interface IPredicate extends IFunction
+interface IRelationship extends IElement {
+  isImplied: Boolean
+}
+
+interface IStep extends IFeature
+interface IStructure extends IClass
+interface ISuccession extends IConnector
+interface ISuccessionItemFlow extends IItemFlow, ISuccession
+interface IType extends INamespace {
+  isAbstract: Boolean
+  isSufficient: Boolean
+  isConjugated: Boolean
+}
+
+interface IUsage extends IFeature {
+  isReference: Boolean
+  isVariation: Boolean
+}
+
+class IfActionUsage implements IActionUsage
+
+class Import implements IImport
+
+class IncludeUseCaseUsage extends UseCaseUsage implements IPerformActionUsage
+
+class IndexExpression extends OperatorExpression
+
+class Interaction implements IInteraction
+
+class InterfaceDefinition extends ConnectionDefinition
+
+class InterfaceUsage extends ConnectionUsage
+
+class Intersecting implements IRelationship
+
+class Invariant implements IInvariant
+
+class InvocationExpression implements IExpression
+
+class ItemDefinition extends OccurrenceDefinition implements IStructure
+
+class ItemFeature implements IFeature
+
+class ItemFlow implements IItemFlow
+
+class ItemFlowEnd implements IFeature
+
+class ItemUsage implements IItemUsage
+
+class JoinNode extends ControlNode
+
+class LibraryPackage extends Package {
+  isStandard: Boolean
+}
+
+class LifeClass implements IClass
+
+class LiteralBoolean extends LiteralExpression {
+  value: Boolean
+}
+
+class LiteralExpression implements IExpression
+
+class LiteralInfinity extends LiteralExpression
+
+class LiteralInteger extends LiteralExpression {
+  value: Integer
+}
+
+class LiteralRational extends LiteralExpression {
+  value: Real
+}
+
+class LiteralString extends LiteralExpression {
+  value: String
+}
+
+abstract class LoopActionUsage implements IActionUsage
+
+class Membership implements IRelationship {
+  memberElementId: String
+  memberShortName: String?
+  memberName: String?
+  visibility: VisibilityKind
+}
+
+class MembershipExpose extends MembershipImport implements IExpose
+
+class MembershipImport implements IImport
+
+class MergeNode extends ControlNode
+
+class Metaclass implements IMetaclass
+
+class MetadataAccessExpression implements IExpression
+
+class MetadataDefinition extends ItemDefinition implements IMetaclass
+
+class MetadataFeature implements IAnnotatingElement, IFeature
+
+class MetadataUsage extends MetadataFeature implements IItemUsage
+
+class Multiplicity implements IFeature
+
+class MultiplicityRange extends Multiplicity
+
+class Namespace implements INamespace
+
+class NamespaceExpose extends NamespaceImport implements IExpose
+
+class NamespaceImport implements IImport
+
+class NullExpression implements IExpression
+
+class ObjectiveMembership extends FeatureMembership
+
+class OccurrenceDefinition extends Definition implements IClass {
+  isIndividual: Boolean
+}
+
+class OccurrenceUsage implements IOccurrenceUsage
+
+class OperatorExpression extends InvocationExpression {
+  operator: String
+}
+
+class OwningMembership extends Membership {
+  ownedMemberElementId: String
+  ownedMemberShortName: String?
+  ownedMemberName: String?
+}
+
+class Package implements INamespace
+
+class ParameterMembership extends FeatureMembership
+
+class PartDefinition extends ItemDefinition
+
+class PartUsage implements IPartUsage
+
+class PerformActionUsage implements IPerformActionUsage
+
+class PortConjugation extends Conjugation
+
+class PortDefinition extends OccurrenceDefinition implements IStructure
+
+class PortUsage implements IOccurrenceUsage
+
+enum PortionKind {
+  timeslice
+  snapshot
+}
+
+class Predicate implements IPredicate
+
+class Redefinition extends Subsetting
+
+class ReferenceSubsetting extends Subsetting
+
+class ReferenceUsage implements IUsage
+
+class Relationship implements IRelationship
+
+class RenderingDefinition extends PartDefinition
+
+class RenderingUsage implements IPartUsage
+
+enum RequirementConstraintKind {
+  assumption
+  requirement
+}
+
+class RequirementConstraintMembership extends FeatureMembership {
+  kind: RequirementConstraintKind
+}
+
+class RequirementDefinition extends ConstraintDefinition {
+  reqId: String?
+}
+
+class RequirementUsage implements IConstraintUsage {
+  reqId: String?
+}
+
+class RequirementVerificationMembership extends RequirementConstraintMembership
+
+class ResultExpressionMembership extends FeatureMembership
+
+class ReturnParameterMembership extends ParameterMembership
+
+class SatisfyRequirementUsage extends RequirementUsage implements IAssertConstraintUsage
+
+class SelectExpression extends OperatorExpression
+
+class SendActionUsage implements IActionUsage
+
+class Specialization implements IRelationship
+
+class StakeholderMembership extends ParameterMembership
+
+class StateDefinition extends ActionDefinition {
+  isParallel: Boolean
+}
+
+enum StateSubactionKind {
+  entry
+  do
+  exit
+}
+
+class StateSubactionMembership extends FeatureMembership {
+  kind: StateSubactionKind
+}
+
+class StateUsage implements IActionUsage {
+  isParallel: Boolean
+}
+
+class Step implements IStep
+
+class Structure implements IStructure
+
+class Subclassification extends Specialization
+
+class SubjectMembership extends ParameterMembership
+
+class Subsetting extends Specialization
+
+class Succession implements ISuccession
+
+class SuccessionAsUsage extends ConnectorAsUsage implements ISuccession
+
+class SuccessionFlowConnectionUsage extends FlowConnectionUsage implements ISuccessionItemFlow
+
+class SuccessionItemFlow implements ISuccessionItemFlow
+
+class TerminateActionUsage implements IActionUsage
+
+class TextContainer {
+  text: String?
+}
+
+class TextualRepresentation implements IAnnotatingElement {
+  language: String
+  body: String
+}
+
+enum TransitionFeatureKind {
+  trigger
+  guard
+  effect
+}
+
+class TransitionFeatureMembership extends FeatureMembership {
+  kind: TransitionFeatureKind
+}
+
+class TransitionUsage implements IActionUsage
+
+class TriggerInvocationExpression extends InvocationExpression {
+  kind: TriggerKind
+}
+
+enum TriggerKind {
+  when
+  at
+  after
+}
+
+class Type implements IType
+
+class TypeFeaturing implements IFeaturing
+
+class Unioning implements IRelationship
+
+class Usage implements IUsage
+
+class UseCaseDefinition extends CaseDefinition
+
+class UseCaseUsage extends CaseUsage
+
+class VariantMembership extends OwningMembership
+
+class VerificationCaseDefinition extends CaseDefinition
+
+class VerificationCaseUsage extends CaseUsage
+
+class ViewDefinition extends PartDefinition
+
+class ViewRenderingMembership extends FeatureMembership
+
+class ViewUsage implements IPartUsage
+
+class ViewpointDefinition extends RequirementDefinition
+
+class ViewpointUsage extends RequirementUsage
+
+enum VisibilityKind {
+  private
+  protected
+  public
+}
+
+class WhileLoopActionUsage extends LoopActionUsage
+
+
+
+' relations:
+
+AcceptActionUsage "*" --> "0..1" IExpression: receiverArgument
+AcceptActionUsage "*" --> "1" ReferenceUsage: payloadParameter
+AcceptActionUsage "*" --> "0..1" IExpression: payloadArgument
+ActionDefinition "*" --> "*" IActionUsage: action
+
+ActorMembership "*" --> "1" IPartUsage: ownedActorParameter
+
+AllocationDefinition "*" --> "*" AllocationUsage: allocation
+AllocationUsage "*" --> "*" AllocationDefinition: allocationDefinition
+AnalysisCaseDefinition "*" --> "0..1" IExpression: resultExpression
+AnalysisCaseUsage "*" --> "0..1" AnalysisCaseDefinition: analysisCaseDefinition
+AnalysisCaseUsage "*" --> "0..1" IExpression: resultExpression
+
+Annotation "*" --> "1" IAnnotatingElement: annotatingElement
+Annotation "*" --> "1" IElement: annotatedElement
+Annotation "*" --> "0..1" IElement: owningAnnotatedElement
+Annotation "*" --> "0..1" IAnnotatingElement: ownedAnnotatingElement
+Annotation "*" --> "0..1" IAnnotatingElement: owningAnnotatingElement
+
+AssignmentActionUsage "*" --> "0..1" IExpression: targetArgument
+AssignmentActionUsage "*" --> "0..1" IExpression: valueExpression
+AssignmentActionUsage "*" --> "1" IFeature: referent
+
+
+
+AttributeUsage "*" --> "*" IDataType: attributeDefinition
+
+
+
+
+CalculationDefinition "*" --> "*" CalculationUsage: calculation
+CalculationUsage "*" --> "0..1" IFunction: calculationDefinition
+CaseDefinition "*" --> "0..1" RequirementUsage: objectiveRequirement
+CaseDefinition "*" --> "1" IUsage: subjectParameter
+CaseDefinition "*" --> "*" IPartUsage: actorParameter
+CaseUsage "*" --> "0..1" RequirementUsage: objectiveRequirement
+CaseUsage "*" --> "0..1" CaseDefinition: caseDefinition
+CaseUsage "*" --> "1" IUsage: subjectParameter
+CaseUsage "*" --> "*" IPartUsage: actorParameter
+
+
+
+
+
+ConcernUsage "*" --> "0..1" ConcernDefinition: concernDefinition
+ConjugatedPortDefinition "*" --> "1" PortConjugation: ownedPortConjugator
+ConjugatedPortDefinition "*" --> "1" PortDefinition: originalPortDefinition
+ConjugatedPortTyping "*" --> "1" PortDefinition: portDefinition
+ConjugatedPortTyping "*" --> "1" ConjugatedPortDefinition: conjugatedPortDefinition
+Conjugation "*" --> "1" IType: originalType
+Conjugation "*" --> "1" IType: conjugatedType
+Conjugation "*" --> "0..1" IType: owningType
+ConnectionDefinition "*" --> "*" IUsage: connectionEnd
+ConnectionUsage "*" --> "*" IAssociationStructure: connectionDefinition
+
+
+
+
+
+CrossSubsetting "*" --> "1" IFeature: crossedFeature
+CrossSubsetting "*" --> "1" IFeature: crossingFeature
+
+
+Definition "*" --> "*" IUsage: variant
+Definition "*" --> "*" VariantMembership: variantMembership
+Definition "*" --> "*" IUsage: usage
+Definition "*" --> "*" IUsage: directedUsage
+Definition "*" --> "*" ReferenceUsage: ownedReference
+Definition "*" --> "*" AttributeUsage: ownedAttribute
+Definition "*" --> "*" EnumerationUsage: ownedEnumeration
+Definition "*" --> "*" IOccurrenceUsage: ownedOccurrence
+Definition "*" --> "*" IItemUsage: ownedItem
+Definition "*" --> "*" IPartUsage: ownedPart
+Definition "*" --> "*" PortUsage: ownedPort
+Definition "*" --> "*" ConnectorAsUsage: ownedConnection
+Definition "*" --> "*" FlowConnectionUsage: ownedFlow
+Definition "*" --> "*" InterfaceUsage: ownedInterface
+Definition "*" --> "*" AllocationUsage: ownedAllocation
+Definition "*" --> "*" IActionUsage: ownedAction
+Definition "*" --> "*" StateUsage: ownedState
+Definition "*" --> "*" TransitionUsage: ownedTransition
+Definition "*" --> "*" CalculationUsage: ownedCalculation
+Definition "*" --> "*" IConstraintUsage: ownedConstraint
+Definition "*" --> "*" RequirementUsage: ownedRequirement
+Definition "*" --> "*" ConcernUsage: ownedConcern
+Definition "*" --> "*" CaseUsage: ownedCase
+Definition "*" --> "*" AnalysisCaseUsage: ownedAnalysisCase
+Definition "*" --> "*" VerificationCaseUsage: ownedVerificationCase
+Definition "*" --> "*" UseCaseUsage: ownedUseCase
+Definition "*" --> "*" ViewUsage: ownedView
+Definition "*" --> "*" ViewpointUsage: ownedViewpoint
+Definition "*" --> "*" RenderingUsage: ownedRendering
+Definition "*" --> "*" MetadataUsage: ownedMetadata
+Definition "*" --> "*" IUsage: ownedUsage
+Dependency "*" --> "*" IElement: client
+Dependency "*" --> "*" IElement: supplier
+Differencing "*" --> "1" IType: differencingType
+Differencing "*" --> "1" IType: typeDifferenced
+Disjoining "*" --> "1" IType: typeDisjoined
+Disjoining "*" --> "1" IType: disjoiningType
+Disjoining "*" --> "0..1" IType: owningType
+Documentation "*" --> "1" IElement: documentedElement
+
+ElementFilterMembership "*" --> "1" IExpression: condition
+
+EnumerationDefinition "*" --> "*" EnumerationUsage: enumeratedValue
+EnumerationUsage "*" --> "1" EnumerationDefinition: enumerationDefinition
+
+ExhibitStateUsage "*" --> "1" StateUsage: exhibitedState
+
+
+
+FeatureChainExpression "*" --> "1" IFeature: targetFeature
+FeatureChaining "*" --> "1" IFeature: chainingFeature
+FeatureChaining "*" --> "1" IFeature: featureChained
+
+FeatureInverting "*" --> "1" IFeature: featureInverted
+FeatureInverting "*" --> "1" IFeature: invertingFeature
+FeatureInverting "*" --> "0..1" IFeature: owningFeature
+FeatureMembership "*" --> "1" IFeature: ownedMemberFeature
+FeatureMembership "*" --> "1" IType: owningType
+FeatureReferenceExpression "*" --> "1" IFeature: referent
+FeatureTyping "*" --> "1" IFeature: typedFeature
+FeatureTyping "*" --> "1" IType: type
+FeatureTyping "*" --> "0..1" IFeature: owningFeature
+FeatureValue "*" --> "1" IFeature: featureWithValue
+FeatureValue "*" --> "1" IExpression: value
+
+FlowConnectionDefinition "*" --> "*" IUsage: flowConnectionEnd
+FlowConnectionUsage "*" --> "*" IInteraction: flowConnectionDefinition
+ForLoopActionUsage "*" --> "1" IExpression: seqArgument
+ForLoopActionUsage "*" --> "1" ReferenceUsage: loopVariable
+
+FramedConcernMembership "*" --> "1" ConcernUsage: ownedConcern
+FramedConcernMembership "*" --> "1" ConcernUsage: referencedConcern
+
+IActionUsage "*" --> "*" IBehavior: actionDefinition
+IAnnotatingElement "*" --> "*" IElement: annotatedElement
+IAnnotatingElement "*" --> "*" Annotation: ownedAnnotatingRelationship
+IAnnotatingElement "*" --> "*" Annotation: annotation
+IAnnotatingElement "*" --> "0..1" Annotation: owningAnnotatingRelationship
+IAssertConstraintUsage "*" --> "1" IConstraintUsage: assertedConstraint
+IAssociation "*" --> "*" IType: relatedType
+IAssociation "*" --> "0..1" IType: sourceType
+IAssociation "*" --> "*" IType: targetType
+IAssociation "*" --> "*" IFeature: associationEnd
+
+IBehavior "*" --> "*" IStep: step
+IBehavior "*" --> "*" IFeature: parameter
+
+IBooleanExpression "*" --> "0..1" IPredicate: predicate
+
+IClassifier "*" --> "*" Subclassification: ownedSubclassification
+IConnector "*" --> "*" IFeature: relatedFeature
+IConnector "*" --> "*" IAssociation: association
+IConnector "*" --> "*" IFeature: connectorEnd
+IConnector "*" --> "0..1" IFeature: sourceFeature
+IConnector "*" --> "*" IFeature: targetFeature
+IConstraintUsage "*" --> "0..1" IPredicate: constraintDefinition
+
+IElement "*" --> "0..1" OwningMembership: owningMembership
+IElement "*" --> "0..1" INamespace: owningNamespace
+IElement "*" --> "0..1" IRelationship: owningRelationship
+IElement "1" o--> "*" IRelationship: ownedRelationship
+IElement "*" --> "0..1" IElement: owner
+IElement "*" --> "*" IElement: ownedElement
+IElement "*" --> "*" Documentation: documentation
+IElement "*" --> "*" Annotation: ownedAnnotation
+IElement "*" --> "*" TextualRepresentation: textualRepresentation
+IElement "1" o--> "*" AliasIdsContainer: aliasIdsContainer
+IEventOccurrenceUsage "*" --> "1" IOccurrenceUsage: eventOccurrence
+
+IExpression "*" --> "0..1" IFunction: function
+IExpression "*" --> "1" IFeature: result
+IFeature "*" --> "0..1" IType: owningType
+IFeature "*" --> "*" IType: type
+IFeature "*" --> "*" Redefinition: ownedRedefinition
+IFeature "*" --> "*" Subsetting: ownedSubsetting
+IFeature "*" --> "0..1" FeatureMembership: owningFeatureMembership
+IFeature "*" --> "0..1" IType: endOwningType
+IFeature "*" --> "*" FeatureTyping: ownedTyping
+IFeature "*" --> "*" IType: featuringType
+IFeature "*" --> "*" TypeFeaturing: ownedTypeFeaturing
+IFeature "*" --> "*" IFeature: chainingFeature
+IFeature "*" --> "*" FeatureInverting: ownedFeatureInverting
+IFeature "*" --> "*" FeatureChaining: ownedFeatureChaining
+IFeature "*" --> "0..1" ReferenceSubsetting: ownedReferenceSubsetting
+IFeature "*" --> "0..1" IFeature: crossFeature
+IFeature "*" --> "0..1" CrossSubsetting: ownedCrossSubsetting
+IFeature "*" --> "1" IFeature: featureTarget
+IFeaturing "*" --> "1" IType: type
+IFeaturing "*" --> "1" IFeature: feature
+IFunction "*" --> "*" IExpression: expression
+IFunction "*" --> "1" IFeature: result
+IImport "*" --> "1" IElement: importedElement
+IImport "*" --> "1" INamespace: importOwningNamespace
+
+
+IItemFlow "*" --> "*" IClassifier: itemType
+IItemFlow "*" --> "0..1" IFeature: targetInputFeature
+IItemFlow "*" --> "0..1" IFeature: sourceOutputFeature
+IItemFlow "*" --> "*" ItemFlowEnd: itemFlowEnd
+IItemFlow "*" --> "0..1" ItemFeature: itemFeature
+IItemFlow "*" --> "*" IInteraction: interaction
+IItemUsage "*" --> "*" IStructure: itemDefinition
+
+INamespace "*" --> "*" Membership: membership
+INamespace "*" --> "*" IImport: ownedImport
+INamespace "*" --> "*" IElement: member
+INamespace "*" --> "*" IElement: ownedMember
+INamespace "*" --> "*" Membership: importedMembership
+INamespace "*" --> "*" Membership: ownedMembership
+IOccurrenceUsage "*" --> "*" IClass: occurrenceDefinition
+IOccurrenceUsage "*" --> "0..1" OccurrenceDefinition: individualDefinition
+IPartUsage "*" --> "*" PartDefinition: partDefinition
+IPerformActionUsage "*" --> "1" IActionUsage: performedAction
+
+IRelationship "1" o--> "*" IElement: ownedRelatedElement
+IRelationship "*" --> "0..1" IElement: owningRelatedElement
+IRelationship "*" --> "*" IElement: relatedElement
+IRelationship "*" --> "*" IElement: target
+IRelationship "*" --> "*" IElement: source
+IStep "*" --> "*" IBehavior: behavior
+IStep "*" --> "*" IFeature: parameter
+
+ISuccession "*" --> "0..1" IStep: transitionStep
+ISuccession "*" --> "*" IStep: triggerStep
+ISuccession "*" --> "*" IStep: effectStep
+ISuccession "*" --> "*" IExpression: guardExpression
+
+IType "*" --> "*" FeatureMembership: ownedFeatureMembership
+IType "*" --> "*" IFeature: ownedFeature
+IType "*" --> "*" IFeature: ownedEndFeature
+IType "*" --> "*" IFeature: feature
+IType "*" --> "*" IFeature: input
+IType "*" --> "*" IFeature: output
+IType "*" --> "*" Membership: inheritedMembership
+IType "*" --> "*" IFeature: endFeature
+IType "*" --> "0..1" Conjugation: ownedConjugator
+IType "*" --> "*" IFeature: inheritedFeature
+IType "*" --> "0..1" Multiplicity: multiplicity
+IType "*" --> "*" IType: unioningType
+IType "*" --> "*" Intersecting: ownedIntersecting
+IType "*" --> "*" IType: intersectingType
+IType "*" --> "*" Unioning: ownedUnioning
+IType "*" --> "*" Disjoining: ownedDisjoining
+IType "*" --> "*" FeatureMembership: featureMembership
+IType "*" --> "*" IType: differencingType
+IType "*" --> "*" Differencing: ownedDifferencing
+IType "*" --> "*" IFeature: directedFeature
+IType "*" --> "*" Specialization: ownedSpecialization
+IUsage "*" --> "*" IUsage: variant
+IUsage "*" --> "*" VariantMembership: variantMembership
+IUsage "*" --> "0..1" Definition: owningDefinition
+IUsage "*" --> "0..1" IUsage: owningUsage
+IUsage "*" --> "*" IUsage: nestedUsage
+IUsage "*" --> "*" IClassifier: definition
+IUsage "*" --> "*" IUsage: usage
+IUsage "*" --> "*" IUsage: directedUsage
+IUsage "*" --> "*" ReferenceUsage: nestedReference
+IUsage "*" --> "*" AttributeUsage: nestedAttribute
+IUsage "*" --> "*" EnumerationUsage: nestedEnumeration
+IUsage "*" --> "*" IOccurrenceUsage: nestedOccurrence
+IUsage "*" --> "*" IItemUsage: nestedItem
+IUsage "*" --> "*" IPartUsage: nestedPart
+IUsage "*" --> "*" PortUsage: nestedPort
+IUsage "*" --> "*" ConnectorAsUsage: nestedConnection
+IUsage "*" --> "*" FlowConnectionUsage: nestedFlow
+IUsage "*" --> "*" InterfaceUsage: nestedInterface
+IUsage "*" --> "*" AllocationUsage: nestedAllocation
+IUsage "*" --> "*" IActionUsage: nestedAction
+IUsage "*" --> "*" StateUsage: nestedState
+IUsage "*" --> "*" TransitionUsage: nestedTransition
+IUsage "*" --> "*" CalculationUsage: nestedCalculation
+IUsage "*" --> "*" IConstraintUsage: nestedConstraint
+IUsage "*" --> "*" RequirementUsage: nestedRequirement
+IUsage "*" --> "*" ConcernUsage: nestedConcern
+IUsage "*" --> "*" CaseUsage: nestedCase
+IUsage "*" --> "*" AnalysisCaseUsage: nestedAnalysisCase
+IUsage "*" --> "*" VerificationCaseUsage: nestedVerificationCase
+IUsage "*" --> "*" UseCaseUsage: nestedUseCase
+IUsage "*" --> "*" ViewUsage: nestedView
+IUsage "*" --> "*" ViewpointUsage: nestedViewpoint
+IUsage "*" --> "*" RenderingUsage: nestedRendering
+IUsage "*" --> "*" MetadataUsage: nestedMetadata
+IfActionUsage "*" --> "0..1" IActionUsage: elseAction
+IfActionUsage "*" --> "1" IActionUsage: thenAction
+IfActionUsage "*" --> "1" IExpression: ifArgument
+
+IncludeUseCaseUsage "*" --> "1" UseCaseUsage: useCaseIncluded
+
+
+InterfaceDefinition "*" --> "*" PortUsage: interfaceEnd
+InterfaceUsage "*" --> "*" InterfaceDefinition: interfaceDefinition
+Intersecting "*" --> "1" IType: intersectingType
+Intersecting "*" --> "1" IType: typeIntersected
+
+InvocationExpression "*" --> "*" IExpression: argument
+InvocationExpression "1" o--> "*" IExpression: operand
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LoopActionUsage "*" --> "1" IActionUsage: bodyAction
+Membership "*" --> "1" INamespace: membershipOwningNamespace
+Membership "*" --> "1" IElement: memberElement
+
+MembershipImport "*" --> "1" Membership: importedMembership
+
+
+MetadataAccessExpression "*" --> "1" IElement: referencedElement
+
+MetadataFeature "*" --> "0..1" IMetaclass: metaclass
+MetadataUsage "*" --> "0..1" IMetaclass: metadataDefinition
+
+MultiplicityRange "*" --> "0..1" IExpression: lowerBound
+MultiplicityRange "*" --> "1" IExpression: upperBound
+MultiplicityRange "*" --> "*" IExpression: bound
+
+
+NamespaceImport "*" --> "1" INamespace: importedNamespace
+
+ObjectiveMembership "*" --> "1" RequirementUsage: ownedObjectiveRequirement
+OccurrenceDefinition "*" --> "0..1" LifeClass: lifeClass
+
+
+OwningMembership "*" --> "1" IElement: ownedMemberElement
+Package "*" --> "*" IExpression: filterCondition
+ParameterMembership "*" --> "1" IFeature: ownedMemberParameter
+
+
+
+PortConjugation "*" --> "1" PortDefinition: originalPortDefinition
+PortConjugation "*" --> "1" ConjugatedPortDefinition: conjugatedPortDefinition
+PortDefinition "*" --> "0..1" ConjugatedPortDefinition: conjugatedPortDefinition
+PortUsage "*" --> "*" PortDefinition: portDefinition
+
+
+Redefinition "*" --> "1" IFeature: redefiningFeature
+Redefinition "*" --> "1" IFeature: redefinedFeature
+ReferenceSubsetting "*" --> "1" IFeature: referencedFeature
+ReferenceSubsetting "*" --> "1" IFeature: referencingFeature
+
+
+RenderingDefinition "*" --> "*" RenderingUsage: rendering
+RenderingUsage "*" --> "0..1" RenderingDefinition: renderingDefinition
+
+RequirementConstraintMembership "*" --> "1" IConstraintUsage: ownedConstraint
+RequirementConstraintMembership "*" --> "1" IConstraintUsage: referencedConstraint
+RequirementDefinition "*" --> "1" IUsage: subjectParameter
+RequirementDefinition "*" --> "*" IPartUsage: actorParameter
+RequirementDefinition "*" --> "*" IPartUsage: stakeholderParameter
+RequirementDefinition "*" --> "*" IConstraintUsage: assumedConstraint
+RequirementDefinition "*" --> "*" IConstraintUsage: requiredConstraint
+RequirementDefinition "*" --> "*" ConcernUsage: framedConcern
+RequirementDefinition "1" o--> "*" TextContainer: textContainer
+RequirementUsage "*" --> "0..1" RequirementDefinition: requirementDefinition
+RequirementUsage "*" --> "*" IConstraintUsage: requiredConstraint
+RequirementUsage "*" --> "*" IConstraintUsage: assumedConstraint
+RequirementUsage "*" --> "1" IUsage: subjectParameter
+RequirementUsage "*" --> "*" ConcernUsage: framedConcern
+RequirementUsage "*" --> "*" IPartUsage: actorParameter
+RequirementUsage "*" --> "*" IPartUsage: stakeholderParameter
+RequirementUsage "1" o--> "*" TextContainer: textContainer
+RequirementVerificationMembership "*" --> "1" RequirementUsage: ownedRequirement
+RequirementVerificationMembership "*" --> "1" RequirementUsage: verifiedRequirement
+ResultExpressionMembership "*" --> "1" IExpression: ownedResultExpression
+
+SatisfyRequirementUsage "*" --> "1" RequirementUsage: satisfiedRequirement
+SatisfyRequirementUsage "*" --> "1" IFeature: satisfyingFeature
+
+SendActionUsage "*" --> "0..1" IExpression: receiverArgument
+SendActionUsage "*" --> "1" IExpression: payloadArgument
+SendActionUsage "*" --> "0..1" IExpression: senderArgument
+Specialization "*" --> "0..1" IType: owningType
+Specialization "*" --> "1" IType: general
+Specialization "*" --> "1" IType: specific
+StakeholderMembership "*" --> "1" IPartUsage: ownedStakeholderParameter
+StateDefinition "*" --> "*" StateUsage: state
+StateDefinition "*" --> "0..1" IActionUsage: entryAction
+StateDefinition "*" --> "0..1" IActionUsage: doAction
+StateDefinition "*" --> "0..1" IActionUsage: exitAction
+
+StateSubactionMembership "*" --> "1" IActionUsage: action
+StateUsage "*" --> "*" IBehavior: stateDefinition
+StateUsage "*" --> "0..1" IActionUsage: entryAction
+StateUsage "*" --> "0..1" IActionUsage: doAction
+StateUsage "*" --> "0..1" IActionUsage: exitAction
+
+
+Subclassification "*" --> "1" IClassifier: superclassifier
+Subclassification "*" --> "0..1" IClassifier: owningClassifier
+Subclassification "*" --> "1" IClassifier: subclassifier
+SubjectMembership "*" --> "1" IUsage: ownedSubjectParameter
+Subsetting "*" --> "1" IFeature: subsettedFeature
+Subsetting "*" --> "1" IFeature: subsettingFeature
+Subsetting "*" --> "0..1" IFeature: owningFeature
+
+
+
+
+TerminateActionUsage "*" --> "0..1" IExpression: terminatedOccurrenceArgument
+
+TextualRepresentation "*" --> "1" IElement: representedElement
+
+TransitionFeatureMembership "*" --> "1" IStep: transitionFeature
+TransitionUsage "*" --> "1" IActionUsage: source
+TransitionUsage "*" --> "1" IActionUsage: target
+TransitionUsage "*" --> "*" AcceptActionUsage: triggerAction
+TransitionUsage "*" --> "*" IExpression: guardExpression
+TransitionUsage "*" --> "*" IActionUsage: effectAction
+TransitionUsage "*" --> "1" ISuccession: succession
+
+
+
+TypeFeaturing "*" --> "1" IFeature: featureOfType
+TypeFeaturing "*" --> "1" IType: featuringType
+TypeFeaturing "*" --> "0..1" IFeature: owningFeatureOfType
+Unioning "*" --> "1" IType: unioningType
+Unioning "*" --> "1" IType: typeUnioned
+
+UseCaseDefinition "*" --> "*" UseCaseUsage: includedUseCase
+UseCaseUsage "*" --> "0..1" UseCaseDefinition: useCaseDefinition
+UseCaseUsage "*" --> "*" UseCaseUsage: includedUseCase
+VariantMembership "*" --> "1" IUsage: ownedVariantUsage
+VerificationCaseDefinition "*" --> "*" RequirementUsage: verifiedRequirement
+VerificationCaseUsage "*" --> "0..1" VerificationCaseDefinition: verificationCaseDefinition
+VerificationCaseUsage "*" --> "*" RequirementUsage: verifiedRequirement
+ViewDefinition "*" --> "*" ViewUsage: view
+ViewDefinition "*" --> "*" ViewpointUsage: satisfiedViewpoint
+ViewDefinition "*" --> "0..1" RenderingUsage: viewRendering
+ViewDefinition "*" --> "*" IExpression: viewCondition
+ViewRenderingMembership "*" --> "1" RenderingUsage: ownedRendering
+ViewRenderingMembership "*" --> "1" RenderingUsage: referencedRendering
+ViewUsage "*" --> "0..1" ViewDefinition: viewDefinition
+ViewUsage "*" --> "*" ViewpointUsage: satisfiedViewpoint
+ViewUsage "*" --> "*" IElement: exposedElement
+ViewUsage "*" --> "0..1" RenderingUsage: viewRendering
+ViewUsage "*" --> "*" IExpression: viewCondition
+ViewpointDefinition "*" --> "*" IPartUsage: viewpointStakeholder
+ViewpointUsage "*" --> "0..1" ViewpointDefinition: viewpointDefinition
+ViewpointUsage "*" --> "*" IPartUsage: viewpointStakeholder
+
+WhileLoopActionUsage "*" --> "1" IExpression: whileArgument
+WhileLoopActionUsage "*" --> "0..1" IExpression: untilArgument
+
+@enduml

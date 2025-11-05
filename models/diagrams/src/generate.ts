@@ -1,11 +1,17 @@
 import { writeFileSync } from "fs"
+import { asString } from "littoral-templates"
 import { defaultSimplisticHandler, deserializeLanguagesWithHandler } from "@lionweb/core"
 import { LionWebJsonChunk } from "@lionweb/json"
-import { generatePlantUmlForLanguage, readFileAsJson } from "@lionweb/utilities"
+import { generatePlantUmlForLanguage, languageAsText, readFileAsJson } from "@lionweb/utilities"
+
+import { focusedDiagram } from "./custom-diagram"
 
 const typesLanguage = deserializeLanguagesWithHandler(readFileAsJson("../types_lionweb.json") as LionWebJsonChunk, defaultSimplisticHandler)[0]
-const sysMlV2Language = deserializeLanguagesWithHandler(readFileAsJson("../SysML_lionweb_lionweb.json") as LionWebJsonChunk, defaultSimplisticHandler, typesLanguage)[0]
+const sysMLv2Language = deserializeLanguagesWithHandler(readFileAsJson("../SysML_lionweb_lionweb.json") as LionWebJsonChunk, defaultSimplisticHandler, typesLanguage)[0]
 
 writeFileSync("artifacts/types.puml", generatePlantUmlForLanguage(typesLanguage))
-writeFileSync("artifacts/sysml.puml", generatePlantUmlForLanguage(sysMlV2Language))
+writeFileSync("artifacts/sysml.puml", generatePlantUmlForLanguage(sysMLv2Language))
+writeFileSync("artifacts/sysml.txt", languageAsText(sysMLv2Language))
+
+writeFileSync("artifacts/sysml_focused.puml", asString(focusedDiagram(sysMLv2Language)))
 
