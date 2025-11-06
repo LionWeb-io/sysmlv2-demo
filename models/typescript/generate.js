@@ -5,10 +5,11 @@ import { setEOLStyleFromOS } from "littoral-templates-node"
 
 // read the JSON for the SysMLv2 *types* language, and deserialize it as a Language object:
 const typesLanguage = deserializeLanguages(readFileAsJson("../types_lionweb.json"))[0]
+// tweak the language’s name, to have more standard file and class names:
+typesLanguage.name = "Types"
 
 // read the JSON for the SysMLv2 language (that relies on the types language), and deserialize it as a Language object:
 const sysMlV2Language = deserializeLanguages(readFileAsJson("../SysML_lionweb_lionweb.json"), typesLanguage)[0]
-
 // tweak the language’s name, to have more standard file and class names:
 sysMlV2Language.name = "SysMLv2"
 // tweak the name of the language’s Classifier concept, to deconflict from LionCore’s own Classifier meta-concept:

@@ -1,6 +1,6 @@
 /*
  * language's metadata:
- *     name:    types
+ *     name:    Types
  *     version: 1
  *     key:     types
  *     id:      types
@@ -25,9 +25,9 @@ import {
 } from "@lionweb/class-core";
 
 
-export class typesBase implements ILanguageBase {
+export class TypesBase implements ILanguageBase {
 
-    private readonly _language: Language = new Language("types", "1", "types", "types");
+    private readonly _language: Language = new Language("Types", "1", "types", "types");
     get language(): Language {
         this.ensureWiredUp();
         return this._language;
@@ -85,7 +85,7 @@ export class typesBase implements ILanguageBase {
         throw new Error(`enumeration with key ${enumeration.key} is not known in language ${language.name} (key=${language.key}, version=${language.version})`);
     }
 
-    public static readonly INSTANCE = new typesBase();
+    public static readonly INSTANCE = new TypesBase();
 }
 
 
