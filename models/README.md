@@ -35,9 +35,16 @@ Execute the following in the `typescript/` directory to download all required NP
 npm install
 ```
 
-Execute the following to generate the TypeScript code:
+Execute the following to generate the TypeScript code into the `src/` subdirectory:
 
 ```shell
 $ node generate.js
 ```
+
+This “JavaScript-let” relies on the following features from various LionWeb TypeScript libraries:
+
+* `generateApiFromLanguages(<array of languages>)` from `@lionweb/class-core-generator`: generate a complete API for a collection of LionWeb languages
+* `deserializeLanguages(<serialization chunk>)` from `@lionweb/core`: deserialize a LionWeb serialization chunk containing one or more languages, as instances of `Language`
+* `readFileAsJson(<path>)` from `@lionweb/utilities`: read and parse a JSON file from the filesystem
+* (`setEOLStyleFromOS()` from `littoral-templates-node`: ensure that line endings are OS-compliant)
 

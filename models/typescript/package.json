@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@lionweb/class-core": "0.7.1",
     "@lionweb/class-core-generator": "0.7.1",
