@@ -1,6 +1,9 @@
 @startuml
 hide empty members
 
+' qualified name: "sysml"
+
+
 interface INamespace extends IElement
 class Membership implements IRelationship {
   memberElementId: String
@@ -60,6 +63,9 @@ class ActorMembership extends ParameterMembership
 
 class ViewRenderingMembership extends FeatureMembership
 
+
+
+' relations:
 
 INamespace "*" --> "*" Membership: membership
 INamespace "*" --> "*" IImport: ownedImport

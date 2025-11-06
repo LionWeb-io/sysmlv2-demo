@@ -1,9 +1,8 @@
-import { allSuperTypesOf, Classifier, inheritsFrom, Language } from "@lionweb/core"
-import { Template } from "littoral-templates"
-import { generateForEntity, generateForRelationsOf } from "./PlantUML-generator"
+import { allSuperTypesOf, Classifier, Language } from "@lionweb/core"
+import { generatePlantUmlForLanguage } from "./PlantUML-generator"
 
 
-export const focusedDiagram = (sysMLv2Language: Language): Template => {
+export const focusedDiagram = (sysMLv2Language: Language): string => {
 
     const allSubTypesOf = (superClassifier: Classifier) =>
         sysMLv2Language.entities
@@ -23,15 +22,6 @@ export const focusedDiagram = (sysMLv2Language: Language): Template => {
     const interestingEntities = interestingNames.map(entity)
         .concat(allSubTypesOf(entity("Membership") as Classifier))
 
-    return [
-        `@startuml`,
-        `hide empty members`,
-        ``,
-        interestingEntities.map(generateForEntity),
-        ``,
-        interestingEntities.map(generateForRelationsOf),
-        ``,
-        `@enduml`
-    ]
+    return generatePlantUmlForLanguage(sysMLv2Language, interestingEntities)
 }
 

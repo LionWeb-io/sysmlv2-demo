@@ -1,5 +1,4 @@
 import { writeFileSync } from "fs"
-import { asString } from "littoral-templates"
 import { setEOLStyleFromOS } from "littoral-templates-node"
 import { defaultSimplisticHandler, deserializeLanguagesWithHandler } from "@lionweb/core"
 import { LionWebJsonChunk } from "@lionweb/json"
@@ -22,5 +21,5 @@ writeFileSync("artifacts/kerml.txt", languageAsText(kerMLlanguage))
 writeFileSync("artifacts/sysml.puml", generatePlantUmlForLanguage(sysMLv2Language))
 writeFileSync("artifacts/sysml.txt", languageAsText(sysMLv2Language))
 
-writeFileSync("artifacts/sysml_focused.puml", asString(focusedDiagram(sysMLv2Language)))
+writeFileSync("artifacts/sysml_focused.puml", focusedDiagram(sysMLv2Language))
 

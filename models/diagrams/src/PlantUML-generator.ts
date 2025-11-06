@@ -26,29 +26,31 @@ const indented = indentWith(`  `)(1)
  * Generates a string with a PlantUML class diagram
  * representing the given {@link Language LionCore instance}.
  */
-export const generatePlantUmlForLanguage = ({ name, entities }: Language) =>
-    asString([
-        `@startuml
-hide empty members
-
-' qualified name: "${name}"
-
-`,
-        nameSorted(entities).map(generateForEntity),
-        `
-
-' relations:
-`,
-        nameSorted(entities).map(generateForRelationsOf),
-        `
-@enduml`
+export const generatePlantUmlForLanguage = ({ name, entities }: Language, focusEntities?: LanguageEntity[]) => {
+    const entitiesToShow = focusEntities ?? nameSorted(entities)
+    return asString([
+        `@startuml`,
+        `hide empty members`,
+        ``,
+        `' qualified name: "${name}"`,
+        ``,
+        ``,
+        entitiesToShow.map(generateForEntity),
+        ``,
+        ``,
+        `' relations:`,
+        ``,
+        entitiesToShow.map(generateForRelationsOf),
+        ``,
+        `@enduml`
     ])
+}
 
 const generateForEnumeration = ({ name, literals }: Enumeration) => [
     `enum ${name} {`,
     indented(literals.map(({name}) => name)),
-    `}
-`
+    `}`,
+    ``
 ]
 
 const generateForAnnotation = ({ name, features, extends: extends_, implements: implements_, annotates }: Annotation) => {
@@ -107,7 +109,7 @@ const generateForNonRelationalFeature = (feature: Feature) => {
 
 const generateForPrimitiveType = ({ name }: PrimitiveType) => `class "${name}" <<primitive type>>`
 
-export const generateForEntity = (entity: LanguageEntity) => {
+const generateForEntity = (entity: LanguageEntity) => {
     if (entity instanceof Annotation) {
         return generateForAnnotation(entity)
     }
