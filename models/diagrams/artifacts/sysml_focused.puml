@@ -1,0 +1,104 @@
+@startuml
+hide empty members
+
+' qualified name: "sysml"
+
+
+interface INamespace extends IElement
+class Membership implements IRelationship {
+  memberElementId: String
+  memberShortName: String?
+  memberName: String?
+  visibility: VisibilityKind
+}
+
+class OwningMembership extends Membership {
+  ownedMemberElementId: String
+  ownedMemberShortName: String?
+  ownedMemberName: String?
+}
+
+class FeatureMembership extends OwningMembership implements IFeaturing
+
+class EndFeatureMembership extends FeatureMembership
+
+class ResultExpressionMembership extends FeatureMembership
+
+class ReturnParameterMembership extends ParameterMembership
+
+class ParameterMembership extends FeatureMembership
+
+class FeatureValue extends OwningMembership {
+  isInitial: Boolean
+  isDefault: Boolean
+}
+
+class ElementFilterMembership extends OwningMembership
+
+class VariantMembership extends OwningMembership
+
+class TransitionFeatureMembership extends FeatureMembership {
+  kind: TransitionFeatureKind
+}
+
+class StateSubactionMembership extends FeatureMembership {
+  kind: StateSubactionKind
+}
+
+class RequirementVerificationMembership extends RequirementConstraintMembership
+
+class RequirementConstraintMembership extends FeatureMembership {
+  kind: RequirementConstraintKind
+}
+
+class ObjectiveMembership extends FeatureMembership
+
+class SubjectMembership extends ParameterMembership
+
+class StakeholderMembership extends ParameterMembership
+
+class FramedConcernMembership extends RequirementConstraintMembership
+
+class ActorMembership extends ParameterMembership
+
+class ViewRenderingMembership extends FeatureMembership
+
+
+
+' relations:
+
+INamespace "*" --> "*" Membership: membership
+INamespace "*" --> "*" IImport: ownedImport
+INamespace "*" --> "*" IElement: member
+INamespace "*" --> "*" IElement: ownedMember
+INamespace "*" --> "*" Membership: importedMembership
+INamespace "*" --> "*" Membership: ownedMembership
+Membership "*" --> "1" INamespace: membershipOwningNamespace
+Membership "*" --> "1" IElement: memberElement
+OwningMembership "*" --> "1" IElement: ownedMemberElement
+FeatureMembership "*" --> "1" IFeature: ownedMemberFeature
+FeatureMembership "*" --> "1" IType: owningType
+
+ResultExpressionMembership "*" --> "1" IExpression: ownedResultExpression
+
+ParameterMembership "*" --> "1" IFeature: ownedMemberParameter
+FeatureValue "*" --> "1" IFeature: featureWithValue
+FeatureValue "*" --> "1" IExpression: value
+ElementFilterMembership "*" --> "1" IExpression: condition
+VariantMembership "*" --> "1" IUsage: ownedVariantUsage
+TransitionFeatureMembership "*" --> "1" IStep: transitionFeature
+StateSubactionMembership "*" --> "1" IActionUsage: action
+RequirementVerificationMembership "*" --> "1" RequirementUsage: ownedRequirement
+RequirementVerificationMembership "*" --> "1" RequirementUsage: verifiedRequirement
+RequirementConstraintMembership "*" --> "1" IConstraintUsage: ownedConstraint
+RequirementConstraintMembership "*" --> "1" IConstraintUsage: referencedConstraint
+ObjectiveMembership "*" --> "1" RequirementUsage: ownedObjectiveRequirement
+SubjectMembership "*" --> "1" IUsage: ownedSubjectParameter
+StakeholderMembership "*" --> "1" IPartUsage: ownedStakeholderParameter
+FramedConcernMembership "*" --> "1" ConcernUsage: ownedConcern
+FramedConcernMembership "*" --> "1" ConcernUsage: referencedConcern
+ActorMembership "*" --> "1" IPartUsage: ownedActorParameter
+ViewRenderingMembership "*" --> "1" RenderingUsage: ownedRendering
+ViewRenderingMembership "*" --> "1" RenderingUsage: referencedRendering
+
+@enduml

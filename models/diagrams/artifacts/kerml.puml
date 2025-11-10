@@ -1,0 +1,471 @@
+@startuml
+hide empty members
+
+' qualified name: "kerml"
+
+
+class AliasIdsContainer {
+  aliasIds: String?
+}
+
+class AnnotatingElement implements IAnnotatingElement
+
+class Annotation implements IRelationship
+
+class Association implements IClassifier, IRelationship
+
+class AssociationStructure extends Association implements IStructure
+
+class Behavior implements IBehavior
+
+class BindingConnector implements IConnector
+
+class BooleanExpression extends Expression
+
+class Class implements IClass
+
+class Classifier implements IClassifier
+
+class CollectExpression extends OperatorExpression
+
+class Comment implements IAnnotatingElement {
+  locale: String?
+  body: String
+}
+
+class Conjugation implements IRelationship
+
+class Connector implements IConnector
+
+class DataType implements IClassifier
+
+class Dependency implements IRelationship
+
+class Differencing implements IRelationship
+
+class Disjoining implements IRelationship
+
+class Documentation extends Comment
+
+class Element implements IElement
+
+class ElementFilterMembership extends OwningMembership
+
+class EndFeatureMembership extends FeatureMembership
+
+class Expression implements IStep {
+  isModelLevelEvaluable: Boolean
+}
+
+class Feature implements IFeature
+
+class FeatureChainExpression extends OperatorExpression
+
+class FeatureChaining implements IRelationship
+
+enum FeatureDirectionKind {
+  in
+  inout
+  out
+}
+
+class FeatureInverting implements IRelationship
+
+class FeatureMembership extends OwningMembership implements IFeaturing
+
+class FeatureReferenceExpression extends Expression
+
+class FeatureTyping extends Specialization
+
+class FeatureValue extends OwningMembership {
+  isInitial: Boolean
+  isDefault: Boolean
+}
+
+class Featuring implements IFeaturing
+
+class Function implements IBehavior {
+  isModelLevelEvaluable: Boolean
+}
+
+interface IAnnotatingElement extends IElement
+interface IBehavior extends IClass
+interface IClass extends IClassifier
+interface IClassifier extends IType
+interface IConnector extends IFeature, IRelationship
+interface IElement {
+  elementId: String
+  declaredShortName: String?
+  declaredName: String?
+  shortName: String?
+  name: String?
+  qualifiedName: String?
+  isImpliedIncluded: Boolean
+  isLibraryElement: Boolean
+}
+
+interface IFeature extends IType {
+  isUnique: Boolean
+  isOrdered: Boolean
+  isComposite: Boolean
+  isEnd: Boolean
+  isDerived: Boolean
+  isReadOnly: Boolean
+  isPortion: Boolean
+  direction: FeatureDirectionKind?
+  isNonunique: Boolean
+}
+
+interface IFeaturing extends IRelationship
+interface INamespace extends IElement
+interface IRelationship extends IElement {
+  isImplied: Boolean
+}
+
+interface IStep extends IFeature
+interface IStructure extends IClass
+interface ISuccession extends IConnector
+interface IType extends INamespace {
+  isAbstract: Boolean
+  isSufficient: Boolean
+  isConjugated: Boolean
+}
+
+abstract class Import implements IRelationship {
+  visibility: VisibilityKind
+  isRecursive: Boolean
+  isImportAll: Boolean
+}
+
+class Interaction extends Association implements IBehavior
+
+class Intersecting implements IRelationship
+
+class Invariant extends BooleanExpression {
+  isNegated: Boolean
+}
+
+class InvocationExpression extends Expression
+
+class ItemFeature implements IFeature
+
+class ItemFlow implements IConnector, IStep
+
+class ItemFlowEnd implements IFeature
+
+class LibraryPackage extends Package {
+  isStandard: Boolean
+}
+
+class LiteralBoolean extends LiteralExpression {
+  value: Boolean
+}
+
+class LiteralExpression extends Expression
+
+class LiteralInfinity extends LiteralExpression
+
+class LiteralInteger extends LiteralExpression {
+  value: Integer
+}
+
+class LiteralRational extends LiteralExpression {
+  value: Real
+}
+
+class LiteralString extends LiteralExpression {
+  value: String
+}
+
+class Membership implements IRelationship {
+  memberElementId: String
+  memberShortName: String?
+  memberName: String?
+  visibility: VisibilityKind
+}
+
+class MembershipImport extends Import
+
+class Metaclass implements IStructure
+
+class MetadataAccessExpression extends Expression
+
+class MetadataFeature implements IAnnotatingElement, IFeature
+
+class Multiplicity implements IFeature
+
+class MultiplicityRange extends Multiplicity
+
+class Namespace implements INamespace
+
+class NamespaceImport extends Import
+
+class NullExpression extends Expression
+
+class OperatorExpression extends InvocationExpression {
+  operator: String
+}
+
+class OwningMembership extends Membership {
+  ownedMemberElementId: String
+  ownedMemberShortName: String?
+  ownedMemberName: String?
+}
+
+class Package implements INamespace
+
+class ParameterMembership extends FeatureMembership
+
+class Predicate extends Function
+
+class Redefinition extends Subsetting
+
+class ReferenceSubsetting extends Subsetting
+
+class Relationship implements IRelationship
+
+class ResultExpressionMembership extends FeatureMembership
+
+class ReturnParameterMembership extends ParameterMembership
+
+class SelectExpression extends OperatorExpression
+
+class Specialization implements IRelationship
+
+class Step implements IStep
+
+class Structure implements IStructure
+
+class Subclassification extends Specialization
+
+class Subsetting extends Specialization
+
+class Succession implements ISuccession
+
+class SuccessionItemFlow extends ItemFlow implements ISuccession
+
+class TextualRepresentation implements IAnnotatingElement {
+  language: String
+  body: String
+}
+
+class Type implements IType
+
+class TypeFeaturing implements IFeaturing
+
+class Unioning implements IRelationship
+
+enum VisibilityKind {
+  private
+  protected
+  public
+}
+
+
+
+' relations:
+
+
+
+Annotation "*" --> "1" IAnnotatingElement: annotatingElement
+Annotation "*" --> "1" IElement: annotatedElement
+Annotation "*" --> "0..1" IElement: owningAnnotatedElement
+Annotation "*" --> "0..1" IAnnotatingElement: owningAnnotatingElement
+Association "*" --> "*" IType: relatedType
+Association "*" --> "0..1" IType: sourceType
+Association "*" --> "*" IType: targetType
+Association "*" --> "*" IFeature: associationEnd
+
+
+
+BooleanExpression "*" --> "0..1" Predicate: predicate
+
+
+
+
+Conjugation "*" --> "1" IType: originalType
+Conjugation "*" --> "1" IType: conjugatedType
+Conjugation "*" --> "0..1" IType: owningType
+
+
+Dependency "*" --> "*" IElement: client
+Dependency "*" --> "*" IElement: supplier
+Differencing "*" --> "1" IType: differencingType
+Differencing "*" --> "1" IType: typeDifferenced
+Disjoining "*" --> "1" IType: typeDisjoined
+Disjoining "*" --> "1" IType: disjoiningType
+Disjoining "*" --> "0..1" IType: owningType
+Documentation "*" --> "1" IElement: documentedElement
+
+ElementFilterMembership "*" --> "1" Expression: condition
+
+Expression "*" --> "0..1" Function: function
+Expression "*" --> "1" IFeature: result
+
+FeatureChainExpression "*" --> "1" IFeature: targetFeature
+FeatureChaining "*" --> "1" IFeature: chainingFeature
+FeatureChaining "*" --> "1" IFeature: featureChained
+
+FeatureInverting "*" --> "1" IFeature: featureInverted
+FeatureInverting "*" --> "1" IFeature: invertingFeature
+FeatureInverting "*" --> "0..1" IFeature: owningFeature
+FeatureMembership "*" --> "1" IFeature: ownedMemberFeature
+FeatureMembership "*" --> "1" IType: owningType
+FeatureReferenceExpression "*" --> "1" IFeature: referent
+FeatureTyping "*" --> "1" IFeature: typedFeature
+FeatureTyping "*" --> "1" IType: type
+FeatureTyping "*" --> "0..1" IFeature: owningFeature
+FeatureValue "*" --> "1" IFeature: featureWithValue
+FeatureValue "*" --> "1" Expression: value
+
+Function "*" --> "*" Expression: expression
+Function "*" --> "1" IFeature: result
+IAnnotatingElement "*" --> "*" IElement: annotatedElement
+IAnnotatingElement "*" --> "*" Annotation: ownedAnnotatingRelationship
+IAnnotatingElement "*" --> "*" Annotation: annotation
+IBehavior "*" --> "*" IStep: step
+IBehavior "*" --> "*" IFeature: parameter
+
+IClassifier "*" --> "*" Subclassification: ownedSubclassification
+IConnector "*" --> "*" IFeature: relatedFeature
+IConnector "*" --> "*" Association: association
+IConnector "*" --> "*" IFeature: connectorEnd
+IConnector "*" --> "0..1" IFeature: sourceFeature
+IConnector "*" --> "*" IFeature: targetFeature
+IElement "*" --> "0..1" OwningMembership: owningMembership
+IElement "1" o--> "*" IRelationship: ownedRelationship
+IElement "*" --> "0..1" IRelationship: owningRelationship
+IElement "*" --> "0..1" INamespace: owningNamespace
+IElement "*" --> "0..1" IElement: owner
+IElement "*" --> "*" IElement: ownedElement
+IElement "*" --> "*" Documentation: documentation
+IElement "*" --> "*" Annotation: ownedAnnotation
+IElement "*" --> "*" TextualRepresentation: textualRepresentation
+IElement "1" o--> "*" AliasIdsContainer: aliasIdsContainer
+IFeature "*" --> "0..1" IType: owningType
+IFeature "*" --> "*" IType: type
+IFeature "*" --> "*" Redefinition: ownedRedefinition
+IFeature "*" --> "*" Subsetting: ownedSubsetting
+IFeature "*" --> "0..1" FeatureMembership: owningFeatureMembership
+IFeature "*" --> "0..1" IType: endOwningType
+IFeature "*" --> "*" FeatureTyping: ownedTyping
+IFeature "*" --> "*" IType: featuringType
+IFeature "*" --> "*" TypeFeaturing: ownedTypeFeaturing
+IFeature "*" --> "*" IFeature: chainingFeature
+IFeature "*" --> "*" FeatureInverting: ownedFeatureInverting
+IFeature "*" --> "*" FeatureChaining: ownedFeatureChaining
+IFeature "*" --> "0..1" ReferenceSubsetting: ownedReferenceSubsetting
+IFeature "*" --> "1" IFeature: featureTarget
+IFeaturing "*" --> "1" IType: type
+IFeaturing "*" --> "1" IFeature: feature
+INamespace "*" --> "*" Membership: membership
+INamespace "*" --> "*" Import: ownedImport
+INamespace "*" --> "*" IElement: member
+INamespace "*" --> "*" IElement: ownedMember
+INamespace "*" --> "*" Membership: ownedMembership
+INamespace "*" --> "*" Membership: importedMembership
+IRelationship "*" --> "*" IElement: relatedElement
+IRelationship "*" --> "*" IElement: target
+IRelationship "*" --> "*" IElement: source
+IRelationship "*" --> "0..1" IElement: owningRelatedElement
+IRelationship "1" o--> "*" IElement: ownedRelatedElement
+IStep "*" --> "*" IBehavior: behavior
+IStep "*" --> "*" IFeature: parameter
+
+ISuccession "*" --> "0..1" IStep: transitionStep
+ISuccession "*" --> "*" IStep: triggerStep
+ISuccession "*" --> "*" IStep: effectStep
+ISuccession "*" --> "*" Expression: guardExpression
+IType "*" --> "*" FeatureMembership: ownedFeatureMembership
+IType "*" --> "*" IFeature: ownedFeature
+IType "*" --> "*" IFeature: ownedEndFeature
+IType "*" --> "*" IFeature: feature
+IType "*" --> "*" IFeature: input
+IType "*" --> "*" IFeature: output
+IType "*" --> "*" Membership: inheritedMembership
+IType "*" --> "*" IFeature: endFeature
+IType "*" --> "0..1" Conjugation: ownedConjugator
+IType "*" --> "*" IFeature: inheritedFeature
+IType "*" --> "0..1" Multiplicity: multiplicity
+IType "*" --> "*" IType: unioningType
+IType "*" --> "*" Intersecting: ownedIntersecting
+IType "*" --> "*" IType: intersectingType
+IType "*" --> "*" Unioning: ownedUnioning
+IType "*" --> "*" Disjoining: ownedDisjoining
+IType "*" --> "*" FeatureMembership: featureMembership
+IType "*" --> "*" IType: differencingType
+IType "*" --> "*" Differencing: ownedDifferencing
+IType "*" --> "*" IFeature: directedFeature
+IType "*" --> "*" Specialization: ownedSpecialization
+Import "*" --> "1" IElement: importedElement
+Import "*" --> "1" INamespace: importOwningNamespace
+
+Intersecting "*" --> "1" IType: intersectingType
+Intersecting "*" --> "1" IType: typeIntersected
+
+InvocationExpression "*" --> "*" Expression: argument
+InvocationExpression "1" o--> "*" Expression: operand
+
+ItemFlow "*" --> "*" IClassifier: itemType
+ItemFlow "*" --> "0..1" IFeature: targetInputFeature
+ItemFlow "*" --> "0..1" IFeature: sourceOutputFeature
+ItemFlow "*" --> "*" ItemFlowEnd: itemFlowEnd
+ItemFlow "*" --> "0..1" ItemFeature: itemFeature
+ItemFlow "*" --> "*" Interaction: interaction
+
+
+
+
+
+
+
+
+Membership "*" --> "1" INamespace: membershipOwningNamespace
+Membership "*" --> "1" IElement: memberElement
+MembershipImport "*" --> "1" Membership: importedMembership
+
+MetadataAccessExpression "*" --> "1" IElement: referencedElement
+MetadataFeature "*" --> "0..1" Metaclass: metaclass
+
+MultiplicityRange "*" --> "0..1" Expression: lowerBound
+MultiplicityRange "*" --> "1" Expression: upperBound
+MultiplicityRange "*" --> "*" Expression: bound
+
+NamespaceImport "*" --> "1" INamespace: importedNamespace
+
+
+OwningMembership "*" --> "1" IElement: ownedMemberElement
+Package "*" --> "*" Expression: filterCondition
+ParameterMembership "*" --> "1" IFeature: ownedMemberParameter
+
+Redefinition "*" --> "1" IFeature: redefiningFeature
+Redefinition "*" --> "1" IFeature: redefinedFeature
+ReferenceSubsetting "*" --> "1" IFeature: referencedFeature
+ReferenceSubsetting "*" --> "1" IFeature: referencingFeature
+
+ResultExpressionMembership "*" --> "1" Expression: ownedResultExpression
+
+
+Specialization "*" --> "0..1" IType: owningType
+Specialization "*" --> "1" IType: general
+Specialization "*" --> "1" IType: specific
+
+
+Subclassification "*" --> "1" IClassifier: superclassifier
+Subclassification "*" --> "0..1" IClassifier: owningClassifier
+Subclassification "*" --> "1" IClassifier: subclassifier
+Subsetting "*" --> "1" IFeature: subsettedFeature
+Subsetting "*" --> "1" IFeature: subsettingFeature
+Subsetting "*" --> "0..1" IFeature: owningFeature
+
+
+TextualRepresentation "*" --> "1" IElement: representedElement
+
+TypeFeaturing "*" --> "1" IFeature: featureOfType
+TypeFeaturing "*" --> "1" IType: featuringType
+TypeFeaturing "*" --> "0..1" IFeature: owningFeatureOfType
+Unioning "*" --> "1" IType: unioningType
+Unioning "*" --> "1" IType: typeUnioned
+
+
+@enduml
