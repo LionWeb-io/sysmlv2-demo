@@ -370,7 +370,7 @@ public partial class Association : ConceptInstanceBase, IClassifier, IRelationsh
     private bool? _isImpliedIncluded = null;
     private bool SetIsImpliedIncludedRaw(bool? value)
     {
-        if (value is null && _isImpliedIncluded is null || value is not null && value.Equals(_isImpliedIncluded))
+        if (value == _isImpliedIncluded)
             return false;
         _isImpliedIncluded = value;
         return true;
@@ -401,7 +401,7 @@ public partial class Association : ConceptInstanceBase, IClassifier, IRelationsh
     private bool? _isLibraryElement = null;
     private bool SetIsLibraryElementRaw(bool? value)
     {
-        if (value is null && _isLibraryElement is null || value is not null && value.Equals(_isLibraryElement))
+        if (value == _isLibraryElement)
             return false;
         _isLibraryElement = value;
         return true;
@@ -1057,7 +1057,7 @@ public partial class Association : ConceptInstanceBase, IClassifier, IRelationsh
     private bool? _isImplied = null;
     private bool SetIsImpliedRaw(bool? value)
     {
-        if (value is null && _isImplied is null || value is not null && value.Equals(_isImplied))
+        if (value == _isImplied)
             return false;
         _isImplied = value;
         return true;
@@ -1635,7 +1635,7 @@ public partial class Association : ConceptInstanceBase, IClassifier, IRelationsh
     private bool? _isAbstract = null;
     private bool SetIsAbstractRaw(bool? value)
     {
-        if (value is null && _isAbstract is null || value is not null && value.Equals(_isAbstract))
+        if (value == _isAbstract)
             return false;
         _isAbstract = value;
         return true;
@@ -1666,7 +1666,7 @@ public partial class Association : ConceptInstanceBase, IClassifier, IRelationsh
     private bool? _isConjugated = null;
     private bool SetIsConjugatedRaw(bool? value)
     {
-        if (value is null && _isConjugated is null || value is not null && value.Equals(_isConjugated))
+        if (value == _isConjugated)
             return false;
         _isConjugated = value;
         return true;
@@ -1697,7 +1697,7 @@ public partial class Association : ConceptInstanceBase, IClassifier, IRelationsh
     private bool? _isSufficient = null;
     private bool SetIsSufficientRaw(bool? value)
     {
-        if (value is null && _isSufficient is null || value is not null && value.Equals(_isSufficient))
+        if (value == _isSufficient)
             return false;
         _isSufficient = value;
         return true;

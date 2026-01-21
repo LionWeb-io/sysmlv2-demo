@@ -93,7 +93,7 @@ public partial class CalculationDefinition : ActionDefinition, IFunction
     private bool? _isModelLevelEvaluable = null;
     private bool SetIsModelLevelEvaluableRaw(bool? value)
     {
-        if (value is null && _isModelLevelEvaluable is null || value is not null && value.Equals(_isModelLevelEvaluable))
+        if (value == _isModelLevelEvaluable)
             return false;
         _isModelLevelEvaluable = value;
         return true;

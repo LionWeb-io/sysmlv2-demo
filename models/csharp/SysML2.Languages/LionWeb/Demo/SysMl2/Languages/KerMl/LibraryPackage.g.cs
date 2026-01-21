@@ -21,7 +21,7 @@ public partial class LibraryPackage : Package
     private bool? _isStandard = null;
     private bool SetIsStandardRaw(bool? value)
     {
-        if (value is null && _isStandard is null || value is not null && value.Equals(_isStandard))
+        if (value == _isStandard)
             return false;
         _isStandard = value;
         return true;

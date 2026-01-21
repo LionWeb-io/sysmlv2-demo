@@ -21,7 +21,7 @@ public partial class LiteralInteger : LiteralExpression
     private int? _value = null;
     private bool SetValueRaw(int? value)
     {
-        if (value is null && _value is null || value is not null && value.Equals(_value))
+        if (value == _value)
             return false;
         _value = value;
         return true;

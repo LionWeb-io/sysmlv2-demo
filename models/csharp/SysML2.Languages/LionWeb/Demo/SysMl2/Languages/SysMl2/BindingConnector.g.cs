@@ -390,7 +390,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isImpliedIncluded = null;
     private bool SetIsImpliedIncludedRaw(bool? value)
     {
-        if (value is null && _isImpliedIncluded is null || value is not null && value.Equals(_isImpliedIncluded))
+        if (value == _isImpliedIncluded)
             return false;
         _isImpliedIncluded = value;
         return true;
@@ -421,7 +421,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isLibraryElement = null;
     private bool SetIsLibraryElementRaw(bool? value)
     {
-        if (value is null && _isLibraryElement is null || value is not null && value.Equals(_isLibraryElement))
+        if (value == _isLibraryElement)
             return false;
         _isLibraryElement = value;
         return true;
@@ -1060,7 +1060,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isComposite = null;
     private bool SetIsCompositeRaw(bool? value)
     {
-        if (value is null && _isComposite is null || value is not null && value.Equals(_isComposite))
+        if (value == _isComposite)
             return false;
         _isComposite = value;
         return true;
@@ -1091,7 +1091,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isDerived = null;
     private bool SetIsDerivedRaw(bool? value)
     {
-        if (value is null && _isDerived is null || value is not null && value.Equals(_isDerived))
+        if (value == _isDerived)
             return false;
         _isDerived = value;
         return true;
@@ -1122,7 +1122,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isEnd = null;
     private bool SetIsEndRaw(bool? value)
     {
-        if (value is null && _isEnd is null || value is not null && value.Equals(_isEnd))
+        if (value == _isEnd)
             return false;
         _isEnd = value;
         return true;
@@ -1153,7 +1153,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isNonunique = null;
     private bool SetIsNonuniqueRaw(bool? value)
     {
-        if (value is null && _isNonunique is null || value is not null && value.Equals(_isNonunique))
+        if (value == _isNonunique)
             return false;
         _isNonunique = value;
         return true;
@@ -1184,7 +1184,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isOrdered = null;
     private bool SetIsOrderedRaw(bool? value)
     {
-        if (value is null && _isOrdered is null || value is not null && value.Equals(_isOrdered))
+        if (value == _isOrdered)
             return false;
         _isOrdered = value;
         return true;
@@ -1215,7 +1215,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isPortion = null;
     private bool SetIsPortionRaw(bool? value)
     {
-        if (value is null && _isPortion is null || value is not null && value.Equals(_isPortion))
+        if (value == _isPortion)
             return false;
         _isPortion = value;
         return true;
@@ -1246,7 +1246,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isReadOnly = null;
     private bool SetIsReadOnlyRaw(bool? value)
     {
-        if (value is null && _isReadOnly is null || value is not null && value.Equals(_isReadOnly))
+        if (value == _isReadOnly)
             return false;
         _isReadOnly = value;
         return true;
@@ -1277,7 +1277,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isUnique = null;
     private bool SetIsUniqueRaw(bool? value)
     {
-        if (value is null && _isUnique is null || value is not null && value.Equals(_isUnique))
+        if (value == _isUnique)
             return false;
         _isUnique = value;
         return true;
@@ -1955,7 +1955,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isImplied = null;
     private bool SetIsImpliedRaw(bool? value)
     {
-        if (value is null && _isImplied is null || value is not null && value.Equals(_isImplied))
+        if (value == _isImplied)
             return false;
         _isImplied = value;
         return true;
@@ -2533,7 +2533,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isAbstract = null;
     private bool SetIsAbstractRaw(bool? value)
     {
-        if (value is null && _isAbstract is null || value is not null && value.Equals(_isAbstract))
+        if (value == _isAbstract)
             return false;
         _isAbstract = value;
         return true;
@@ -2564,7 +2564,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isConjugated = null;
     private bool SetIsConjugatedRaw(bool? value)
     {
-        if (value is null && _isConjugated is null || value is not null && value.Equals(_isConjugated))
+        if (value == _isConjugated)
             return false;
         _isConjugated = value;
         return true;
@@ -2595,7 +2595,7 @@ public partial class BindingConnector : ConceptInstanceBase, IBindingConnector
     private bool? _isSufficient = null;
     private bool SetIsSufficientRaw(bool? value)
     {
-        if (value is null && _isSufficient is null || value is not null && value.Equals(_isSufficient))
+        if (value == _isSufficient)
             return false;
         _isSufficient = value;
         return true;

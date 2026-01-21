@@ -95,7 +95,7 @@ public partial class MetadataUsage : MetadataFeature, IItemUsage
     private bool? _isIndividual = null;
     private bool SetIsIndividualRaw(bool? value)
     {
-        if (value is null && _isIndividual is null || value is not null && value.Equals(_isIndividual))
+        if (value == _isIndividual)
             return false;
         _isIndividual = value;
         return true;
@@ -273,7 +273,7 @@ public partial class MetadataUsage : MetadataFeature, IItemUsage
     private bool? _isReference = null;
     private bool SetIsReferenceRaw(bool? value)
     {
-        if (value is null && _isReference is null || value is not null && value.Equals(_isReference))
+        if (value == _isReference)
             return false;
         _isReference = value;
         return true;
@@ -304,7 +304,7 @@ public partial class MetadataUsage : MetadataFeature, IItemUsage
     private bool? _isVariation = null;
     private bool SetIsVariationRaw(bool? value)
     {
-        if (value is null && _isVariation is null || value is not null && value.Equals(_isVariation))
+        if (value == _isVariation)
             return false;
         _isVariation = value;
         return true;

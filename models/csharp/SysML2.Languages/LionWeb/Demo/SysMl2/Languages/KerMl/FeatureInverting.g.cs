@@ -304,7 +304,7 @@ public partial class FeatureInverting : ConceptInstanceBase, IRelationship
     private bool? _isImpliedIncluded = null;
     private bool SetIsImpliedIncludedRaw(bool? value)
     {
-        if (value is null && _isImpliedIncluded is null || value is not null && value.Equals(_isImpliedIncluded))
+        if (value == _isImpliedIncluded)
             return false;
         _isImpliedIncluded = value;
         return true;
@@ -335,7 +335,7 @@ public partial class FeatureInverting : ConceptInstanceBase, IRelationship
     private bool? _isLibraryElement = null;
     private bool SetIsLibraryElementRaw(bool? value)
     {
-        if (value is null && _isLibraryElement is null || value is not null && value.Equals(_isLibraryElement))
+        if (value == _isLibraryElement)
             return false;
         _isLibraryElement = value;
         return true;
@@ -757,7 +757,7 @@ public partial class FeatureInverting : ConceptInstanceBase, IRelationship
     private bool? _isImplied = null;
     private bool SetIsImpliedRaw(bool? value)
     {
-        if (value is null && _isImplied is null || value is not null && value.Equals(_isImplied))
+        if (value == _isImplied)
             return false;
         _isImplied = value;
         return true;

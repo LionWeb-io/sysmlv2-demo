@@ -21,7 +21,7 @@ public partial class LiteralBoolean : LiteralExpression
     private bool? _value = null;
     private bool SetValueRaw(bool? value)
     {
-        if (value is null && _value is null || value is not null && value.Equals(_value))
+        if (value == _value)
             return false;
         _value = value;
         return true;

@@ -28,7 +28,7 @@ public partial class TypesLanguage : LanguageBase<ITypesFactory>
     }
 
     /// <inheritdoc/>
-    public override IReadOnlyList<LanguageEntity> Entities => [];
+    public override IReadOnlyList<LanguageEntity> Entities => [Boolean, Integer, Real, String, UnlimitedNatural];
     /// <inheritdoc/>
     public override IReadOnlyList<Language> DependsOn => [];
 

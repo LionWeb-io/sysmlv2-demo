@@ -206,7 +206,7 @@ public partial class FlowConnectionDefinition : ActionDefinition, IInteraction
     private bool? _isImplied = null;
     private bool SetIsImpliedRaw(bool? value)
     {
-        if (value is null && _isImplied is null || value is not null && value.Equals(_isImplied))
+        if (value == _isImplied)
             return false;
         _isImplied = value;
         return true;

@@ -128,7 +128,7 @@ public partial class ConnectionUsage : ConnectorAsUsage, IPartUsage
     private bool? _isIndividual = null;
     private bool SetIsIndividualRaw(bool? value)
     {
-        if (value is null && _isIndividual is null || value is not null && value.Equals(_isIndividual))
+        if (value == _isIndividual)
             return false;
         _isIndividual = value;
         return true;

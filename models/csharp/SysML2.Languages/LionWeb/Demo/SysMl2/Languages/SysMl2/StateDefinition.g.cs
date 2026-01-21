@@ -120,7 +120,7 @@ public partial class StateDefinition : ActionDefinition
     private bool? _isParallel = null;
     private bool SetIsParallelRaw(bool? value)
     {
-        if (value is null && _isParallel is null || value is not null && value.Equals(_isParallel))
+        if (value == _isParallel)
             return false;
         _isParallel = value;
         return true;

@@ -60,7 +60,7 @@ public partial class SatisfyRequirementUsage : RequirementUsage, IAssertConstrai
     private bool? _isNegated = null;
     private bool SetIsNegatedRaw(bool? value)
     {
-        if (value is null && _isNegated is null || value is not null && value.Equals(_isNegated))
+        if (value == _isNegated)
             return false;
         _isNegated = value;
         return true;

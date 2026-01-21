@@ -57,7 +57,7 @@ public partial class FeatureValue : OwningMembership
     private bool? _isDefault = null;
     private bool SetIsDefaultRaw(bool? value)
     {
-        if (value is null && _isDefault is null || value is not null && value.Equals(_isDefault))
+        if (value == _isDefault)
             return false;
         _isDefault = value;
         return true;
@@ -86,7 +86,7 @@ public partial class FeatureValue : OwningMembership
     private bool? _isInitial = null;
     private bool SetIsInitialRaw(bool? value)
     {
-        if (value is null && _isInitial is null || value is not null && value.Equals(_isInitial))
+        if (value == _isInitial)
             return false;
         _isInitial = value;
         return true;
