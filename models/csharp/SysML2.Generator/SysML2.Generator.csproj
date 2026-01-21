@@ -8,6 +8,7 @@
     <ItemGroup>
       <PackageReference Include="LionWeb-CSharp" />
       <PackageReference Include="LionWeb-CSharp-Generator" />
+      <PackageReference Include="LionWeb-CSharp-Generator-MpsSpecific" />
     </ItemGroup>
 
 </Project>

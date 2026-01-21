@@ -1,9 +1,11 @@
 ﻿<Project>
-	<PropertyGroup>
-		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageVersion Include="LionWeb-CSharp" Version="0.4.0-alpha.8.9" />
-		<PackageVersion Include="LionWeb-CSharp-Generator" Version="0.4.0-alpha.8.9" />
-	</ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="LionWeb-CSharp" Version="0.4.0" />
+    <PackageVersion Include="LionWeb-CSharp-Generator" Version="0.4.0" />
+    <PackageVersion Include="LionWeb-CSharp-Generator-MpsSpecific" Version="0.4.0" />
+    <PackageVersion Include="LionWeb-LionWeb-CSharp-Generator-MpsSpecific" Version="0.4.0" />
+  </ItemGroup>
 </Project>
