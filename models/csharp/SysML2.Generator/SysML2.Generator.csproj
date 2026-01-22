@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="LionWeb-CSharp" />
+      <PackageReference Include="LionWeb-CSharp-Generator" />
+      <PackageReference Include="LionWeb-CSharp-Generator-MpsSpecific" />
+    </ItemGroup>
+
+</Project>
