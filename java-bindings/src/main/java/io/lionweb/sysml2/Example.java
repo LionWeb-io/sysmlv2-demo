@@ -2,7 +2,13 @@ package io.lionweb.sysml2;
 
 public class Example {
 
+
+
+
     static void main(String[] args) {
-        InterfaceDefinition interfaceDefinition = new InterfaceDefinition("my-id");
+        Instantiator instantiator = new Instantiator();
+        Package pkg = instantiator.create(Package.class);
+        pkg.setName("BrakeSystem");
+
     }
 }

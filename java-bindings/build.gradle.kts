@@ -19,3 +19,12 @@ sourceSets {
         java.srcDirs("build/generated-lionweb")
     }
 }
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation("io.lionweb.lionweb-java:lionweb-java-2024.1-core:1.2.6-SNAPSHOT")
+}
