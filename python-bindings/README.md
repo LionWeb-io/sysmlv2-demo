@@ -11,5 +11,5 @@ pip install lionweb
 Launch generation:
 ```
 lionweb-gen ../models/types_lionweb.json sysml2py/types
-lionweb-gen ../models/kerml_lionweb_lionweb.json -d../models/types_lionweb.json sysml2py/kerml
+lionweb-gen ../models/kerml_lionweb_lionweb.json -d../models/types_lionweb.json sysml2py/kerml --lp types=sysml2py.types --pt String=str 
 ```
