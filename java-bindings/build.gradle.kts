@@ -1,5 +1,5 @@
 plugins {
-    id("io.lionweb") version "1.3.1-SNAPSHOT"
+    id("io.lionweb") version "1.3.1"
     id("java")
 }
 
