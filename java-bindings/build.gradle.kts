@@ -1,5 +1,5 @@
 plugins {
-    id("io.lionweb") version "1.2.6-SNAPSHOT"
+    id("io.lionweb") version "1.3.1-SNAPSHOT"
     id("java")
 }
 
@@ -13,18 +13,9 @@ lionweb {
         "types-Real" to "java.lang.Double")
 }
 
-sourceSets {
-    main {
-        java.srcDirs("src/main/java")
-        java.srcDirs("build/generated-lionweb")
-    }
-}
-
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
-dependencies {
-    implementation("io.lionweb.lionweb-java:lionweb-java-2024.1-core:1.2.6-SNAPSHOT")
-}
+tasks.findByName("compileJava")?.dependsOn("generateLWLanguages", "generateLWNodeClasses")
