@@ -1,4 +1,6 @@
 from sysml2py.sysml.node_classes import Package, PartDefinition, PartUsage, AttributeUsage, PortUsage, ConnectionUsage, RequirementUsage
+from lionweb.serialization import create_standard_json_serialization
+from lionweb import LionWebVersion
 
 import inspect
 
@@ -106,3 +108,6 @@ if __name__ == '__main__':
     print("    - Ports: batteryPowerPort -> motorPowerPort")
     print("    - Connection: powerFlow")
     print("    - Requirements: 3 (range, performance, efficiency)")    
+
+    ser = create_standard_json_serialization(LionWebVersion.v2023_1)
+    print(ser.serialize_trees_to_json_string([ev_package]))
