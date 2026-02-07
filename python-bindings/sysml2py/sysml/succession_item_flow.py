@@ -1,0 +1,1123 @@
+from typing import TYPE_CHECKING, Optional, cast, List
+from lionweb.model.classifier_instance_utils import get_only_reference_value_by_reference_name, get_property_value_by_name, get_reference_value_by_name
+from lionweb.model.reference_value import ReferenceValue
+from .language import get_succession_item_flow
+from lionweb.model.impl.dynamic_node import DynamicNode
+from .feature_direction_kind import FeatureDirectionKind
+if TYPE_CHECKING:
+    from .i_classifier import IClassifier
+    from .i_feature import IFeature
+    from .item_flow_end import ItemFlowEnd
+    from .item_feature import ItemFeature
+    from .i_interaction import IInteraction
+    from .i_step import IStep
+    from .i_expression import IExpression
+    from .i_association import IAssociation
+    from .i_behavior import IBehavior
+    from .i_type import IType
+    from .redefinition import Redefinition
+    from .subsetting import Subsetting
+    from .feature_membership import FeatureMembership
+    from .feature_typing import FeatureTyping
+    from .type_featuring import TypeFeaturing
+    from .feature_inverting import FeatureInverting
+    from .feature_chaining import FeatureChaining
+    from .reference_subsetting import ReferenceSubsetting
+    from .cross_subsetting import CrossSubsetting
+    from .i_element import IElement
+    from .membership import Membership
+    from .conjugation import Conjugation
+    from .multiplicity import Multiplicity
+    from .intersecting import Intersecting
+    from .unioning import Unioning
+    from .disjoining import Disjoining
+    from .differencing import Differencing
+    from .specialization import Specialization
+    from .owning_membership import OwningMembership
+    from .i_namespace import INamespace
+    from .i_relationship import IRelationship
+    from .documentation import Documentation
+    from .annotation import Annotation
+    from .textual_representation import TextualRepresentation
+    from .i_import import IImport
+
+
+class SuccessionItemFlow(DynamicNode):
+
+    def __init__(self, id: str):
+        super().__init__(id)
+        self.concept = get_succession_item_flow()
+
+    @property
+    def itemType(self) ->'List["IClassifier"]':
+        res = get_reference_value_by_name(self, 'itemType')
+        return [(cast('IClassifier', r.referred) if r else None) for r in res]
+
+    def add_to_item_type(self, new_element: '"IClassifier"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('itemType'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def targetInputFeature(self) ->'Optional["IFeature"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'targetInputFeature')
+        if res:
+            return cast('IFeature', res.referred)
+        else:
+            return None
+
+    @targetInputFeature.setter
+    def targetInputFeature(self, targetInputFeature: '"IFeature"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'targetInputFeature')
+        if self.targetInputFeature:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(
+            targetInputFeature, targetInputFeature.name))
+
+    @property
+    def sourceOutputFeature(self) ->'Optional["IFeature"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'sourceOutputFeature')
+        if res:
+            return cast('IFeature', res.referred)
+        else:
+            return None
+
+    @sourceOutputFeature.setter
+    def sourceOutputFeature(self, sourceOutputFeature: '"IFeature"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'sourceOutputFeature')
+        if self.sourceOutputFeature:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(
+            sourceOutputFeature, sourceOutputFeature.name))
+
+    @property
+    def itemFlowEnd(self) ->'List["ItemFlowEnd"]':
+        res = get_reference_value_by_name(self, 'itemFlowEnd')
+        return [(cast('ItemFlowEnd', r.referred) if r else None) for r in res]
+
+    def add_to_item_flow_end(self, new_element: '"ItemFlowEnd"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('itemFlowEnd'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def itemFeature(self) ->'Optional["ItemFeature"]':
+        res = get_only_reference_value_by_reference_name(self, 'itemFeature')
+        if res:
+            return cast('ItemFeature', res.referred)
+        else:
+            return None
+
+    @itemFeature.setter
+    def itemFeature(self, itemFeature: '"ItemFeature"'):
+        reference = self.get_classifier().get_reference_by_name('itemFeature')
+        if self.itemFeature:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(itemFeature,
+            itemFeature.name))
+
+    @property
+    def interaction(self) ->'List["IInteraction"]':
+        res = get_reference_value_by_name(self, 'interaction')
+        return [(cast('IInteraction', r.referred) if r else None) for r in res]
+
+    def add_to_interaction(self, new_element: '"IInteraction"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('interaction'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def transitionStep(self) ->'Optional["IStep"]':
+        res = get_only_reference_value_by_reference_name(self, 'transitionStep'
+            )
+        if res:
+            return cast('IStep', res.referred)
+        else:
+            return None
+
+    @transitionStep.setter
+    def transitionStep(self, transitionStep: '"IStep"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'transitionStep')
+        if self.transitionStep:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(transitionStep,
+            transitionStep.name))
+
+    @property
+    def triggerStep(self) ->'List["IStep"]':
+        res = get_reference_value_by_name(self, 'triggerStep')
+        return [(cast('IStep', r.referred) if r else None) for r in res]
+
+    def add_to_trigger_step(self, new_element: '"IStep"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('triggerStep'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def effectStep(self) ->'List["IStep"]':
+        res = get_reference_value_by_name(self, 'effectStep')
+        return [(cast('IStep', r.referred) if r else None) for r in res]
+
+    def add_to_effect_step(self, new_element: '"IStep"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('effectStep'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def guardExpression(self) ->'List["IExpression"]':
+        res = get_reference_value_by_name(self, 'guardExpression')
+        return [(cast('IExpression', r.referred) if r else None) for r in res]
+
+    def add_to_guard_expression(self, new_element: '"IExpression"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('guardExpression'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def relatedFeature(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'relatedFeature')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_related_feature(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('relatedFeature'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def association(self) ->'List["IAssociation"]':
+        res = get_reference_value_by_name(self, 'association')
+        return [(cast('IAssociation', r.referred) if r else None) for r in res]
+
+    def add_to_association(self, new_element: '"IAssociation"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('association'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def connectorEnd(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'connectorEnd')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_connector_end(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('connectorEnd'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def sourceFeature(self) ->'Optional["IFeature"]':
+        res = get_only_reference_value_by_reference_name(self, 'sourceFeature')
+        if res:
+            return cast('IFeature', res.referred)
+        else:
+            return None
+
+    @sourceFeature.setter
+    def sourceFeature(self, sourceFeature: '"IFeature"'):
+        reference = self.get_classifier().get_reference_by_name('sourceFeature'
+            )
+        if self.sourceFeature:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(sourceFeature,
+            sourceFeature.name))
+
+    @property
+    def targetFeature(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'targetFeature')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_target_feature(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('targetFeature'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def behavior(self) ->'List["IBehavior"]':
+        res = get_reference_value_by_name(self, 'behavior')
+        return [(cast('IBehavior', r.referred) if r else None) for r in res]
+
+    def add_to_behavior(self, new_element: '"IBehavior"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('behavior'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def parameter(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'parameter')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_parameter(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('parameter'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def owningType(self) ->'Optional["IType"]':
+        res = get_only_reference_value_by_reference_name(self, 'owningType')
+        if res:
+            return cast('IType', res.referred)
+        else:
+            return None
+
+    @owningType.setter
+    def owningType(self, owningType: '"IType"'):
+        reference = self.get_classifier().get_reference_by_name('owningType')
+        if self.owningType:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(owningType,
+            owningType.name))
+
+    @property
+    def isUnique(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isUnique'))
+
+    @isUnique.setter
+    def isUnique(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name('isUnique')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def isOrdered(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isOrdered'))
+
+    @isOrdered.setter
+    def isOrdered(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name('isOrdered')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def type(self) ->'List["IType"]':
+        res = get_reference_value_by_name(self, 'type')
+        return [(cast('IType', r.referred) if r else None) for r in res]
+
+    def add_to_type(self, new_element: '"IType"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('type'), ReferenceValue(new_element,
+            new_element.name))
+
+    @property
+    def ownedRedefinition(self) ->'List["Redefinition"]':
+        res = get_reference_value_by_name(self, 'ownedRedefinition')
+        return [(cast('Redefinition', r.referred) if r else None) for r in res]
+
+    def add_to_owned_redefinition(self, new_element: '"Redefinition"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedRedefinition'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedSubsetting(self) ->'List["Subsetting"]':
+        res = get_reference_value_by_name(self, 'ownedSubsetting')
+        return [(cast('Subsetting', r.referred) if r else None) for r in res]
+
+    def add_to_owned_subsetting(self, new_element: '"Subsetting"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedSubsetting'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def owningFeatureMembership(self) ->'Optional["FeatureMembership"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'owningFeatureMembership')
+        if res:
+            return cast('FeatureMembership', res.referred)
+        else:
+            return None
+
+    @owningFeatureMembership.setter
+    def owningFeatureMembership(self, owningFeatureMembership:
+        '"FeatureMembership"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'owningFeatureMembership')
+        if self.owningFeatureMembership:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(
+            owningFeatureMembership, owningFeatureMembership.name))
+
+    @property
+    def isComposite(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isComposite'))
+
+    @isComposite.setter
+    def isComposite(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name(
+            'isComposite')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def isEnd(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isEnd'))
+
+    @isEnd.setter
+    def isEnd(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name('isEnd')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def endOwningType(self) ->'Optional["IType"]':
+        res = get_only_reference_value_by_reference_name(self, 'endOwningType')
+        if res:
+            return cast('IType', res.referred)
+        else:
+            return None
+
+    @endOwningType.setter
+    def endOwningType(self, endOwningType: '"IType"'):
+        reference = self.get_classifier().get_reference_by_name('endOwningType'
+            )
+        if self.endOwningType:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(endOwningType,
+            endOwningType.name))
+
+    @property
+    def ownedTyping(self) ->'List["FeatureTyping"]':
+        res = get_reference_value_by_name(self, 'ownedTyping')
+        return [(cast('FeatureTyping', r.referred) if r else None) for r in res
+            ]
+
+    def add_to_owned_typing(self, new_element: '"FeatureTyping"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedTyping'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def featuringType(self) ->'List["IType"]':
+        res = get_reference_value_by_name(self, 'featuringType')
+        return [(cast('IType', r.referred) if r else None) for r in res]
+
+    def add_to_featuring_type(self, new_element: '"IType"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('featuringType'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedTypeFeaturing(self) ->'List["TypeFeaturing"]':
+        res = get_reference_value_by_name(self, 'ownedTypeFeaturing')
+        return [(cast('TypeFeaturing', r.referred) if r else None) for r in res
+            ]
+
+    def add_to_owned_type_featuring(self, new_element: '"TypeFeaturing"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedTypeFeaturing'), ReferenceValue
+            (new_element, new_element.name))
+
+    @property
+    def isDerived(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isDerived'))
+
+    @isDerived.setter
+    def isDerived(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name('isDerived')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def chainingFeature(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'chainingFeature')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_chaining_feature(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('chainingFeature'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedFeatureInverting(self) ->'List["FeatureInverting"]':
+        res = get_reference_value_by_name(self, 'ownedFeatureInverting')
+        return [(cast('FeatureInverting', r.referred) if r else None) for r in
+            res]
+
+    def add_to_owned_feature_inverting(self, new_element: '"FeatureInverting"'
+        ):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedFeatureInverting'),
+            ReferenceValue(new_element, new_element.name))
+
+    @property
+    def ownedFeatureChaining(self) ->'List["FeatureChaining"]':
+        res = get_reference_value_by_name(self, 'ownedFeatureChaining')
+        return [(cast('FeatureChaining', r.referred) if r else None) for r in
+            res]
+
+    def add_to_owned_feature_chaining(self, new_element: '"FeatureChaining"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedFeatureChaining'),
+            ReferenceValue(new_element, new_element.name))
+
+    @property
+    def isReadOnly(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isReadOnly'))
+
+    @isReadOnly.setter
+    def isReadOnly(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name('isReadOnly'
+            )
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def isPortion(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isPortion'))
+
+    @isPortion.setter
+    def isPortion(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name('isPortion')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def direction(self) ->FeatureDirectionKind:
+        return cast(FeatureDirectionKind, get_property_value_by_name(self,
+            'direction'))
+
+    @direction.setter
+    def direction(self, value: FeatureDirectionKind):
+        property_ = self.get_classifier().require_property_by_name('direction')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def ownedReferenceSubsetting(self) ->'Optional["ReferenceSubsetting"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'ownedReferenceSubsetting')
+        if res:
+            return cast('ReferenceSubsetting', res.referred)
+        else:
+            return None
+
+    @ownedReferenceSubsetting.setter
+    def ownedReferenceSubsetting(self, ownedReferenceSubsetting:
+        '"ReferenceSubsetting"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'ownedReferenceSubsetting')
+        if self.ownedReferenceSubsetting:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(
+            ownedReferenceSubsetting, ownedReferenceSubsetting.name))
+
+    @property
+    def crossFeature(self) ->'Optional["IFeature"]':
+        res = get_only_reference_value_by_reference_name(self, 'crossFeature')
+        if res:
+            return cast('IFeature', res.referred)
+        else:
+            return None
+
+    @crossFeature.setter
+    def crossFeature(self, crossFeature: '"IFeature"'):
+        reference = self.get_classifier().get_reference_by_name('crossFeature')
+        if self.crossFeature:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(crossFeature,
+            crossFeature.name))
+
+    @property
+    def ownedCrossSubsetting(self) ->'Optional["CrossSubsetting"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'ownedCrossSubsetting')
+        if res:
+            return cast('CrossSubsetting', res.referred)
+        else:
+            return None
+
+    @ownedCrossSubsetting.setter
+    def ownedCrossSubsetting(self, ownedCrossSubsetting: '"CrossSubsetting"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'ownedCrossSubsetting')
+        if self.ownedCrossSubsetting:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(
+            ownedCrossSubsetting, ownedCrossSubsetting.name))
+
+    @property
+    def featureTarget(self) ->'Optional["IFeature"]':
+        res = get_only_reference_value_by_reference_name(self, 'featureTarget')
+        if res:
+            return cast('IFeature', res.referred)
+        else:
+            return None
+
+    @featureTarget.setter
+    def featureTarget(self, featureTarget: '"IFeature"'):
+        reference = self.get_classifier().get_reference_by_name('featureTarget'
+            )
+        if self.featureTarget:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(featureTarget,
+            featureTarget.name))
+
+    @property
+    def isNonunique(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isNonunique'))
+
+    @isNonunique.setter
+    def isNonunique(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name(
+            'isNonunique')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def owningRelatedElement(self) ->'Optional["IElement"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'owningRelatedElement')
+        if res:
+            return cast('IElement', res.referred)
+        else:
+            return None
+
+    @owningRelatedElement.setter
+    def owningRelatedElement(self, owningRelatedElement: '"IElement"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'owningRelatedElement')
+        if self.owningRelatedElement:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(
+            owningRelatedElement, owningRelatedElement.name))
+
+    @property
+    def relatedElement(self) ->'List["IElement"]':
+        res = get_reference_value_by_name(self, 'relatedElement')
+        return [(cast('IElement', r.referred) if r else None) for r in res]
+
+    def add_to_related_element(self, new_element: '"IElement"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('relatedElement'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def target(self) ->'List["IElement"]':
+        res = get_reference_value_by_name(self, 'target')
+        return [(cast('IElement', r.referred) if r else None) for r in res]
+
+    def add_to_target(self, new_element: '"IElement"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('target'), ReferenceValue(new_element,
+            new_element.name))
+
+    @property
+    def source(self) ->'List["IElement"]':
+        res = get_reference_value_by_name(self, 'source')
+        return [(cast('IElement', r.referred) if r else None) for r in res]
+
+    def add_to_source(self, new_element: '"IElement"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('source'), ReferenceValue(new_element,
+            new_element.name))
+
+    @property
+    def isImplied(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isImplied'))
+
+    @isImplied.setter
+    def isImplied(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name('isImplied')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def ownedFeatureMembership(self) ->'List["FeatureMembership"]':
+        res = get_reference_value_by_name(self, 'ownedFeatureMembership')
+        return [(cast('FeatureMembership', r.referred) if r else None) for
+            r in res]
+
+    def add_to_owned_feature_membership(self, new_element:
+        '"FeatureMembership"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedFeatureMembership'),
+            ReferenceValue(new_element, new_element.name))
+
+    @property
+    def ownedFeature(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'ownedFeature')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_owned_feature(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedFeature'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedEndFeature(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'ownedEndFeature')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_owned_end_feature(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedEndFeature'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def feature(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'feature')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_feature(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('feature'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def input(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'input')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_input(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('input'), ReferenceValue(new_element,
+            new_element.name))
+
+    @property
+    def output(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'output')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_output(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('output'), ReferenceValue(new_element,
+            new_element.name))
+
+    @property
+    def isAbstract(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isAbstract'))
+
+    @isAbstract.setter
+    def isAbstract(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name('isAbstract'
+            )
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def inheritedMembership(self) ->'List["Membership"]':
+        res = get_reference_value_by_name(self, 'inheritedMembership')
+        return [(cast('Membership', r.referred) if r else None) for r in res]
+
+    def add_to_inherited_membership(self, new_element: '"Membership"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('inheritedMembership'),
+            ReferenceValue(new_element, new_element.name))
+
+    @property
+    def endFeature(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'endFeature')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_end_feature(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('endFeature'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def isSufficient(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isSufficient'))
+
+    @isSufficient.setter
+    def isSufficient(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name(
+            'isSufficient')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def ownedConjugator(self) ->'Optional["Conjugation"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'ownedConjugator')
+        if res:
+            return cast('Conjugation', res.referred)
+        else:
+            return None
+
+    @ownedConjugator.setter
+    def ownedConjugator(self, ownedConjugator: '"Conjugation"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'ownedConjugator')
+        if self.ownedConjugator:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(ownedConjugator,
+            ownedConjugator.name))
+
+    @property
+    def isConjugated(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isConjugated'))
+
+    @isConjugated.setter
+    def isConjugated(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name(
+            'isConjugated')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def inheritedFeature(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'inheritedFeature')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_inherited_feature(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('inheritedFeature'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def multiplicity(self) ->'Optional["Multiplicity"]':
+        res = get_only_reference_value_by_reference_name(self, 'multiplicity')
+        if res:
+            return cast('Multiplicity', res.referred)
+        else:
+            return None
+
+    @multiplicity.setter
+    def multiplicity(self, multiplicity: '"Multiplicity"'):
+        reference = self.get_classifier().get_reference_by_name('multiplicity')
+        if self.multiplicity:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(multiplicity,
+            multiplicity.name))
+
+    @property
+    def unioningType(self) ->'List["IType"]':
+        res = get_reference_value_by_name(self, 'unioningType')
+        return [(cast('IType', r.referred) if r else None) for r in res]
+
+    def add_to_unioning_type(self, new_element: '"IType"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('unioningType'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedIntersecting(self) ->'List["Intersecting"]':
+        res = get_reference_value_by_name(self, 'ownedIntersecting')
+        return [(cast('Intersecting', r.referred) if r else None) for r in res]
+
+    def add_to_owned_intersecting(self, new_element: '"Intersecting"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedIntersecting'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def intersectingType(self) ->'List["IType"]':
+        res = get_reference_value_by_name(self, 'intersectingType')
+        return [(cast('IType', r.referred) if r else None) for r in res]
+
+    def add_to_intersecting_type(self, new_element: '"IType"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('intersectingType'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedUnioning(self) ->'List["Unioning"]':
+        res = get_reference_value_by_name(self, 'ownedUnioning')
+        return [(cast('Unioning', r.referred) if r else None) for r in res]
+
+    def add_to_owned_unioning(self, new_element: '"Unioning"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedUnioning'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedDisjoining(self) ->'List["Disjoining"]':
+        res = get_reference_value_by_name(self, 'ownedDisjoining')
+        return [(cast('Disjoining', r.referred) if r else None) for r in res]
+
+    def add_to_owned_disjoining(self, new_element: '"Disjoining"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedDisjoining'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def featureMembership(self) ->'List["FeatureMembership"]':
+        res = get_reference_value_by_name(self, 'featureMembership')
+        return [(cast('FeatureMembership', r.referred) if r else None) for
+            r in res]
+
+    def add_to_feature_membership(self, new_element: '"FeatureMembership"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('featureMembership'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def differencingType(self) ->'List["IType"]':
+        res = get_reference_value_by_name(self, 'differencingType')
+        return [(cast('IType', r.referred) if r else None) for r in res]
+
+    def add_to_differencing_type(self, new_element: '"IType"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('differencingType'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedDifferencing(self) ->'List["Differencing"]':
+        res = get_reference_value_by_name(self, 'ownedDifferencing')
+        return [(cast('Differencing', r.referred) if r else None) for r in res]
+
+    def add_to_owned_differencing(self, new_element: '"Differencing"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedDifferencing'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def directedFeature(self) ->'List["IFeature"]':
+        res = get_reference_value_by_name(self, 'directedFeature')
+        return [(cast('IFeature', r.referred) if r else None) for r in res]
+
+    def add_to_directed_feature(self, new_element: '"IFeature"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('directedFeature'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedSpecialization(self) ->'List["Specialization"]':
+        res = get_reference_value_by_name(self, 'ownedSpecialization')
+        return [(cast('Specialization', r.referred) if r else None) for r in
+            res]
+
+    def add_to_owned_specialization(self, new_element: '"Specialization"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedSpecialization'),
+            ReferenceValue(new_element, new_element.name))
+
+    @property
+    def owningMembership(self) ->'Optional["OwningMembership"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'owningMembership')
+        if res:
+            return cast('OwningMembership', res.referred)
+        else:
+            return None
+
+    @owningMembership.setter
+    def owningMembership(self, owningMembership: '"OwningMembership"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'owningMembership')
+        if self.owningMembership:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(owningMembership,
+            owningMembership.name))
+
+    @property
+    def owningNamespace(self) ->'Optional["INamespace"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'owningNamespace')
+        if res:
+            return cast('INamespace', res.referred)
+        else:
+            return None
+
+    @owningNamespace.setter
+    def owningNamespace(self, owningNamespace: '"INamespace"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'owningNamespace')
+        if self.owningNamespace:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(owningNamespace,
+            owningNamespace.name))
+
+    @property
+    def owningRelationship(self) ->'Optional["IRelationship"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'owningRelationship')
+        if res:
+            return cast('IRelationship', res.referred)
+        else:
+            return None
+
+    @owningRelationship.setter
+    def owningRelationship(self, owningRelationship: '"IRelationship"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'owningRelationship')
+        if self.owningRelationship:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(
+            owningRelationship, owningRelationship.name))
+
+    @property
+    def elementId(self) ->str:
+        return cast(str, get_property_value_by_name(self, 'elementId'))
+
+    @elementId.setter
+    def elementId(self, value: str):
+        property_ = self.get_classifier().require_property_by_name('elementId')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def owner(self) ->'Optional["IElement"]':
+        res = get_only_reference_value_by_reference_name(self, 'owner')
+        if res:
+            return cast('IElement', res.referred)
+        else:
+            return None
+
+    @owner.setter
+    def owner(self, owner: '"IElement"'):
+        reference = self.get_classifier().get_reference_by_name('owner')
+        if self.owner:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(owner, owner.name))
+
+    @property
+    def ownedElement(self) ->'List["IElement"]':
+        res = get_reference_value_by_name(self, 'ownedElement')
+        return [(cast('IElement', r.referred) if r else None) for r in res]
+
+    def add_to_owned_element(self, new_element: '"IElement"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedElement'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def documentation(self) ->'List["Documentation"]':
+        res = get_reference_value_by_name(self, 'documentation')
+        return [(cast('Documentation', r.referred) if r else None) for r in res
+            ]
+
+    def add_to_documentation(self, new_element: '"Documentation"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('documentation'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedAnnotation(self) ->'List["Annotation"]':
+        res = get_reference_value_by_name(self, 'ownedAnnotation')
+        return [(cast('Annotation', r.referred) if r else None) for r in res]
+
+    def add_to_owned_annotation(self, new_element: '"Annotation"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedAnnotation'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def textualRepresentation(self) ->'List["TextualRepresentation"]':
+        res = get_reference_value_by_name(self, 'textualRepresentation')
+        return [(cast('TextualRepresentation', r.referred) if r else None) for
+            r in res]
+
+    def add_to_textual_representation(self, new_element:
+        '"TextualRepresentation"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('textualRepresentation'),
+            ReferenceValue(new_element, new_element.name))
+
+    @property
+    def declaredShortName(self) ->str:
+        return cast(str, get_property_value_by_name(self, 'declaredShortName'))
+
+    @declaredShortName.setter
+    def declaredShortName(self, value: str):
+        property_ = self.get_classifier().require_property_by_name(
+            'declaredShortName')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def declaredName(self) ->str:
+        return cast(str, get_property_value_by_name(self, 'declaredName'))
+
+    @declaredName.setter
+    def declaredName(self, value: str):
+        property_ = self.get_classifier().require_property_by_name(
+            'declaredName')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def shortName(self) ->str:
+        return cast(str, get_property_value_by_name(self, 'shortName'))
+
+    @shortName.setter
+    def shortName(self, value: str):
+        property_ = self.get_classifier().require_property_by_name('shortName')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def name(self) ->str:
+        return cast(str, get_property_value_by_name(self, 'name'))
+
+    @name.setter
+    def name(self, value: str):
+        property_ = self.get_classifier().require_property_by_name('name')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def qualifiedName(self) ->str:
+        return cast(str, get_property_value_by_name(self, 'qualifiedName'))
+
+    @qualifiedName.setter
+    def qualifiedName(self, value: str):
+        property_ = self.get_classifier().require_property_by_name(
+            'qualifiedName')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def isImpliedIncluded(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isImpliedIncluded')
+            )
+
+    @isImpliedIncluded.setter
+    def isImpliedIncluded(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name(
+            'isImpliedIncluded')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def isLibraryElement(self) ->bool:
+        return cast(bool, get_property_value_by_name(self, 'isLibraryElement'))
+
+    @isLibraryElement.setter
+    def isLibraryElement(self, value: bool):
+        property_ = self.get_classifier().require_property_by_name(
+            'isLibraryElement')
+        self.set_property_value(property=property_, value=value)
+
+    @property
+    def membership(self) ->'List["Membership"]':
+        res = get_reference_value_by_name(self, 'membership')
+        return [(cast('Membership', r.referred) if r else None) for r in res]
+
+    def add_to_membership(self, new_element: '"Membership"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('membership'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def ownedImport(self) ->'List["IImport"]':
+        res = get_reference_value_by_name(self, 'ownedImport')
+        return [(cast('IImport', r.referred) if r else None) for r in res]
+
+    def add_to_owned_import(self, new_element: '"IImport"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedImport'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def member(self) ->'List["IElement"]':
+        res = get_reference_value_by_name(self, 'member')
+        return [(cast('IElement', r.referred) if r else None) for r in res]
+
+    def add_to_member(self, new_element: '"IElement"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('member'), ReferenceValue(new_element,
+            new_element.name))
+
+    @property
+    def ownedMember(self) ->'List["IElement"]':
+        res = get_reference_value_by_name(self, 'ownedMember')
+        return [(cast('IElement', r.referred) if r else None) for r in res]
+
+    def add_to_owned_member(self, new_element: '"IElement"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedMember'), ReferenceValue(
+            new_element, new_element.name))
+
+    @property
+    def importedMembership(self) ->'List["Membership"]':
+        res = get_reference_value_by_name(self, 'importedMembership')
+        return [(cast('Membership', r.referred) if r else None) for r in res]
+
+    def add_to_imported_membership(self, new_element: '"Membership"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('importedMembership'), ReferenceValue
+            (new_element, new_element.name))
+
+    @property
+    def ownedMembership(self) ->'List["Membership"]':
+        res = get_reference_value_by_name(self, 'ownedMembership')
+        return [(cast('Membership', r.referred) if r else None) for r in res]
+
+    def add_to_owned_membership(self, new_element: '"Membership"'):
+        self.add_reference_value(self.get_classifier().
+            require_reference_by_name('ownedMembership'), ReferenceValue(
+            new_element, new_element.name))

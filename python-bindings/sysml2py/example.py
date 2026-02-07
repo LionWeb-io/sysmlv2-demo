@@ -1,4 +1,4 @@
-from sysml2py.sysml.node_classes import Package, PartDefinition, PartUsage, AttributeUsage, PortUsage, ConnectionUsage, RequirementUsage
+from sysml2py.sysml import Package, PartDefinition, PartUsage, AttributeUsage, PortUsage, ConnectionUsage, RequirementUsage
 from lionweb.serialization import create_standard_json_serialization
 from lionweb import LionWebVersion
 
