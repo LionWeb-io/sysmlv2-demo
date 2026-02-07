@@ -94,3 +94,12 @@ class RequirementDefinition(ConstraintDefinition):
         self.add_reference_value(self.get_classifier().
             require_reference_by_name('framedConcern'), ReferenceValue(
             new_element, new_element.name))
+
+    @property
+    def textContainer(self) ->'List["TextContainer"]':
+        res = self.get_children('textContainer')
+        return res
+
+    def add_to_text_container(self, new_element: '"TextContainer"'):
+        self.add_child(self.get_classifier().require_containment_by_name(
+            'textContainer'), new_element)

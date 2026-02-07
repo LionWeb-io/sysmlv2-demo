@@ -101,6 +101,15 @@ class Featuring(DynamicNode):
             owningRelatedElement, owningRelatedElement.name))
 
     @property
+    def ownedRelatedElement(self) ->'List["IElement"]':
+        res = self.get_children('ownedRelatedElement')
+        return res
+
+    def add_to_owned_related_element(self, new_element: '"IElement"'):
+        self.add_child(self.get_classifier().require_containment_by_name(
+            'ownedRelatedElement'), new_element)
+
+    @property
     def isImplied(self) ->bool:
         return cast(bool, get_property_value_by_name(self, 'isImplied'))
 
@@ -126,6 +135,15 @@ class Featuring(DynamicNode):
             self.remove_reference_value_by_index(reference, 0)
         self.add_reference_value(reference, ReferenceValue(owningMembership,
             owningMembership.name))
+
+    @property
+    def ownedRelationship(self) ->'List["IRelationship"]':
+        res = self.get_children('ownedRelationship')
+        return res
+
+    def add_to_owned_relationship(self, new_element: '"IRelationship"'):
+        self.add_child(self.get_classifier().require_containment_by_name(
+            'ownedRelationship'), new_element)
 
     @property
     def owningRelationship(self) ->'Optional["IRelationship"]':
@@ -298,3 +316,12 @@ class Featuring(DynamicNode):
         property_ = self.get_classifier().require_property_by_name(
             'isLibraryElement')
         self.set_property_value(property=property_, value=value)
+
+    @property
+    def aliasIdsContainer(self) ->'List["AliasIdsContainer"]':
+        res = self.get_children('aliasIdsContainer')
+        return res
+
+    def add_to_alias_ids_container(self, new_element: '"AliasIdsContainer"'):
+        self.add_child(self.get_classifier().require_containment_by_name(
+            'aliasIdsContainer'), new_element)

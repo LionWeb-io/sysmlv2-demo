@@ -22,3 +22,12 @@ class InvocationExpression(Expression):
         self.add_reference_value(self.get_classifier().
             require_reference_by_name('argument'), ReferenceValue(
             new_element, new_element.name))
+
+    @property
+    def operand(self) ->'List["Expression"]':
+        res = self.get_children('operand')
+        return res
+
+    def add_to_operand(self, new_element: '"Expression"'):
+        self.add_child(self.get_classifier().require_containment_by_name(
+            'operand'), new_element)

@@ -558,6 +558,15 @@ class SuccessionItemFlow(DynamicNode):
         self.set_property_value(property=property_, value=value)
 
     @property
+    def ownedRelatedElement(self) ->'List["IElement"]':
+        res = self.get_children('ownedRelatedElement')
+        return res
+
+    def add_to_owned_related_element(self, new_element: '"IElement"'):
+        self.add_child(self.get_classifier().require_containment_by_name(
+            'ownedRelatedElement'), new_element)
+
+    @property
     def owningRelatedElement(self) ->'Optional["IElement"]':
         res = get_only_reference_value_by_reference_name(self,
             'owningRelatedElement')
@@ -936,6 +945,15 @@ class SuccessionItemFlow(DynamicNode):
         self.set_property_value(property=property_, value=value)
 
     @property
+    def ownedRelationship(self) ->'List["IRelationship"]':
+        res = self.get_children('ownedRelationship')
+        return res
+
+    def add_to_owned_relationship(self, new_element: '"IRelationship"'):
+        self.add_child(self.get_classifier().require_containment_by_name(
+            'ownedRelationship'), new_element)
+
+    @property
     def owner(self) ->'Optional["IElement"]':
         res = get_only_reference_value_by_reference_name(self, 'owner')
         if res:
@@ -1061,6 +1079,15 @@ class SuccessionItemFlow(DynamicNode):
         property_ = self.get_classifier().require_property_by_name(
             'isLibraryElement')
         self.set_property_value(property=property_, value=value)
+
+    @property
+    def aliasIdsContainer(self) ->'List["AliasIdsContainer"]':
+        res = self.get_children('aliasIdsContainer')
+        return res
+
+    def add_to_alias_ids_container(self, new_element: '"AliasIdsContainer"'):
+        self.add_child(self.get_classifier().require_containment_by_name(
+            'aliasIdsContainer'), new_element)
 
     @property
     def membership(self) ->'List["Membership"]':
