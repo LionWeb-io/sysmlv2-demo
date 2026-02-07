@@ -4,9 +4,9 @@ from enum import Enum
 from typing import Optional, cast, List
 from lionweb.model.classifier_instance_utils import get_only_reference_value_by_reference_name, get_property_value_by_name
 from lionweb.model.impl.dynamic_node import DynamicNode
-from .language import get_language, get_subclassification, get_specialization, get_owningmembership, get_membership, get_documentation, get_comment, get_annotation, get_textualrepresentation, get_featuremembership, get_redefinition, get_subsetting, get_featuretyping, get_typefeaturing, get_featureinverting, get_featurechaining, get_referencesubsetting, get_crosssubsetting, get_conjugation, get_multiplicity, get_intersecting, get_unioning, get_disjoining, get_differencing, get_endfeaturemembership, get_resultexpressionmembership, get_returnparametermembership, get_parametermembership, get_multiplicityrange, get_featurevalue, get_metadatafeature, get_itemflowend, get_itemfeature, get_elementfiltermembership, get_package, get_librarypackage, get_featurereferenceexpression, get_metadataaccessexpression, get_nullexpression, get_indexexpression, get_operatorexpression, get_invocationexpression, get_collectexpression, get_literalinfinity, get_literalexpression, get_literalinteger, get_selectexpression, get_literalrational, get_literalboolean, get_literalstring, get_featurechainexpression, get_dependency, get_namespaceimport, get_membershipimport, get_interfaceusage, get_connectionusage, get_connectorasusage, get_variantmembership, get_definition, get_referenceusage, get_attributeusage, get_enumerationusage, get_enumerationdefinition, get_attributedefinition, get_occurrencedefinition, get_lifeclass, get_partdefinition, get_itemdefinition, get_portusage, get_portdefinition, get_conjugatedportdefinition, get_portconjugation, get_flowconnectionusage, get_allocationusage, get_allocationdefinition, get_connectiondefinition, get_stateusage, get_transitionusage, get_acceptactionusage, get_calculationusage, get_requirementusage, get_requirementdefinition, get_constraintdefinition, get_concernusage, get_concerndefinition, get_caseusage, get_casedefinition, get_calculationdefinition, get_actiondefinition, get_analysiscaseusage, get_analysiscasedefinition, get_verificationcaseusage, get_verificationcasedefinition, get_usecaseusage, get_usecasedefinition, get_viewusage, get_viewdefinition, get_viewpointusage, get_viewpointdefinition, get_renderingusage, get_renderingdefinition, get_metadatausage, get_interfacedefinition, get_conjugatedporttyping, get_transitionfeaturemembership, get_exhibitstateusage, get_statesubactionmembership, get_statedefinition, get_successionflowconnectionusage, get_flowconnectiondefinition, get_requirementverificationmembership, get_requirementconstraintmembership, get_includeusecaseusage, get_objectivemembership, get_satisfyrequirementusage, get_subjectmembership, get_stakeholdermembership, get_framedconcernmembership, get_actormembership, get_viewrenderingmembership, get_namespaceexpose, get_membershipexpose, get_bindingconnectorasusage, get_successionasusage, get_forknode, get_controlnode, get_joinnode, get_sendactionusage, get_decisionnode, get_mergenode, get_loopactionusage, get_triggerinvocationexpression, get_assignmentactionusage, get_forloopactionusage, get_ifactionusage, get_whileloopactionusage, get_terminateactionusage, get_metadatadefinition, get_aliasidscontainer, get_textcontainer, get_featuring, get_relationship, get_element, get_annotatingelement, get_step, get_feature, get_type, get_namespace, get_behavior, get_class, get_classifier, get_succession, get_connector, get_structure, get_partusage, get_itemusage, get_occurrenceusage, get_usage, get_datatype, get_actionusage, get_itemflow, get_associationstructure, get_association, get_predicate, get_function, get_performactionusage, get_eventoccurrenceusage, get_successionitemflow, get_interaction, get_assertconstraintusage, get_constraintusage, get_booleanexpression, get_expression, get_invariant, get_expose, get_import, get_bindingconnector, get_metaclass
 from lionweb.model.reference_value import ReferenceValue
 from lionweb.model import Node
+from .language import get_language, get_subclassification, get_specialization, get_owning_membership, get_membership, get_documentation, get_comment, get_annotation, get_textual_representation, get_feature_membership, get_redefinition, get_subsetting, get_feature_typing, get_type_featuring, get_feature_inverting, get_feature_chaining, get_reference_subsetting, get_cross_subsetting, get_conjugation, get_multiplicity, get_intersecting, get_unioning, get_disjoining, get_differencing, get_end_feature_membership, get_result_expression_membership, get_return_parameter_membership, get_parameter_membership, get_multiplicity_range, get_feature_value, get_metadata_feature, get_item_flow_end, get_item_feature, get_element_filter_membership, get_package, get_library_package, get_feature_reference_expression, get_metadata_access_expression, get_null_expression, get_index_expression, get_operator_expression, get_invocation_expression, get_collect_expression, get_literal_infinity, get_literal_expression, get_literal_integer, get_select_expression, get_literal_rational, get_literal_boolean, get_literal_string, get_feature_chain_expression, get_dependency, get_namespace_import, get_membership_import, get_interface_usage, get_connection_usage, get_connector_as_usage, get_variant_membership, get_definition, get_reference_usage, get_attribute_usage, get_enumeration_usage, get_enumeration_definition, get_attribute_definition, get_occurrence_definition, get_life_class, get_part_definition, get_item_definition, get_port_usage, get_port_definition, get_conjugated_port_definition, get_port_conjugation, get_flow_connection_usage, get_allocation_usage, get_allocation_definition, get_connection_definition, get_state_usage, get_transition_usage, get_accept_action_usage, get_calculation_usage, get_requirement_usage, get_requirement_definition, get_constraint_definition, get_concern_usage, get_concern_definition, get_case_usage, get_case_definition, get_calculation_definition, get_action_definition, get_analysis_case_usage, get_analysis_case_definition, get_verification_case_usage, get_verification_case_definition, get_use_case_usage, get_use_case_definition, get_view_usage, get_view_definition, get_viewpoint_usage, get_viewpoint_definition, get_rendering_usage, get_rendering_definition, get_metadata_usage, get_interface_definition, get_conjugated_port_typing, get_transition_feature_membership, get_exhibit_state_usage, get_state_subaction_membership, get_state_definition, get_succession_flow_connection_usage, get_flow_connection_definition, get_requirement_verification_membership, get_requirement_constraint_membership, get_include_use_case_usage, get_objective_membership, get_satisfy_requirement_usage, get_subject_membership, get_stakeholder_membership, get_framed_concern_membership, get_actor_membership, get_view_rendering_membership, get_namespace_expose, get_membership_expose, get_binding_connector_as_usage, get_succession_as_usage, get_fork_node, get_control_node, get_join_node, get_send_action_usage, get_decision_node, get_merge_node, get_loop_action_usage, get_trigger_invocation_expression, get_assignment_action_usage, get_for_loop_action_usage, get_if_action_usage, get_while_loop_action_usage, get_terminate_action_usage, get_metadata_definition, get_alias_ids_container, get_text_container, get_featuring, get_relationship, get_element, get_annotating_element, get_step, get_feature, get_type, get_namespace, get_behavior, get_class, get_classifier, get_succession, get_connector, get_structure, get_part_usage, get_item_usage, get_occurrence_usage, get_usage, get_data_type, get_action_usage, get_item_flow, get_association_structure, get_association, get_predicate, get_function, get_perform_action_usage, get_event_occurrence_usage, get_succession_item_flow, get_interaction, get_assert_constraint_usage, get_constraint_usage, get_boolean_expression, get_expression, get_invariant, get_expose, get_import, get_binding_connector, get_metaclass
 
 
 class VisibilityKind(Enum):
@@ -53,7 +53,7 @@ class AliasIdsContainer(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_aliasidscontainer()
+        self.concept = get_alias_ids_container()
 
     @property
     def aliasIds(self) ->str:
@@ -768,7 +768,7 @@ class OwningMembership(Membership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_owningmembership()
+        self.concept = get_owning_membership()
 
     @property
     def ownedMemberElementId(self) ->str:
@@ -1470,7 +1470,7 @@ class TextualRepresentation(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_textualrepresentation()
+        self.concept = get_textual_representation()
 
     @property
     def language(self) ->str:
@@ -1759,7 +1759,7 @@ class FeatureMembership(OwningMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featuremembership()
+        self.concept = get_feature_membership()
 
     @property
     def ownedMemberFeature(self) ->Optional['IFeature']:
@@ -2184,7 +2184,7 @@ class FeatureTyping(Specialization):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featuretyping()
+        self.concept = get_feature_typing()
 
     @property
     def typedFeature(self) ->Optional['IFeature']:
@@ -2239,7 +2239,7 @@ class TypeFeaturing(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_typefeaturing()
+        self.concept = get_type_featuring()
 
     @property
     def featureOfType(self) ->Optional['IFeature']:
@@ -2575,7 +2575,7 @@ class FeatureInverting(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featureinverting()
+        self.concept = get_feature_inverting()
 
     @property
     def featureInverted(self) ->Optional['IFeature']:
@@ -2881,7 +2881,7 @@ class FeatureChaining(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featurechaining()
+        self.concept = get_feature_chaining()
 
     @property
     def chainingFeature(self) ->Optional['IFeature']:
@@ -3170,7 +3170,7 @@ class ReferenceSubsetting(Subsetting):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_referencesubsetting()
+        self.concept = get_reference_subsetting()
 
     @property
     def referencedFeature(self) ->Optional['IFeature']:
@@ -3213,7 +3213,7 @@ class CrossSubsetting(Subsetting):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_crosssubsetting()
+        self.concept = get_cross_subsetting()
 
     @property
     def crossedFeature(self) ->Optional['IFeature']:
@@ -5542,7 +5542,7 @@ class EndFeatureMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_endfeaturemembership()
+        self.concept = get_end_feature_membership()
 
 
 class IStep(Node, ABC):
@@ -5569,7 +5569,7 @@ class ResultExpressionMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_resultexpressionmembership()
+        self.concept = get_result_expression_membership()
 
     @property
     def ownedResultExpression(self) ->Optional['IExpression']:
@@ -5606,7 +5606,7 @@ class ParameterMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_parametermembership()
+        self.concept = get_parameter_membership()
 
     @property
     def ownedMemberParameter(self) ->Optional['IFeature']:
@@ -5631,14 +5631,14 @@ class ReturnParameterMembership(ParameterMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_returnparametermembership()
+        self.concept = get_return_parameter_membership()
 
 
 class MultiplicityRange(Multiplicity):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_multiplicityrange()
+        self.concept = get_multiplicity_range()
 
     @property
     def lowerBound(self) ->Optional['IExpression']:
@@ -5691,7 +5691,7 @@ class FeatureValue(OwningMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featurevalue()
+        self.concept = get_feature_value()
 
     @property
     def featureWithValue(self) ->Optional['IFeature']:
@@ -5753,7 +5753,7 @@ class MetadataFeature(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_metadatafeature()
+        self.concept = get_metadata_feature()
 
     @property
     def metaclass(self) ->Optional['IMetaclass']:
@@ -6642,7 +6642,7 @@ class ItemFlowEnd(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_itemflowend()
+        self.concept = get_item_flow_end()
 
     @property
     def owningType(self) ->Optional['IType']:
@@ -7454,7 +7454,7 @@ class ItemFeature(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_itemfeature()
+        self.concept = get_item_feature()
 
     @property
     def owningType(self) ->Optional['IType']:
@@ -8278,7 +8278,7 @@ class ElementFilterMembership(OwningMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_elementfiltermembership()
+        self.concept = get_element_filter_membership()
 
     @property
     def condition(self) ->Optional['IExpression']:
@@ -8567,7 +8567,7 @@ class LibraryPackage(Package):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_librarypackage()
+        self.concept = get_library_package()
 
     @property
     def isStandard(self) ->bool:
@@ -8588,7 +8588,7 @@ class FeatureReferenceExpression(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featurereferenceexpression()
+        self.concept = get_feature_reference_expression()
 
     @property
     def referent(self) ->Optional['IFeature']:
@@ -9479,7 +9479,7 @@ class MetadataAccessExpression(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_metadataaccessexpression()
+        self.concept = get_metadata_access_expression()
 
     @property
     def referencedElement(self) ->Optional['IElement']:
@@ -10372,7 +10372,7 @@ class NullExpression(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_nullexpression()
+        self.concept = get_null_expression()
 
     @property
     def function(self) ->Optional['IFunction']:
@@ -11247,7 +11247,7 @@ class InvocationExpression(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_invocationexpression()
+        self.concept = get_invocation_expression()
 
     @property
     def argument(self) ->List['IExpression']:
@@ -12132,7 +12132,7 @@ class OperatorExpression(InvocationExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_operatorexpression()
+        self.concept = get_operator_expression()
 
     @property
     def operator(self) ->str:
@@ -12148,21 +12148,21 @@ class IndexExpression(OperatorExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_indexexpression()
+        self.concept = get_index_expression()
 
 
 class CollectExpression(OperatorExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_collectexpression()
+        self.concept = get_collect_expression()
 
 
 class LiteralExpression(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalexpression()
+        self.concept = get_literal_expression()
 
     @property
     def function(self) ->Optional['IFunction']:
@@ -13037,14 +13037,14 @@ class LiteralInfinity(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalinfinity()
+        self.concept = get_literal_infinity()
 
 
 class LiteralInteger(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalinteger()
+        self.concept = get_literal_integer()
 
     @property
     def value(self) ->int:
@@ -13060,14 +13060,14 @@ class SelectExpression(OperatorExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_selectexpression()
+        self.concept = get_select_expression()
 
 
 class LiteralRational(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalrational()
+        self.concept = get_literal_rational()
 
     @property
     def value(self) ->float:
@@ -13083,7 +13083,7 @@ class LiteralBoolean(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalboolean()
+        self.concept = get_literal_boolean()
 
     @property
     def value(self) ->bool:
@@ -13099,7 +13099,7 @@ class LiteralString(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalstring()
+        self.concept = get_literal_string()
 
     @property
     def value(self) ->str:
@@ -13115,7 +13115,7 @@ class FeatureChainExpression(OperatorExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featurechainexpression()
+        self.concept = get_feature_chain_expression()
 
     @property
     def targetFeature(self) ->Optional['IFeature']:
@@ -13420,7 +13420,7 @@ class NamespaceImport(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_namespaceimport()
+        self.concept = get_namespace_import()
 
     @property
     def importedNamespace(self) ->Optional['INamespace']:
@@ -13758,7 +13758,7 @@ class MembershipImport(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_membershipimport()
+        self.concept = get_membership_import()
 
     @property
     def importedMembership(self) ->Optional['Membership']:
@@ -14100,7 +14100,7 @@ class ConnectorAsUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_connectorasusage()
+        self.concept = get_connector_as_usage()
 
     @property
     def isReference(self) ->bool:
@@ -15425,7 +15425,7 @@ class ConnectionUsage(ConnectorAsUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_connectionusage()
+        self.concept = get_connection_usage()
 
     @property
     def connectionDefinition(self) ->List['IAssociationStructure']:
@@ -16706,7 +16706,7 @@ class InterfaceUsage(ConnectionUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_interfaceusage()
+        self.concept = get_interface_usage()
 
     @property
     def interfaceDefinition(self) ->List['InterfaceDefinition']:
@@ -16724,7 +16724,7 @@ class VariantMembership(OwningMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_variantmembership()
+        self.concept = get_variant_membership()
 
     @property
     def ownedVariantUsage(self) ->Optional['IUsage']:
@@ -17606,7 +17606,7 @@ class ReferenceUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_referenceusage()
+        self.concept = get_reference_usage()
 
     @property
     def isReference(self) ->bool:
@@ -18805,7 +18805,7 @@ class AttributeUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_attributeusage()
+        self.concept = get_attribute_usage()
 
     @property
     def attributeDefinition(self) ->List['IDataType']:
@@ -20014,7 +20014,7 @@ class EnumerationUsage(AttributeUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_enumerationusage()
+        self.concept = get_enumeration_usage()
 
     @property
     def enumerationDefinition(self) ->Optional['EnumerationDefinition']:
@@ -20040,7 +20040,7 @@ class AttributeDefinition(Definition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_attributedefinition()
+        self.concept = get_attribute_definition()
 
     @property
     def ownedSubclassification(self) ->List['Subclassification']:
@@ -20564,7 +20564,7 @@ class EnumerationDefinition(AttributeDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_enumerationdefinition()
+        self.concept = get_enumeration_definition()
 
     @property
     def enumeratedValue(self) ->List['EnumerationUsage']:
@@ -20582,7 +20582,7 @@ class OccurrenceDefinition(Definition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_occurrencedefinition()
+        self.concept = get_occurrence_definition()
 
     @property
     def lifeClass(self) ->Optional['LifeClass']:
@@ -21132,7 +21132,7 @@ class LifeClass(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_lifeclass()
+        self.concept = get_life_class()
 
     @property
     def ownedSubclassification(self) ->List['Subclassification']:
@@ -21656,7 +21656,7 @@ class ItemDefinition(OccurrenceDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_itemdefinition()
+        self.concept = get_item_definition()
 
     @property
     def ownedSubclassification(self) ->List['Subclassification']:
@@ -22180,14 +22180,14 @@ class PartDefinition(ItemDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_partdefinition()
+        self.concept = get_part_definition()
 
 
 class PortUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_portusage()
+        self.concept = get_port_usage()
 
     @property
     def portDefinition(self) ->List['PortDefinition']:
@@ -23446,7 +23446,7 @@ class PortDefinition(OccurrenceDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_portdefinition()
+        self.concept = get_port_definition()
 
     @property
     def conjugatedPortDefinition(self) ->Optional['ConjugatedPortDefinition']:
@@ -23989,7 +23989,7 @@ class ConjugatedPortDefinition(PortDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_conjugatedportdefinition()
+        self.concept = get_conjugated_port_definition()
 
     @property
     def ownedPortConjugator(self) ->Optional['PortConjugation']:
@@ -24032,7 +24032,7 @@ class PortConjugation(Conjugation):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_portconjugation()
+        self.concept = get_port_conjugation()
 
     @property
     def originalPortDefinition(self) ->Optional['PortDefinition']:
@@ -24080,7 +24080,7 @@ class FlowConnectionUsage(ConnectorAsUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_flowconnectionusage()
+        self.concept = get_flow_connection_usage()
 
     @property
     def flowConnectionDefinition(self) ->List['IInteraction']:
@@ -25565,7 +25565,7 @@ class AllocationUsage(ConnectionUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_allocationusage()
+        self.concept = get_allocation_usage()
 
     @property
     def allocationDefinition(self) ->List['AllocationDefinition']:
@@ -25584,7 +25584,7 @@ class ConnectionDefinition(PartDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_connectiondefinition()
+        self.concept = get_connection_definition()
 
     @property
     def connectionEnd(self) ->List['IUsage']:
@@ -26221,7 +26221,7 @@ class AllocationDefinition(ConnectionDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_allocationdefinition()
+        self.concept = get_allocation_definition()
 
     @property
     def allocation(self) ->List['AllocationUsage']:
@@ -26239,7 +26239,7 @@ class StateUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_stateusage()
+        self.concept = get_state_usage()
 
     @property
     def stateDefinition(self) ->List['IBehavior']:
@@ -27586,7 +27586,7 @@ class TransitionUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_transitionusage()
+        self.concept = get_transition_usage()
 
     @property
     def source(self) ->Optional['IActionUsage']:
@@ -28944,7 +28944,7 @@ class AcceptActionUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_acceptactionusage()
+        self.concept = get_accept_action_usage()
 
     @property
     def receiverArgument(self) ->Optional['IExpression']:
@@ -30277,7 +30277,7 @@ class CalculationUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_calculationusage()
+        self.concept = get_calculation_usage()
 
     @property
     def calculationDefinition(self) ->Optional['IFunction']:
@@ -31621,7 +31621,7 @@ class TextContainer(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_textcontainer()
+        self.concept = get_text_container()
 
     @property
     def text(self) ->str:
@@ -31637,7 +31637,7 @@ class RequirementUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_requirementusage()
+        self.concept = get_requirement_usage()
 
     @property
     def requirementDefinition(self) ->Optional['RequirementDefinition']:
@@ -33081,7 +33081,7 @@ class ConstraintDefinition(OccurrenceDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_constraintdefinition()
+        self.concept = get_constraint_definition()
 
     @property
     def expression(self) ->List['IExpression']:
@@ -33662,7 +33662,7 @@ class RequirementDefinition(ConstraintDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_requirementdefinition()
+        self.concept = get_requirement_definition()
 
     @property
     def reqId(self) ->str:
@@ -33748,7 +33748,7 @@ class ConcernUsage(RequirementUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_concernusage()
+        self.concept = get_concern_usage()
 
     @property
     def concernDefinition(self) ->Optional['ConcernDefinition']:
@@ -33773,14 +33773,14 @@ class ConcernDefinition(RequirementDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_concerndefinition()
+        self.concept = get_concern_definition()
 
 
 class CaseUsage(CalculationUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_caseusage()
+        self.concept = get_case_usage()
 
     @property
     def objectiveRequirement(self) ->Optional['RequirementUsage']:
@@ -33851,7 +33851,7 @@ class ActionDefinition(OccurrenceDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_actiondefinition()
+        self.concept = get_action_definition()
 
     @property
     def action(self) ->List['IActionUsage']:
@@ -34405,7 +34405,7 @@ class CalculationDefinition(ActionDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_calculationdefinition()
+        self.concept = get_calculation_definition()
 
     @property
     def calculation(self) ->List['CalculationUsage']:
@@ -34997,7 +34997,7 @@ class CaseDefinition(CalculationDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_casedefinition()
+        self.concept = get_case_definition()
 
     @property
     def objectiveRequirement(self) ->Optional['RequirementUsage']:
@@ -35050,7 +35050,7 @@ class AnalysisCaseUsage(CaseUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_analysiscaseusage()
+        self.concept = get_analysis_case_usage()
 
     @property
     def analysisCaseDefinition(self) ->Optional['AnalysisCaseDefinition']:
@@ -35094,7 +35094,7 @@ class AnalysisCaseDefinition(CaseDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_analysiscasedefinition()
+        self.concept = get_analysis_case_definition()
 
     @property
     def resultExpression(self) ->Optional['IExpression']:
@@ -35119,7 +35119,7 @@ class VerificationCaseUsage(CaseUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_verificationcaseusage()
+        self.concept = get_verification_case_usage()
 
     @property
     def verificationCaseDefinition(self) ->Optional[
@@ -35157,7 +35157,7 @@ class VerificationCaseDefinition(CaseDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_verificationcasedefinition()
+        self.concept = get_verification_case_definition()
 
     @property
     def verifiedRequirement(self) ->List['RequirementUsage']:
@@ -35175,7 +35175,7 @@ class UseCaseUsage(CaseUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_usecaseusage()
+        self.concept = get_use_case_usage()
 
     @property
     def useCaseDefinition(self) ->Optional['UseCaseDefinition']:
@@ -35210,7 +35210,7 @@ class UseCaseDefinition(CaseDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_usecasedefinition()
+        self.concept = get_use_case_definition()
 
     @property
     def includedUseCase(self) ->List['UseCaseUsage']:
@@ -35227,7 +35227,7 @@ class ViewUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_viewusage()
+        self.concept = get_view_usage()
 
     @property
     def viewDefinition(self) ->Optional['ViewDefinition']:
@@ -36561,7 +36561,7 @@ class ViewDefinition(PartDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_viewdefinition()
+        self.concept = get_view_definition()
 
     @property
     def view(self) ->List['ViewUsage']:
@@ -36615,7 +36615,7 @@ class ViewpointUsage(RequirementUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_viewpointusage()
+        self.concept = get_viewpoint_usage()
 
     @property
     def viewpointDefinition(self) ->Optional['ViewpointDefinition']:
@@ -36650,7 +36650,7 @@ class ViewpointDefinition(RequirementDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_viewpointdefinition()
+        self.concept = get_viewpoint_definition()
 
     @property
     def viewpointStakeholder(self) ->List['IPartUsage']:
@@ -36667,7 +36667,7 @@ class RenderingUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_renderingusage()
+        self.concept = get_rendering_usage()
 
     @property
     def renderingDefinition(self) ->Optional['RenderingDefinition']:
@@ -37954,7 +37954,7 @@ class RenderingDefinition(PartDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_renderingdefinition()
+        self.concept = get_rendering_definition()
 
     @property
     def rendering(self) ->List['RenderingUsage']:
@@ -37971,7 +37971,7 @@ class MetadataUsage(MetadataFeature):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_metadatausage()
+        self.concept = get_metadata_usage()
 
     @property
     def metadataDefinition(self) ->Optional['IMetaclass']:
@@ -39248,7 +39248,7 @@ class InterfaceDefinition(ConnectionDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_interfacedefinition()
+        self.concept = get_interface_definition()
 
     @property
     def interfaceEnd(self) ->List['PortUsage']:
@@ -39265,7 +39265,7 @@ class ConjugatedPortTyping(FeatureTyping):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_conjugatedporttyping()
+        self.concept = get_conjugated_port_typing()
 
     @property
     def portDefinition(self) ->Optional['PortDefinition']:
@@ -39309,7 +39309,7 @@ class TransitionFeatureMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_transitionfeaturemembership()
+        self.concept = get_transition_feature_membership()
 
     @property
     def kind(self) ->TransitionFeatureKind:
@@ -39352,7 +39352,7 @@ class ExhibitStateUsage(StateUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_exhibitstateusage()
+        self.concept = get_exhibit_state_usage()
 
     @property
     def exhibitedState(self) ->Optional['StateUsage']:
@@ -40685,7 +40685,7 @@ class StateSubactionMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_statesubactionmembership()
+        self.concept = get_state_subaction_membership()
 
     @property
     def kind(self) ->StateSubactionKind:
@@ -40718,7 +40718,7 @@ class StateDefinition(ActionDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_statedefinition()
+        self.concept = get_state_definition()
 
     @property
     def state(self) ->List['StateUsage']:
@@ -40793,7 +40793,7 @@ class SuccessionFlowConnectionUsage(FlowConnectionUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_successionflowconnectionusage()
+        self.concept = get_succession_flow_connection_usage()
 
     @property
     def itemType(self) ->List['IClassifier']:
@@ -41869,7 +41869,7 @@ class FlowConnectionDefinition(ActionDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_flowconnectiondefinition()
+        self.concept = get_flow_connection_definition()
 
     @property
     def flowConnectionEnd(self) ->List['IUsage']:
@@ -42526,7 +42526,7 @@ class RequirementConstraintMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_requirementconstraintmembership()
+        self.concept = get_requirement_constraint_membership()
 
     @property
     def kind(self) ->RequirementConstraintKind:
@@ -42579,7 +42579,7 @@ class RequirementVerificationMembership(RequirementConstraintMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_requirementverificationmembership()
+        self.concept = get_requirement_verification_membership()
 
     @property
     def ownedRequirement(self) ->Optional['RequirementUsage']:
@@ -42622,7 +42622,7 @@ class IncludeUseCaseUsage(UseCaseUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_includeusecaseusage()
+        self.concept = get_include_use_case_usage()
 
     @property
     def useCaseIncluded(self) ->Optional['UseCaseUsage']:
@@ -43955,7 +43955,7 @@ class ObjectiveMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_objectivemembership()
+        self.concept = get_objective_membership()
 
     @property
     def ownedObjectiveRequirement(self) ->Optional['RequirementUsage']:
@@ -43985,7 +43985,7 @@ class SatisfyRequirementUsage(RequirementUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_satisfyrequirementusage()
+        self.concept = get_satisfy_requirement_usage()
 
     @property
     def satisfiedRequirement(self) ->Optional['RequirementUsage']:
@@ -45394,7 +45394,7 @@ class SubjectMembership(ParameterMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_subjectmembership()
+        self.concept = get_subject_membership()
 
     @property
     def ownedSubjectParameter(self) ->Optional['IUsage']:
@@ -45419,7 +45419,7 @@ class StakeholderMembership(ParameterMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_stakeholdermembership()
+        self.concept = get_stakeholder_membership()
 
     @property
     def ownedStakeholderParameter(self) ->Optional['IPartUsage']:
@@ -45445,7 +45445,7 @@ class FramedConcernMembership(RequirementConstraintMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_framedconcernmembership()
+        self.concept = get_framed_concern_membership()
 
     @property
     def ownedConcern(self) ->Optional['ConcernUsage']:
@@ -45486,7 +45486,7 @@ class ActorMembership(ParameterMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_actormembership()
+        self.concept = get_actor_membership()
 
     @property
     def ownedActorParameter(self) ->Optional['IPartUsage']:
@@ -45511,7 +45511,7 @@ class ViewRenderingMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_viewrenderingmembership()
+        self.concept = get_view_rendering_membership()
 
     @property
     def ownedRendering(self) ->Optional['RenderingUsage']:
@@ -45558,7 +45558,7 @@ class NamespaceExpose(NamespaceImport):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_namespaceexpose()
+        self.concept = get_namespace_expose()
 
     @property
     def visibility(self) ->VisibilityKind:
@@ -45878,7 +45878,7 @@ class MembershipExpose(MembershipImport):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_membershipexpose()
+        self.concept = get_membership_expose()
 
     @property
     def visibility(self) ->VisibilityKind:
@@ -46198,7 +46198,7 @@ class BindingConnectorAsUsage(ConnectorAsUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_bindingconnectorasusage()
+        self.concept = get_binding_connector_as_usage()
 
     @property
     def relatedFeature(self) ->List['IFeature']:
@@ -47124,7 +47124,7 @@ class SuccessionAsUsage(ConnectorAsUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_successionasusage()
+        self.concept = get_succession_as_usage()
 
     @property
     def transitionStep(self) ->Optional['IStep']:
@@ -48098,7 +48098,7 @@ class ControlNode(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_controlnode()
+        self.concept = get_control_node()
 
     @property
     def actionDefinition(self) ->List['IBehavior']:
@@ -49377,21 +49377,21 @@ class ForkNode(ControlNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_forknode()
+        self.concept = get_fork_node()
 
 
 class JoinNode(ControlNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_joinnode()
+        self.concept = get_join_node()
 
 
 class SendActionUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_sendactionusage()
+        self.concept = get_send_action_usage()
 
     @property
     def receiverArgument(self) ->Optional['IExpression']:
@@ -50724,21 +50724,21 @@ class DecisionNode(ControlNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_decisionnode()
+        self.concept = get_decision_node()
 
 
 class MergeNode(ControlNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_mergenode()
+        self.concept = get_merge_node()
 
 
 class LoopActionUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_loopactionusage()
+        self.concept = get_loop_action_usage()
 
     @property
     def bodyAction(self) ->Optional['IActionUsage']:
@@ -52033,7 +52033,7 @@ class TriggerInvocationExpression(InvocationExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_triggerinvocationexpression()
+        self.concept = get_trigger_invocation_expression()
 
     @property
     def kind(self) ->TriggerKind:
@@ -52049,7 +52049,7 @@ class AssignmentActionUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_assignmentactionusage()
+        self.concept = get_assignment_action_usage()
 
     @property
     def targetArgument(self) ->Optional['IExpression']:
@@ -53380,7 +53380,7 @@ class ForLoopActionUsage(LoopActionUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_forloopactionusage()
+        self.concept = get_for_loop_action_usage()
 
     @property
     def seqArgument(self) ->Optional['IExpression']:
@@ -53419,7 +53419,7 @@ class IfActionUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_ifactionusage()
+        self.concept = get_if_action_usage()
 
     @property
     def elseAction(self) ->Optional['IActionUsage']:
@@ -54746,7 +54746,7 @@ class WhileLoopActionUsage(LoopActionUsage):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_whileloopactionusage()
+        self.concept = get_while_loop_action_usage()
 
     @property
     def whileArgument(self) ->Optional['IExpression']:
@@ -54787,7 +54787,7 @@ class TerminateActionUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_terminateactionusage()
+        self.concept = get_terminate_action_usage()
 
     @property
     def terminatedOccurrenceArgument(self) ->Optional['IExpression']:
@@ -56085,7 +56085,7 @@ class MetadataDefinition(ItemDefinition):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_metadatadefinition()
+        self.concept = get_metadata_definition()
 
     @property
     def ownedSubclassification(self) ->List['Subclassification']:
@@ -57342,7 +57342,7 @@ class AnnotatingElement(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_annotatingelement()
+        self.concept = get_annotating_element()
 
     @property
     def annotatedElement(self) ->List['IElement']:
@@ -64016,7 +64016,7 @@ class PartUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_partusage()
+        self.concept = get_part_usage()
 
     @property
     def partDefinition(self) ->List['PartDefinition']:
@@ -65285,7 +65285,7 @@ class ItemUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_itemusage()
+        self.concept = get_item_usage()
 
     @property
     def itemDefinition(self) ->List['IStructure']:
@@ -66544,7 +66544,7 @@ class OccurrenceUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_occurrenceusage()
+        self.concept = get_occurrence_usage()
 
     @property
     def occurrenceDefinition(self) ->List['IClass']:
@@ -68992,7 +68992,7 @@ class DataType(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_datatype()
+        self.concept = get_data_type()
 
     @property
     def ownedSubclassification(self) ->List['Subclassification']:
@@ -69516,7 +69516,7 @@ class ActionUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_actionusage()
+        self.concept = get_action_usage()
 
     @property
     def actionDefinition(self) ->List['IBehavior']:
@@ -70795,7 +70795,7 @@ class ItemFlow(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_itemflow()
+        self.concept = get_item_flow()
 
     @property
     def itemType(self) ->List['IClassifier']:
@@ -71823,7 +71823,7 @@ class AssociationStructure(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_associationstructure()
+        self.concept = get_association_structure()
 
     @property
     def relatedType(self) ->List['IType']:
@@ -74239,7 +74239,7 @@ class PerformActionUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_performactionusage()
+        self.concept = get_perform_action_usage()
 
     @property
     def performedAction(self) ->Optional['IActionUsage']:
@@ -75554,7 +75554,7 @@ class EventOccurrenceUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_eventoccurrenceusage()
+        self.concept = get_event_occurrence_usage()
 
     @property
     def eventOccurrence(self) ->Optional['IOccurrenceUsage']:
@@ -76821,7 +76821,7 @@ class SuccessionItemFlow(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_successionitemflow()
+        self.concept = get_succession_item_flow()
 
     @property
     def itemType(self) ->List['IClassifier']:
@@ -78544,7 +78544,7 @@ class AssertConstraintUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_assertconstraintusage()
+        self.concept = get_assert_constraint_usage()
 
     @property
     def assertedConstraint(self) ->Optional['IConstraintUsage']:
@@ -79917,7 +79917,7 @@ class ConstraintUsage(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_constraintusage()
+        self.concept = get_constraint_usage()
 
     @property
     def constraintDefinition(self) ->Optional['IPredicate']:
@@ -81263,7 +81263,7 @@ class BooleanExpression(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_booleanexpression()
+        self.concept = get_boolean_expression()
 
     @property
     def predicate(self) ->Optional['IPredicate']:
@@ -84569,7 +84569,7 @@ class BindingConnector(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_bindingconnector()
+        self.concept = get_binding_connector()
 
     @property
     def relatedFeature(self) ->List['IFeature']:

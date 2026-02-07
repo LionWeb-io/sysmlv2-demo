@@ -109,5 +109,6 @@ if __name__ == '__main__':
     print("    - Connection: powerFlow")
     print("    - Requirements: 3 (range, performance, efficiency)")    
 
-    ser = create_standard_json_serialization(LionWebVersion.v2023_1)
+    ser = create_standard_json_serialization(LionWebVersion.V2023_1)
+    ser.primitive_values_serialization.register_serializer('types-String', serializer=lambda x: x)
     print(ser.serialize_trees_to_json_string([ev_package]))

@@ -1163,74 +1163,95 @@ def get_language() ->Language:
     subclassification.set_extended_concept(specialization)
     subclassification.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-Subclassification-superclassifier', name=
-        'superclassifier', key='sysml-Subclassification-superclassifier'))
+        'superclassifier', key='sysml-Subclassification-superclassifier',
+        type=i_classifier, multiple=False, optional=False))
     subclassification.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-Subclassification-owningClassifier', name=
-        'owningClassifier', key='sysml-Subclassification-owningClassifier'))
+        'owningClassifier', key='sysml-Subclassification-owningClassifier',
+        type=i_classifier, multiple=False, optional=True))
     subclassification.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-Subclassification-subclassifier', name=
-        'subclassifier', key='sysml-Subclassification-subclassifier'))
+        'subclassifier', key='sysml-Subclassification-subclassifier', type=
+        i_classifier, multiple=False, optional=False))
     specialization.add_implemented_interface(i_relationship)
     specialization.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Specialization-owningType', name='owningType',
-        key='sysml-Specialization-owningType'))
+        key='sysml-Specialization-owningType', type=i_type, multiple=False,
+        optional=True))
     specialization.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Specialization-general', name='general', key=
-        'sysml-Specialization-general'))
+        'sysml-Specialization-general', type=i_type, multiple=False,
+        optional=False))
     specialization.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Specialization-specific', name='specific', key=
-        'sysml-Specialization-specific'))
+        'sysml-Specialization-specific', type=i_type, multiple=False,
+        optional=False))
     i_relationship.add_extended_interface(i_element)
     i_relationship.add_feature(Containment(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IRelationship-ownedRelatedElement', name=
-        'ownedRelatedElement', key='sysml-IRelationship-ownedRelatedElement'))
+        'ownedRelatedElement', key=
+        'sysml-IRelationship-ownedRelatedElement', type=i_element, multiple
+        =True, optional=True))
     i_relationship.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IRelationship-owningRelatedElement', name=
-        'owningRelatedElement', key='sysml-IRelationship-owningRelatedElement')
-        )
+        'owningRelatedElement', key=
+        'sysml-IRelationship-owningRelatedElement', type=i_element,
+        multiple=False, optional=True))
     i_relationship.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IRelationship-relatedElement', name=
-        'relatedElement', key='sysml-IRelationship-relatedElement'))
+        'relatedElement', key='sysml-IRelationship-relatedElement', type=
+        i_element, multiple=True, optional=True))
     i_relationship.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IRelationship-target', name='target', key=
-        'sysml-IRelationship-target'))
+        'sysml-IRelationship-target', type=i_element, multiple=True,
+        optional=True))
     i_relationship.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IRelationship-source', name='source', key=
-        'sysml-IRelationship-source'))
+        'sysml-IRelationship-source', type=i_element, multiple=True,
+        optional=True))
     i_relationship.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IRelationship-isImplied', name='isImplied', key=
         'sysml-IRelationship-isImplied', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IElement-owningMembership', name='owningMembership', key=
-        'sysml-IElement-owningMembership'))
+        'sysml-IElement-owningMembership', type=owning_membership, multiple
+        =False, optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IElement-owningNamespace', name='owningNamespace', key=
-        'sysml-IElement-owningNamespace'))
+        'sysml-IElement-owningNamespace', type=i_namespace, multiple=False,
+        optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IElement-owningRelationship', name='owningRelationship',
-        key='sysml-IElement-owningRelationship'))
+        key='sysml-IElement-owningRelationship', type=i_relationship,
+        multiple=False, optional=True))
     i_element.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IElement-elementId', name='elementId', key=
         'sysml-IElement-elementId', type=get_types_language().
         get_primitive_type_by_name('String')))
     i_element.add_feature(Containment(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IElement-ownedRelationship', name=
-        'ownedRelationship', key='sysml-IElement-ownedRelationship'))
+        'ownedRelationship', key='sysml-IElement-ownedRelationship', type=
+        i_relationship, multiple=True, optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='sysml-IElement-owner', name='owner', key='sysml-IElement-owner'))
+        id='sysml-IElement-owner', name='owner', key='sysml-IElement-owner',
+        type=i_element, multiple=False, optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IElement-ownedElement', name='ownedElement', key=
-        'sysml-IElement-ownedElement'))
+        'sysml-IElement-ownedElement', type=i_element, multiple=True,
+        optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IElement-documentation', name='documentation', key=
-        'sysml-IElement-documentation'))
+        'sysml-IElement-documentation', type=documentation, multiple=True,
+        optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IElement-ownedAnnotation', name='ownedAnnotation', key=
-        'sysml-IElement-ownedAnnotation'))
+        'sysml-IElement-ownedAnnotation', type=annotation, multiple=True,
+        optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IElement-textualRepresentation', name=
-        'textualRepresentation', key='sysml-IElement-textualRepresentation'))
+        'textualRepresentation', key='sysml-IElement-textualRepresentation',
+        type=textual_representation, multiple=True, optional=True))
     i_element.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IElement-declaredShortName', name='declaredShortName',
         key='sysml-IElement-declaredShortName', type=get_types_language().
@@ -1260,7 +1281,8 @@ def get_language() ->Language:
         get_primitive_type_by_name('Boolean')))
     i_element.add_feature(Containment(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IElement-aliasIdsContainer', name=
-        'aliasIdsContainer', key='sysml-IElement-aliasIdsContainer'))
+        'aliasIdsContainer', key='sysml-IElement-aliasIdsContainer', type=
+        alias_ids_container, multiple=True, optional=True))
     owning_membership.set_extended_concept(membership)
     owning_membership.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-OwningMembership-ownedMemberElementId', name=
@@ -1278,7 +1300,9 @@ def get_language() ->Language:
         type=get_types_language().get_primitive_type_by_name('String')))
     owning_membership.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-OwningMembership-ownedMemberElement', name=
-        'ownedMemberElement', key='sysml-OwningMembership-ownedMemberElement'))
+        'ownedMemberElement', key=
+        'sysml-OwningMembership-ownedMemberElement', type=i_element,
+        multiple=False, optional=False))
     membership.add_implemented_interface(i_relationship)
     membership.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-Membership-memberElementId', name='memberElementId', key=
@@ -1287,14 +1311,16 @@ def get_language() ->Language:
     membership.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Membership-membershipOwningNamespace', name=
         'membershipOwningNamespace', key=
-        'sysml-Membership-membershipOwningNamespace'))
+        'sysml-Membership-membershipOwningNamespace', type=i_namespace,
+        multiple=False, optional=False))
     membership.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-Membership-memberShortName', name='memberShortName', key=
         'sysml-Membership-memberShortName', type=get_types_language().
         get_primitive_type_by_name('String')))
     membership.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Membership-memberElement', name='memberElement',
-        key='sysml-Membership-memberElement'))
+        key='sysml-Membership-memberElement', type=i_element, multiple=
+        False, optional=False))
     membership.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-Membership-memberName', name='memberName', key=
         'sysml-Membership-memberName', type=get_types_language().
@@ -1305,22 +1331,28 @@ def get_language() ->Language:
     i_namespace.add_extended_interface(i_element)
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-INamespace-membership', name='membership', key=
-        'sysml-INamespace-membership'))
+        'sysml-INamespace-membership', type=membership, multiple=True,
+        optional=True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-INamespace-ownedImport', name='ownedImport', key
-        ='sysml-INamespace-ownedImport'))
+        ='sysml-INamespace-ownedImport', type=i_import, multiple=True,
+        optional=True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-INamespace-member', name='member', key=
-        'sysml-INamespace-member'))
+        'sysml-INamespace-member', type=i_element, multiple=True, optional=
+        True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-INamespace-ownedMember', name='ownedMember', key
-        ='sysml-INamespace-ownedMember'))
+        ='sysml-INamespace-ownedMember', type=i_element, multiple=True,
+        optional=True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-INamespace-importedMembership', name=
-        'importedMembership', key='sysml-INamespace-importedMembership'))
+        'importedMembership', key='sysml-INamespace-importedMembership',
+        type=membership, multiple=True, optional=True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-INamespace-ownedMembership', name=
-        'ownedMembership', key='sysml-INamespace-ownedMembership'))
+        'ownedMembership', key='sysml-INamespace-ownedMembership', type=
+        membership, multiple=True, optional=True))
     i_import.add_extended_interface(i_relationship)
     i_import.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IImport-visibility', name='visibility', key=
@@ -1335,14 +1367,17 @@ def get_language() ->Language:
         get_primitive_type_by_name('Boolean')))
     i_import.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IImport-importedElement', name='importedElement', key=
-        'sysml-IImport-importedElement'))
+        'sysml-IImport-importedElement', type=i_element, multiple=False,
+        optional=False))
     i_import.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IImport-importOwningNamespace', name=
-        'importOwningNamespace', key='sysml-IImport-importOwningNamespace'))
+        'importOwningNamespace', key='sysml-IImport-importOwningNamespace',
+        type=i_namespace, multiple=False, optional=False))
     documentation.set_extended_concept(comment)
     documentation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Documentation-documentedElement', name=
-        'documentedElement', key='sysml-Documentation-documentedElement'))
+        'documentedElement', key='sysml-Documentation-documentedElement',
+        type=i_element, multiple=False, optional=False))
     comment.add_implemented_interface(i_annotating_element)
     comment.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-Comment-locale', name='locale', key=
@@ -1355,39 +1390,48 @@ def get_language() ->Language:
     i_annotating_element.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-IAnnotatingElement-annotatedElement', name=
-        'annotatedElement', key='sysml-IAnnotatingElement-annotatedElement'))
+        'annotatedElement', key='sysml-IAnnotatingElement-annotatedElement',
+        type=i_element, multiple=True, optional=False))
     i_annotating_element.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-IAnnotatingElement-ownedAnnotatingRelationship', name=
         'ownedAnnotatingRelationship', key=
-        'sysml-IAnnotatingElement-ownedAnnotatingRelationship'))
+        'sysml-IAnnotatingElement-ownedAnnotatingRelationship', type=
+        annotation, multiple=True, optional=True))
     i_annotating_element.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-IAnnotatingElement-annotation',
-        name='annotation', key='sysml-IAnnotatingElement-annotation'))
+        name='annotation', key='sysml-IAnnotatingElement-annotation', type=
+        annotation, multiple=True, optional=True))
     i_annotating_element.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-IAnnotatingElement-owningAnnotatingRelationship', name=
         'owningAnnotatingRelationship', key=
-        'sysml-IAnnotatingElement-owningAnnotatingRelationship'))
+        'sysml-IAnnotatingElement-owningAnnotatingRelationship', type=
+        annotation, multiple=False, optional=True))
     annotation.add_implemented_interface(i_relationship)
     annotation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Annotation-annotatingElement', name=
-        'annotatingElement', key='sysml-Annotation-annotatingElement'))
+        'annotatingElement', key='sysml-Annotation-annotatingElement', type
+        =i_annotating_element, multiple=False, optional=False))
     annotation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Annotation-annotatedElement', name=
-        'annotatedElement', key='sysml-Annotation-annotatedElement'))
+        'annotatedElement', key='sysml-Annotation-annotatedElement', type=
+        i_element, multiple=False, optional=False))
     annotation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Annotation-owningAnnotatedElement', name=
         'owningAnnotatedElement', key=
-        'sysml-Annotation-owningAnnotatedElement'))
+        'sysml-Annotation-owningAnnotatedElement', type=i_element, multiple
+        =False, optional=True))
     annotation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Annotation-ownedAnnotatingElement', name=
         'ownedAnnotatingElement', key=
-        'sysml-Annotation-ownedAnnotatingElement'))
+        'sysml-Annotation-ownedAnnotatingElement', type=
+        i_annotating_element, multiple=False, optional=True))
     annotation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Annotation-owningAnnotatingElement', name=
         'owningAnnotatingElement', key=
-        'sysml-Annotation-owningAnnotatingElement'))
+        'sysml-Annotation-owningAnnotatingElement', type=
+        i_annotating_element, multiple=False, optional=True))
     textual_representation.add_implemented_interface(i_annotating_element)
     textual_representation.add_feature(Property(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-TextualRepresentation-language',
@@ -1401,101 +1445,126 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'sysml-TextualRepresentation-representedElement', name=
         'representedElement', key=
-        'sysml-TextualRepresentation-representedElement'))
+        'sysml-TextualRepresentation-representedElement', type=i_element,
+        multiple=False, optional=False))
     i_type.add_extended_interface(i_namespace)
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-ownedFeatureMembership', name=
-        'ownedFeatureMembership', key='sysml-IType-ownedFeatureMembership'))
+        'ownedFeatureMembership', key='sysml-IType-ownedFeatureMembership',
+        type=feature_membership, multiple=True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-ownedFeature', name='ownedFeature', key=
-        'sysml-IType-ownedFeature'))
+        'sysml-IType-ownedFeature', type=i_feature, multiple=True, optional
+        =True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-ownedEndFeature', name='ownedEndFeature', key=
-        'sysml-IType-ownedEndFeature'))
+        'sysml-IType-ownedEndFeature', type=i_feature, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='sysml-IType-feature', name='feature', key='sysml-IType-feature'))
+        id='sysml-IType-feature', name='feature', key='sysml-IType-feature',
+        type=i_feature, multiple=True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='sysml-IType-input', name='input', key='sysml-IType-input'))
+        id='sysml-IType-input', name='input', key='sysml-IType-input', type
+        =i_feature, multiple=True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='sysml-IType-output', name='output', key='sysml-IType-output'))
+        id='sysml-IType-output', name='output', key='sysml-IType-output',
+        type=i_feature, multiple=True, optional=True))
     i_type.add_feature(Property(lion_web_version=LionWebVersion.V2023_1, id
         ='sysml-IType-isAbstract', name='isAbstract', key=
         'sysml-IType-isAbstract', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-inheritedMembership', name='inheritedMembership',
-        key='sysml-IType-inheritedMembership'))
+        key='sysml-IType-inheritedMembership', type=membership, multiple=
+        True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-endFeature', name='endFeature', key=
-        'sysml-IType-endFeature'))
+        'sysml-IType-endFeature', type=i_feature, multiple=True, optional=True)
+        )
     i_type.add_feature(Property(lion_web_version=LionWebVersion.V2023_1, id
         ='sysml-IType-isSufficient', name='isSufficient', key=
         'sysml-IType-isSufficient', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-ownedConjugator', name='ownedConjugator', key=
-        'sysml-IType-ownedConjugator'))
+        'sysml-IType-ownedConjugator', type=conjugation, multiple=False,
+        optional=True))
     i_type.add_feature(Property(lion_web_version=LionWebVersion.V2023_1, id
         ='sysml-IType-isConjugated', name='isConjugated', key=
         'sysml-IType-isConjugated', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-inheritedFeature', name='inheritedFeature', key=
-        'sysml-IType-inheritedFeature'))
+        'sysml-IType-inheritedFeature', type=i_feature, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-multiplicity', name='multiplicity', key=
-        'sysml-IType-multiplicity'))
+        'sysml-IType-multiplicity', type=multiplicity, multiple=False,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-unioningType', name='unioningType', key=
-        'sysml-IType-unioningType'))
+        'sysml-IType-unioningType', type=i_type, multiple=True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-ownedIntersecting', name='ownedIntersecting', key=
-        'sysml-IType-ownedIntersecting'))
+        'sysml-IType-ownedIntersecting', type=intersecting, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-intersectingType', name='intersectingType', key=
-        'sysml-IType-intersectingType'))
+        'sysml-IType-intersectingType', type=i_type, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-ownedUnioning', name='ownedUnioning', key=
-        'sysml-IType-ownedUnioning'))
+        'sysml-IType-ownedUnioning', type=unioning, multiple=True, optional
+        =True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-ownedDisjoining', name='ownedDisjoining', key=
-        'sysml-IType-ownedDisjoining'))
+        'sysml-IType-ownedDisjoining', type=disjoining, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-featureMembership', name='featureMembership', key=
-        'sysml-IType-featureMembership'))
+        'sysml-IType-featureMembership', type=feature_membership, multiple=
+        True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-differencingType', name='differencingType', key=
-        'sysml-IType-differencingType'))
+        'sysml-IType-differencingType', type=i_type, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-ownedDifferencing', name='ownedDifferencing', key=
-        'sysml-IType-ownedDifferencing'))
+        'sysml-IType-ownedDifferencing', type=differencing, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-directedFeature', name='directedFeature', key=
-        'sysml-IType-directedFeature'))
+        'sysml-IType-directedFeature', type=i_feature, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IType-ownedSpecialization', name='ownedSpecialization',
-        key='sysml-IType-ownedSpecialization'))
+        key='sysml-IType-ownedSpecialization', type=specialization,
+        multiple=True, optional=True))
     feature_membership.set_extended_concept(owning_membership)
     feature_membership.add_implemented_interface(i_featuring)
     feature_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-FeatureMembership-ownedMemberFeature', name=
-        'ownedMemberFeature', key='sysml-FeatureMembership-ownedMemberFeature')
-        )
+        'ownedMemberFeature', key=
+        'sysml-FeatureMembership-ownedMemberFeature', type=i_feature,
+        multiple=False, optional=False))
     feature_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-FeatureMembership-owningType',
-        name='owningType', key='sysml-FeatureMembership-owningType'))
+        name='owningType', key='sysml-FeatureMembership-owningType', type=
+        i_type, multiple=False, optional=False))
     i_featuring.add_extended_interface(i_relationship)
     i_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IFeaturing-type', name='type', key=
-        'sysml-IFeaturing-type'))
+        'sysml-IFeaturing-type', type=i_type, multiple=False, optional=False))
     i_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IFeaturing-feature', name='feature', key=
-        'sysml-IFeaturing-feature'))
+        'sysml-IFeaturing-feature', type=i_feature, multiple=False,
+        optional=False))
     i_feature.add_extended_interface(i_type)
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-owningType', name='owningType', key=
-        'sysml-IFeature-owningType'))
+        'sysml-IFeature-owningType', type=i_type, multiple=False, optional=
+        True))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-isUnique', name='isUnique', key=
         'sysml-IFeature-isUnique', type=get_types_language().
@@ -1505,17 +1574,21 @@ def get_language() ->Language:
         'sysml-IFeature-isOrdered', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='sysml-IFeature-type', name='type', key='sysml-IFeature-type'))
+        id='sysml-IFeature-type', name='type', key='sysml-IFeature-type',
+        type=i_type, multiple=True, optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-ownedRedefinition', name='ownedRedefinition',
-        key='sysml-IFeature-ownedRedefinition'))
+        key='sysml-IFeature-ownedRedefinition', type=redefinition, multiple
+        =True, optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-ownedSubsetting', name='ownedSubsetting', key=
-        'sysml-IFeature-ownedSubsetting'))
+        'sysml-IFeature-ownedSubsetting', type=subsetting, multiple=True,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-owningFeatureMembership', name=
         'owningFeatureMembership', key=
-        'sysml-IFeature-owningFeatureMembership'))
+        'sysml-IFeature-owningFeatureMembership', type=feature_membership,
+        multiple=False, optional=True))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-isComposite', name='isComposite', key=
         'sysml-IFeature-isComposite', type=get_types_language().
@@ -1525,29 +1598,36 @@ def get_language() ->Language:
         type=get_types_language().get_primitive_type_by_name('Boolean')))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-endOwningType', name='endOwningType', key=
-        'sysml-IFeature-endOwningType'))
+        'sysml-IFeature-endOwningType', type=i_type, multiple=False,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-ownedTyping', name='ownedTyping', key=
-        'sysml-IFeature-ownedTyping'))
+        'sysml-IFeature-ownedTyping', type=feature_typing, multiple=True,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-featuringType', name='featuringType', key=
-        'sysml-IFeature-featuringType'))
+        'sysml-IFeature-featuringType', type=i_type, multiple=True,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-ownedTypeFeaturing', name='ownedTypeFeaturing',
-        key='sysml-IFeature-ownedTypeFeaturing'))
+        key='sysml-IFeature-ownedTypeFeaturing', type=type_featuring,
+        multiple=True, optional=True))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-isDerived', name='isDerived', key=
         'sysml-IFeature-isDerived', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-chainingFeature', name='chainingFeature', key=
-        'sysml-IFeature-chainingFeature'))
+        'sysml-IFeature-chainingFeature', type=i_feature, multiple=True,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-ownedFeatureInverting', name=
-        'ownedFeatureInverting', key='sysml-IFeature-ownedFeatureInverting'))
+        'ownedFeatureInverting', key='sysml-IFeature-ownedFeatureInverting',
+        type=feature_inverting, multiple=True, optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-ownedFeatureChaining', name=
-        'ownedFeatureChaining', key='sysml-IFeature-ownedFeatureChaining'))
+        'ownedFeatureChaining', key='sysml-IFeature-ownedFeatureChaining',
+        type=feature_chaining, multiple=True, optional=True))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-isReadOnly', name='isReadOnly', key=
         'sysml-IFeature-isReadOnly', type=get_types_language().
@@ -1562,16 +1642,20 @@ def get_language() ->Language:
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-ownedReferenceSubsetting', name=
         'ownedReferenceSubsetting', key=
-        'sysml-IFeature-ownedReferenceSubsetting'))
+        'sysml-IFeature-ownedReferenceSubsetting', type=
+        reference_subsetting, multiple=False, optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-crossFeature', name='crossFeature', key=
-        'sysml-IFeature-crossFeature'))
+        'sysml-IFeature-crossFeature', type=i_feature, multiple=False,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-ownedCrossSubsetting', name=
-        'ownedCrossSubsetting', key='sysml-IFeature-ownedCrossSubsetting'))
+        'ownedCrossSubsetting', key='sysml-IFeature-ownedCrossSubsetting',
+        type=cross_subsetting, multiple=False, optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-featureTarget', name='featureTarget', key=
-        'sysml-IFeature-featureTarget'))
+        'sysml-IFeature-featureTarget', type=i_feature, multiple=False,
+        optional=False))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFeature-isNonunique', name='isNonunique', key=
         'sysml-IFeature-isNonunique', type=get_types_language().
@@ -1579,130 +1663,166 @@ def get_language() ->Language:
     redefinition.set_extended_concept(subsetting)
     redefinition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Redefinition-redefiningFeature', name=
-        'redefiningFeature', key='sysml-Redefinition-redefiningFeature'))
+        'redefiningFeature', key='sysml-Redefinition-redefiningFeature',
+        type=i_feature, multiple=False, optional=False))
     redefinition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Redefinition-redefinedFeature', name=
-        'redefinedFeature', key='sysml-Redefinition-redefinedFeature'))
+        'redefinedFeature', key='sysml-Redefinition-redefinedFeature', type
+        =i_feature, multiple=False, optional=False))
     subsetting.set_extended_concept(specialization)
     subsetting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Subsetting-subsettedFeature', name=
-        'subsettedFeature', key='sysml-Subsetting-subsettedFeature'))
+        'subsettedFeature', key='sysml-Subsetting-subsettedFeature', type=
+        i_feature, multiple=False, optional=False))
     subsetting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Subsetting-subsettingFeature', name=
-        'subsettingFeature', key='sysml-Subsetting-subsettingFeature'))
+        'subsettingFeature', key='sysml-Subsetting-subsettingFeature', type
+        =i_feature, multiple=False, optional=False))
     subsetting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Subsetting-owningFeature', name='owningFeature',
-        key='sysml-Subsetting-owningFeature'))
+        key='sysml-Subsetting-owningFeature', type=i_feature, multiple=
+        False, optional=True))
     feature_typing.set_extended_concept(specialization)
     feature_typing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-FeatureTyping-typedFeature', name='typedFeature',
-        key='sysml-FeatureTyping-typedFeature'))
+        key='sysml-FeatureTyping-typedFeature', type=i_feature, multiple=
+        False, optional=False))
     feature_typing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-FeatureTyping-type', name='type', key=
-        'sysml-FeatureTyping-type'))
+        'sysml-FeatureTyping-type', type=i_type, multiple=False, optional=
+        False))
     feature_typing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-FeatureTyping-owningFeature', name=
-        'owningFeature', key='sysml-FeatureTyping-owningFeature'))
+        'owningFeature', key='sysml-FeatureTyping-owningFeature', type=
+        i_feature, multiple=False, optional=True))
     type_featuring.add_implemented_interface(i_featuring)
     type_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-TypeFeaturing-featureOfType', name=
-        'featureOfType', key='sysml-TypeFeaturing-featureOfType'))
+        'featureOfType', key='sysml-TypeFeaturing-featureOfType', type=
+        i_feature, multiple=False, optional=False))
     type_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-TypeFeaturing-featuringType', name=
-        'featuringType', key='sysml-TypeFeaturing-featuringType'))
+        'featuringType', key='sysml-TypeFeaturing-featuringType', type=
+        i_type, multiple=False, optional=False))
     type_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-TypeFeaturing-owningFeatureOfType', name=
-        'owningFeatureOfType', key='sysml-TypeFeaturing-owningFeatureOfType'))
+        'owningFeatureOfType', key=
+        'sysml-TypeFeaturing-owningFeatureOfType', type=i_feature, multiple
+        =False, optional=True))
     feature_inverting.add_implemented_interface(i_relationship)
     feature_inverting.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-FeatureInverting-featureInverted', name=
-        'featureInverted', key='sysml-FeatureInverting-featureInverted'))
+        'featureInverted', key='sysml-FeatureInverting-featureInverted',
+        type=i_feature, multiple=False, optional=False))
     feature_inverting.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-FeatureInverting-invertingFeature', name=
-        'invertingFeature', key='sysml-FeatureInverting-invertingFeature'))
+        'invertingFeature', key='sysml-FeatureInverting-invertingFeature',
+        type=i_feature, multiple=False, optional=False))
     feature_inverting.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-FeatureInverting-owningFeature', name=
-        'owningFeature', key='sysml-FeatureInverting-owningFeature'))
+        'owningFeature', key='sysml-FeatureInverting-owningFeature', type=
+        i_feature, multiple=False, optional=True))
     feature_chaining.add_implemented_interface(i_relationship)
     feature_chaining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-FeatureChaining-chainingFeature', name=
-        'chainingFeature', key='sysml-FeatureChaining-chainingFeature'))
+        'chainingFeature', key='sysml-FeatureChaining-chainingFeature',
+        type=i_feature, multiple=False, optional=False))
     feature_chaining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-FeatureChaining-featureChained', name=
-        'featureChained', key='sysml-FeatureChaining-featureChained'))
+        'featureChained', key='sysml-FeatureChaining-featureChained', type=
+        i_feature, multiple=False, optional=False))
     reference_subsetting.set_extended_concept(subsetting)
     reference_subsetting.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ReferenceSubsetting-referencedFeature', name=
-        'referencedFeature', key='sysml-ReferenceSubsetting-referencedFeature')
-        )
+        'referencedFeature', key=
+        'sysml-ReferenceSubsetting-referencedFeature', type=i_feature,
+        multiple=False, optional=False))
     reference_subsetting.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ReferenceSubsetting-referencingFeature', name=
         'referencingFeature', key=
-        'sysml-ReferenceSubsetting-referencingFeature'))
+        'sysml-ReferenceSubsetting-referencingFeature', type=i_feature,
+        multiple=False, optional=False))
     cross_subsetting.set_extended_concept(subsetting)
     cross_subsetting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-CrossSubsetting-crossedFeature', name=
-        'crossedFeature', key='sysml-CrossSubsetting-crossedFeature'))
+        'crossedFeature', key='sysml-CrossSubsetting-crossedFeature', type=
+        i_feature, multiple=False, optional=False))
     cross_subsetting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-CrossSubsetting-crossingFeature', name=
-        'crossingFeature', key='sysml-CrossSubsetting-crossingFeature'))
+        'crossingFeature', key='sysml-CrossSubsetting-crossingFeature',
+        type=i_feature, multiple=False, optional=False))
     conjugation.add_implemented_interface(i_relationship)
     conjugation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Conjugation-originalType', name='originalType',
-        key='sysml-Conjugation-originalType'))
+        key='sysml-Conjugation-originalType', type=i_type, multiple=False,
+        optional=False))
     conjugation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Conjugation-conjugatedType', name=
-        'conjugatedType', key='sysml-Conjugation-conjugatedType'))
+        'conjugatedType', key='sysml-Conjugation-conjugatedType', type=
+        i_type, multiple=False, optional=False))
     conjugation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Conjugation-owningType', name='owningType', key=
-        'sysml-Conjugation-owningType'))
+        'sysml-Conjugation-owningType', type=i_type, multiple=False,
+        optional=True))
     multiplicity.add_implemented_interface(i_feature)
     intersecting.add_implemented_interface(i_relationship)
     intersecting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Intersecting-intersectingType', name=
-        'intersectingType', key='sysml-Intersecting-intersectingType'))
+        'intersectingType', key='sysml-Intersecting-intersectingType', type
+        =i_type, multiple=False, optional=False))
     intersecting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Intersecting-typeIntersected', name=
-        'typeIntersected', key='sysml-Intersecting-typeIntersected'))
+        'typeIntersected', key='sysml-Intersecting-typeIntersected', type=
+        i_type, multiple=False, optional=False))
     unioning.add_implemented_interface(i_relationship)
     unioning.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-Unioning-unioningType', name='unioningType', key=
-        'sysml-Unioning-unioningType'))
+        'sysml-Unioning-unioningType', type=i_type, multiple=False,
+        optional=False))
     unioning.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-Unioning-typeUnioned', name='typeUnioned', key=
-        'sysml-Unioning-typeUnioned'))
+        'sysml-Unioning-typeUnioned', type=i_type, multiple=False, optional
+        =False))
     disjoining.add_implemented_interface(i_relationship)
     disjoining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Disjoining-typeDisjoined', name='typeDisjoined',
-        key='sysml-Disjoining-typeDisjoined'))
+        key='sysml-Disjoining-typeDisjoined', type=i_type, multiple=False,
+        optional=False))
     disjoining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Disjoining-disjoiningType', name=
-        'disjoiningType', key='sysml-Disjoining-disjoiningType'))
+        'disjoiningType', key='sysml-Disjoining-disjoiningType', type=
+        i_type, multiple=False, optional=False))
     disjoining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Disjoining-owningType', name='owningType', key=
-        'sysml-Disjoining-owningType'))
+        'sysml-Disjoining-owningType', type=i_type, multiple=False,
+        optional=True))
     differencing.add_implemented_interface(i_relationship)
     differencing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Differencing-differencingType', name=
-        'differencingType', key='sysml-Differencing-differencingType'))
+        'differencingType', key='sysml-Differencing-differencingType', type
+        =i_type, multiple=False, optional=False))
     differencing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Differencing-typeDifferenced', name=
-        'typeDifferenced', key='sysml-Differencing-typeDifferenced'))
+        'typeDifferenced', key='sysml-Differencing-typeDifferenced', type=
+        i_type, multiple=False, optional=False))
     i_classifier.add_extended_interface(i_type)
     i_classifier.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IClassifier-ownedSubclassification', name=
         'ownedSubclassification', key=
-        'sysml-IClassifier-ownedSubclassification'))
+        'sysml-IClassifier-ownedSubclassification', type=subclassification,
+        multiple=True, optional=True))
     end_feature_membership.set_extended_concept(feature_membership)
     i_expression.add_extended_interface(i_step)
     i_expression.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IExpression-function', name='function', key=
-        'sysml-IExpression-function'))
+        'sysml-IExpression-function', type=i_function, multiple=False,
+        optional=True))
     i_expression.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IExpression-result', name='result', key=
-        'sysml-IExpression-result'))
+        'sysml-IExpression-result', type=i_feature, multiple=False,
+        optional=False))
     i_expression.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IExpression-isModelLevelEvaluable', name=
         'isModelLevelEvaluable', key=
@@ -1710,26 +1830,29 @@ def get_language() ->Language:
         ).get_primitive_type_by_name('Boolean')))
     i_step.add_extended_interface(i_feature)
     i_step.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='sysml-IStep-behavior', name='behavior', key='sysml-IStep-behavior')
-        )
+        id='sysml-IStep-behavior', name='behavior', key=
+        'sysml-IStep-behavior', type=i_behavior, multiple=True, optional=True))
     i_step.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IStep-parameter', name='parameter', key=
-        'sysml-IStep-parameter'))
+        'sysml-IStep-parameter', type=i_feature, multiple=True, optional=True))
     i_behavior.add_extended_interface(i_class)
     i_behavior.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IBehavior-step', name='step', key=
-        'sysml-IBehavior-step'))
+        'sysml-IBehavior-step', type=i_step, multiple=True, optional=True))
     i_behavior.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IBehavior-parameter', name='parameter', key=
-        'sysml-IBehavior-parameter'))
+        'sysml-IBehavior-parameter', type=i_feature, multiple=True,
+        optional=True))
     i_class.add_extended_interface(i_classifier)
     i_function.add_extended_interface(i_behavior)
     i_function.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IFunction-expression', name='expression', key=
-        'sysml-IFunction-expression'))
+        'sysml-IFunction-expression', type=i_expression, multiple=True,
+        optional=True))
     i_function.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IFunction-result', name='result', key=
-        'sysml-IFunction-result'))
+        'sysml-IFunction-result', type=i_feature, multiple=False, optional=
+        False))
     i_function.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IFunction-isModelLevelEvaluable', name=
         'isModelLevelEvaluable', key=
@@ -1740,7 +1863,8 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'sysml-ResultExpressionMembership-ownedResultExpression', name=
         'ownedResultExpression', key=
-        'sysml-ResultExpressionMembership-ownedResultExpression'))
+        'sysml-ResultExpressionMembership-ownedResultExpression', type=
+        i_expression, multiple=False, optional=False))
     i_invariant.add_extended_interface(i_boolean_expression)
     i_invariant.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IInvariant-isNegated', name='isNegated', key=
@@ -1749,7 +1873,8 @@ def get_language() ->Language:
     i_boolean_expression.add_extended_interface(i_expression)
     i_boolean_expression.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-IBooleanExpression-predicate',
-        name='predicate', key='sysml-IBooleanExpression-predicate'))
+        name='predicate', key='sysml-IBooleanExpression-predicate', type=
+        i_predicate, multiple=False, optional=True))
     i_predicate.add_extended_interface(i_function)
     return_parameter_membership.set_extended_concept(parameter_membership)
     parameter_membership.set_extended_concept(feature_membership)
@@ -1757,25 +1882,31 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'sysml-ParameterMembership-ownedMemberParameter', name=
         'ownedMemberParameter', key=
-        'sysml-ParameterMembership-ownedMemberParameter'))
+        'sysml-ParameterMembership-ownedMemberParameter', type=i_feature,
+        multiple=False, optional=False))
     multiplicity_range.set_extended_concept(multiplicity)
     multiplicity_range.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-MultiplicityRange-lowerBound',
-        name='lowerBound', key='sysml-MultiplicityRange-lowerBound'))
+        name='lowerBound', key='sysml-MultiplicityRange-lowerBound', type=
+        i_expression, multiple=False, optional=True))
     multiplicity_range.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-MultiplicityRange-upperBound',
-        name='upperBound', key='sysml-MultiplicityRange-upperBound'))
+        name='upperBound', key='sysml-MultiplicityRange-upperBound', type=
+        i_expression, multiple=False, optional=False))
     multiplicity_range.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-MultiplicityRange-bound', name=
-        'bound', key='sysml-MultiplicityRange-bound'))
+        'bound', key='sysml-MultiplicityRange-bound', type=i_expression,
+        multiple=True, optional=False))
     i_structure.add_extended_interface(i_class)
     feature_value.set_extended_concept(owning_membership)
     feature_value.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-FeatureValue-featureWithValue', name=
-        'featureWithValue', key='sysml-FeatureValue-featureWithValue'))
+        'featureWithValue', key='sysml-FeatureValue-featureWithValue', type
+        =i_feature, multiple=False, optional=False))
     feature_value.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-FeatureValue-value', name='value', key=
-        'sysml-FeatureValue-value'))
+        'sysml-FeatureValue-value', type=i_expression, multiple=False,
+        optional=False))
     feature_value.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-FeatureValue-isInitial', name='isInitial', key=
         'sysml-FeatureValue-isInitial', type=get_types_language().
@@ -1789,58 +1920,74 @@ def get_language() ->Language:
     metadata_feature.add_implemented_interface(i_annotating_element)
     metadata_feature.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-MetadataFeature-metaclass', name='metaclass',
-        key='sysml-MetadataFeature-metaclass'))
+        key='sysml-MetadataFeature-metaclass', type=i_metaclass, multiple=
+        False, optional=True))
     i_item_flow.add_extended_interface(i_connector)
     i_item_flow.add_extended_interface(i_step)
     i_item_flow.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IItemFlow-itemType', name='itemType', key=
-        'sysml-IItemFlow-itemType'))
+        'sysml-IItemFlow-itemType', type=i_classifier, multiple=True,
+        optional=True))
     i_item_flow.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IItemFlow-targetInputFeature', name=
-        'targetInputFeature', key='sysml-IItemFlow-targetInputFeature'))
+        'targetInputFeature', key='sysml-IItemFlow-targetInputFeature',
+        type=i_feature, multiple=False, optional=True))
     i_item_flow.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IItemFlow-sourceOutputFeature', name=
-        'sourceOutputFeature', key='sysml-IItemFlow-sourceOutputFeature'))
+        'sourceOutputFeature', key='sysml-IItemFlow-sourceOutputFeature',
+        type=i_feature, multiple=False, optional=True))
     i_item_flow.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IItemFlow-itemFlowEnd', name='itemFlowEnd', key=
-        'sysml-IItemFlow-itemFlowEnd'))
+        'sysml-IItemFlow-itemFlowEnd', type=item_flow_end, multiple=True,
+        optional=True))
     i_item_flow.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IItemFlow-itemFeature', name='itemFeature', key=
-        'sysml-IItemFlow-itemFeature'))
+        'sysml-IItemFlow-itemFeature', type=item_feature, multiple=False,
+        optional=True))
     i_item_flow.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IItemFlow-interaction', name='interaction', key=
-        'sysml-IItemFlow-interaction'))
+        'sysml-IItemFlow-interaction', type=i_interaction, multiple=True,
+        optional=True))
     i_connector.add_extended_interface(i_feature)
     i_connector.add_extended_interface(i_relationship)
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IConnector-relatedFeature', name=
-        'relatedFeature', key='sysml-IConnector-relatedFeature'))
+        'relatedFeature', key='sysml-IConnector-relatedFeature', type=
+        i_feature, multiple=True, optional=True))
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IConnector-association', name='association', key
-        ='sysml-IConnector-association'))
+        ='sysml-IConnector-association', type=i_association, multiple=True,
+        optional=True))
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IConnector-connectorEnd', name='connectorEnd',
-        key='sysml-IConnector-connectorEnd'))
+        key='sysml-IConnector-connectorEnd', type=i_feature, multiple=True,
+        optional=True))
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IConnector-sourceFeature', name='sourceFeature',
-        key='sysml-IConnector-sourceFeature'))
+        key='sysml-IConnector-sourceFeature', type=i_feature, multiple=
+        False, optional=True))
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IConnector-targetFeature', name='targetFeature',
-        key='sysml-IConnector-targetFeature'))
+        key='sysml-IConnector-targetFeature', type=i_feature, multiple=True,
+        optional=True))
     i_association.add_extended_interface(i_classifier)
     i_association.add_extended_interface(i_relationship)
     i_association.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IAssociation-relatedType', name='relatedType',
-        key='sysml-IAssociation-relatedType'))
+        key='sysml-IAssociation-relatedType', type=i_type, multiple=True,
+        optional=True))
     i_association.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IAssociation-sourceType', name='sourceType', key
-        ='sysml-IAssociation-sourceType'))
+        ='sysml-IAssociation-sourceType', type=i_type, multiple=False,
+        optional=True))
     i_association.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IAssociation-targetType', name='targetType', key
-        ='sysml-IAssociation-targetType'))
+        ='sysml-IAssociation-targetType', type=i_type, multiple=True,
+        optional=True))
     i_association.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IAssociation-associationEnd', name=
-        'associationEnd', key='sysml-IAssociation-associationEnd'))
+        'associationEnd', key='sysml-IAssociation-associationEnd', type=
+        i_feature, multiple=True, optional=True))
     item_flow_end.add_implemented_interface(i_feature)
     item_feature.add_implemented_interface(i_feature)
     i_interaction.add_extended_interface(i_association)
@@ -1850,25 +1997,31 @@ def get_language() ->Language:
     i_succession.add_extended_interface(i_connector)
     i_succession.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ISuccession-transitionStep', name=
-        'transitionStep', key='sysml-ISuccession-transitionStep'))
+        'transitionStep', key='sysml-ISuccession-transitionStep', type=
+        i_step, multiple=False, optional=True))
     i_succession.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ISuccession-triggerStep', name='triggerStep',
-        key='sysml-ISuccession-triggerStep'))
+        key='sysml-ISuccession-triggerStep', type=i_step, multiple=True,
+        optional=True))
     i_succession.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ISuccession-effectStep', name='effectStep', key=
-        'sysml-ISuccession-effectStep'))
+        'sysml-ISuccession-effectStep', type=i_step, multiple=True,
+        optional=True))
     i_succession.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ISuccession-guardExpression', name=
-        'guardExpression', key='sysml-ISuccession-guardExpression'))
+        'guardExpression', key='sysml-ISuccession-guardExpression', type=
+        i_expression, multiple=True, optional=True))
     element_filter_membership.set_extended_concept(owning_membership)
     element_filter_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ElementFilterMembership-condition', name='condition', key=
-        'sysml-ElementFilterMembership-condition'))
+        'sysml-ElementFilterMembership-condition', type=i_expression,
+        multiple=False, optional=False))
     package.add_implemented_interface(i_namespace)
     package.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-Package-filterCondition', name='filterCondition', key=
-        'sysml-Package-filterCondition'))
+        'sysml-Package-filterCondition', type=i_expression, multiple=True,
+        optional=True))
     library_package.set_extended_concept(package)
     library_package.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-LibraryPackage-isStandard', name='isStandard',
@@ -1879,13 +2032,15 @@ def get_language() ->Language:
     feature_reference_expression.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-FeatureReferenceExpression-referent', name='referent', key=
-        'sysml-FeatureReferenceExpression-referent'))
+        'sysml-FeatureReferenceExpression-referent', type=i_feature,
+        multiple=False, optional=False))
     metadata_access_expression.add_implemented_interface(i_expression)
     metadata_access_expression.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-MetadataAccessExpression-referencedElement', name=
         'referencedElement', key=
-        'sysml-MetadataAccessExpression-referencedElement'))
+        'sysml-MetadataAccessExpression-referencedElement', type=i_element,
+        multiple=False, optional=False))
     null_expression.add_implemented_interface(i_expression)
     index_expression.set_extended_concept(operator_expression)
     operator_expression.set_extended_concept(invocation_expression)
@@ -1896,10 +2051,12 @@ def get_language() ->Language:
     invocation_expression.add_implemented_interface(i_expression)
     invocation_expression.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-InvocationExpression-argument',
-        name='argument', key='sysml-InvocationExpression-argument'))
+        name='argument', key='sysml-InvocationExpression-argument', type=
+        i_expression, multiple=True, optional=True))
     invocation_expression.add_feature(Containment(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-InvocationExpression-operand',
-        name='operand', key='sysml-InvocationExpression-operand'))
+        name='operand', key='sysml-InvocationExpression-operand', type=
+        i_expression, multiple=True, optional=True))
     collect_expression.set_extended_concept(operator_expression)
     literal_infinity.set_extended_concept(literal_expression)
     literal_expression.add_implemented_interface(i_expression)
@@ -1928,35 +2085,44 @@ def get_language() ->Language:
     feature_chain_expression.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-FeatureChainExpression-targetFeature', name='targetFeature',
-        key='sysml-FeatureChainExpression-targetFeature'))
+        key='sysml-FeatureChainExpression-targetFeature', type=i_feature,
+        multiple=False, optional=False))
     i_binding_connector.add_extended_interface(i_connector)
     i_association_structure.add_extended_interface(i_association)
     i_association_structure.add_extended_interface(i_structure)
     dependency.add_implemented_interface(i_relationship)
     dependency.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Dependency-client', name='client', key=
-        'sysml-Dependency-client'))
+        'sysml-Dependency-client', type=i_element, multiple=True, optional=
+        False))
     dependency.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Dependency-supplier', name='supplier', key=
-        'sysml-Dependency-supplier'))
+        'sysml-Dependency-supplier', type=i_element, multiple=True,
+        optional=False))
     namespace_import.add_implemented_interface(i_import)
     namespace_import.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-NamespaceImport-importedNamespace', name=
-        'importedNamespace', key='sysml-NamespaceImport-importedNamespace'))
+        'importedNamespace', key='sysml-NamespaceImport-importedNamespace',
+        type=i_namespace, multiple=False, optional=False))
     membership_import.add_implemented_interface(i_import)
     membership_import.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-MembershipImport-importedMembership', name=
-        'importedMembership', key='sysml-MembershipImport-importedMembership'))
+        'importedMembership', key=
+        'sysml-MembershipImport-importedMembership', type=membership,
+        multiple=False, optional=False))
     interface_usage.set_extended_concept(connection_usage)
     interface_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-InterfaceUsage-interfaceDefinition', name=
-        'interfaceDefinition', key='sysml-InterfaceUsage-interfaceDefinition'))
+        'interfaceDefinition', key=
+        'sysml-InterfaceUsage-interfaceDefinition', type=
+        interface_definition, multiple=True, optional=True))
     connection_usage.set_extended_concept(connector_as_usage)
     connection_usage.add_implemented_interface(i_part_usage)
     connection_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ConnectionUsage-connectionDefinition', name=
         'connectionDefinition', key=
-        'sysml-ConnectionUsage-connectionDefinition'))
+        'sysml-ConnectionUsage-connectionDefinition', type=
+        i_association_structure, multiple=True, optional=True))
     connector_as_usage.add_implemented_interface(i_usage)
     connector_as_usage.add_implemented_interface(i_connector)
     i_usage.add_extended_interface(i_feature)
@@ -1969,110 +2135,146 @@ def get_language() ->Language:
         'sysml-IUsage-isVariation', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='sysml-IUsage-variant', name='variant', key='sysml-IUsage-variant'))
+        id='sysml-IUsage-variant', name='variant', key=
+        'sysml-IUsage-variant', type=i_usage, multiple=True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-variantMembership', name='variantMembership', key=
-        'sysml-IUsage-variantMembership'))
+        'sysml-IUsage-variantMembership', type=variant_membership, multiple
+        =True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-owningDefinition', name='owningDefinition', key=
-        'sysml-IUsage-owningDefinition'))
+        'sysml-IUsage-owningDefinition', type=definition, multiple=False,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-owningUsage', name='owningUsage', key=
-        'sysml-IUsage-owningUsage'))
+        'sysml-IUsage-owningUsage', type=i_usage, multiple=False, optional=
+        True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedUsage', name='nestedUsage', key=
-        'sysml-IUsage-nestedUsage'))
+        'sysml-IUsage-nestedUsage', type=i_usage, multiple=True, optional=True)
+        )
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-definition', name='definition', key=
-        'sysml-IUsage-definition'))
+        'sysml-IUsage-definition', type=i_classifier, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='sysml-IUsage-usage', name='usage', key='sysml-IUsage-usage'))
+        id='sysml-IUsage-usage', name='usage', key='sysml-IUsage-usage',
+        type=i_usage, multiple=True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-directedUsage', name='directedUsage', key=
-        'sysml-IUsage-directedUsage'))
+        'sysml-IUsage-directedUsage', type=i_usage, multiple=True, optional
+        =True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedReference', name='nestedReference', key=
-        'sysml-IUsage-nestedReference'))
+        'sysml-IUsage-nestedReference', type=reference_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedAttribute', name='nestedAttribute', key=
-        'sysml-IUsage-nestedAttribute'))
+        'sysml-IUsage-nestedAttribute', type=attribute_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedEnumeration', name='nestedEnumeration', key=
-        'sysml-IUsage-nestedEnumeration'))
+        'sysml-IUsage-nestedEnumeration', type=enumeration_usage, multiple=
+        True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedOccurrence', name='nestedOccurrence', key=
-        'sysml-IUsage-nestedOccurrence'))
+        'sysml-IUsage-nestedOccurrence', type=i_occurrence_usage, multiple=
+        True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedItem', name='nestedItem', key=
-        'sysml-IUsage-nestedItem'))
+        'sysml-IUsage-nestedItem', type=i_item_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedPart', name='nestedPart', key=
-        'sysml-IUsage-nestedPart'))
+        'sysml-IUsage-nestedPart', type=i_part_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedPort', name='nestedPort', key=
-        'sysml-IUsage-nestedPort'))
+        'sysml-IUsage-nestedPort', type=port_usage, multiple=True, optional
+        =True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedConnection', name='nestedConnection', key=
-        'sysml-IUsage-nestedConnection'))
+        'sysml-IUsage-nestedConnection', type=connector_as_usage, multiple=
+        True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedFlow', name='nestedFlow', key=
-        'sysml-IUsage-nestedFlow'))
+        'sysml-IUsage-nestedFlow', type=flow_connection_usage, multiple=
+        True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedInterface', name='nestedInterface', key=
-        'sysml-IUsage-nestedInterface'))
+        'sysml-IUsage-nestedInterface', type=interface_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedAllocation', name='nestedAllocation', key=
-        'sysml-IUsage-nestedAllocation'))
+        'sysml-IUsage-nestedAllocation', type=allocation_usage, multiple=
+        True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedAction', name='nestedAction', key=
-        'sysml-IUsage-nestedAction'))
+        'sysml-IUsage-nestedAction', type=i_action_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedState', name='nestedState', key=
-        'sysml-IUsage-nestedState'))
+        'sysml-IUsage-nestedState', type=state_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedTransition', name='nestedTransition', key=
-        'sysml-IUsage-nestedTransition'))
+        'sysml-IUsage-nestedTransition', type=transition_usage, multiple=
+        True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedCalculation', name='nestedCalculation', key=
-        'sysml-IUsage-nestedCalculation'))
+        'sysml-IUsage-nestedCalculation', type=calculation_usage, multiple=
+        True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedConstraint', name='nestedConstraint', key=
-        'sysml-IUsage-nestedConstraint'))
+        'sysml-IUsage-nestedConstraint', type=i_constraint_usage, multiple=
+        True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedRequirement', name='nestedRequirement', key=
-        'sysml-IUsage-nestedRequirement'))
+        'sysml-IUsage-nestedRequirement', type=requirement_usage, multiple=
+        True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedConcern', name='nestedConcern', key=
-        'sysml-IUsage-nestedConcern'))
+        'sysml-IUsage-nestedConcern', type=concern_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedCase', name='nestedCase', key=
-        'sysml-IUsage-nestedCase'))
+        'sysml-IUsage-nestedCase', type=case_usage, multiple=True, optional
+        =True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedAnalysisCase', name='nestedAnalysisCase',
-        key='sysml-IUsage-nestedAnalysisCase'))
+        key='sysml-IUsage-nestedAnalysisCase', type=analysis_case_usage,
+        multiple=True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedVerificationCase', name=
-        'nestedVerificationCase', key='sysml-IUsage-nestedVerificationCase'))
+        'nestedVerificationCase', key='sysml-IUsage-nestedVerificationCase',
+        type=verification_case_usage, multiple=True, optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedUseCase', name='nestedUseCase', key=
-        'sysml-IUsage-nestedUseCase'))
+        'sysml-IUsage-nestedUseCase', type=use_case_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedView', name='nestedView', key=
-        'sysml-IUsage-nestedView'))
+        'sysml-IUsage-nestedView', type=view_usage, multiple=True, optional
+        =True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedViewpoint', name='nestedViewpoint', key=
-        'sysml-IUsage-nestedViewpoint'))
+        'sysml-IUsage-nestedViewpoint', type=viewpoint_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedRendering', name='nestedRendering', key=
-        'sysml-IUsage-nestedRendering'))
+        'sysml-IUsage-nestedRendering', type=rendering_usage, multiple=True,
+        optional=True))
     i_usage.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-IUsage-nestedMetadata', name='nestedMetadata', key=
-        'sysml-IUsage-nestedMetadata'))
+        'sysml-IUsage-nestedMetadata', type=metadata_usage, multiple=True,
+        optional=True))
     variant_membership.set_extended_concept(owning_membership)
     variant_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-VariantMembership-ownedVariantUsage', name=
-        'ownedVariantUsage', key='sysml-VariantMembership-ownedVariantUsage'))
+        'ownedVariantUsage', key=
+        'sysml-VariantMembership-ownedVariantUsage', type=i_usage, multiple
+        =False, optional=False))
     definition.add_implemented_interface(i_classifier)
     definition.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='sysml-Definition-isVariation', name='isVariation', key=
@@ -2080,112 +2282,148 @@ def get_language() ->Language:
         get_primitive_type_by_name('Boolean')))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-variant', name='variant', key=
-        'sysml-Definition-variant'))
+        'sysml-Definition-variant', type=i_usage, multiple=True, optional=True)
+        )
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-variantMembership', name=
-        'variantMembership', key='sysml-Definition-variantMembership'))
+        'variantMembership', key='sysml-Definition-variantMembership', type
+        =variant_membership, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-usage', name='usage', key=
-        'sysml-Definition-usage'))
+        'sysml-Definition-usage', type=i_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-directedUsage', name='directedUsage',
-        key='sysml-Definition-directedUsage'))
+        key='sysml-Definition-directedUsage', type=i_usage, multiple=True,
+        optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedReference', name=
-        'ownedReference', key='sysml-Definition-ownedReference'))
+        'ownedReference', key='sysml-Definition-ownedReference', type=
+        reference_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedAttribute', name=
-        'ownedAttribute', key='sysml-Definition-ownedAttribute'))
+        'ownedAttribute', key='sysml-Definition-ownedAttribute', type=
+        attribute_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedEnumeration', name=
-        'ownedEnumeration', key='sysml-Definition-ownedEnumeration'))
+        'ownedEnumeration', key='sysml-Definition-ownedEnumeration', type=
+        enumeration_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedOccurrence', name=
-        'ownedOccurrence', key='sysml-Definition-ownedOccurrence'))
+        'ownedOccurrence', key='sysml-Definition-ownedOccurrence', type=
+        i_occurrence_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedItem', name='ownedItem', key=
-        'sysml-Definition-ownedItem'))
+        'sysml-Definition-ownedItem', type=i_item_usage, multiple=True,
+        optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedPart', name='ownedPart', key=
-        'sysml-Definition-ownedPart'))
+        'sysml-Definition-ownedPart', type=i_part_usage, multiple=True,
+        optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedPort', name='ownedPort', key=
-        'sysml-Definition-ownedPort'))
+        'sysml-Definition-ownedPort', type=port_usage, multiple=True,
+        optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedConnection', name=
-        'ownedConnection', key='sysml-Definition-ownedConnection'))
+        'ownedConnection', key='sysml-Definition-ownedConnection', type=
+        connector_as_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedFlow', name='ownedFlow', key=
-        'sysml-Definition-ownedFlow'))
+        'sysml-Definition-ownedFlow', type=flow_connection_usage, multiple=
+        True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedInterface', name=
-        'ownedInterface', key='sysml-Definition-ownedInterface'))
+        'ownedInterface', key='sysml-Definition-ownedInterface', type=
+        interface_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedAllocation', name=
-        'ownedAllocation', key='sysml-Definition-ownedAllocation'))
+        'ownedAllocation', key='sysml-Definition-ownedAllocation', type=
+        allocation_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedAction', name='ownedAction', key
-        ='sysml-Definition-ownedAction'))
+        ='sysml-Definition-ownedAction', type=i_action_usage, multiple=True,
+        optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedState', name='ownedState', key=
-        'sysml-Definition-ownedState'))
+        'sysml-Definition-ownedState', type=state_usage, multiple=True,
+        optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedTransition', name=
-        'ownedTransition', key='sysml-Definition-ownedTransition'))
+        'ownedTransition', key='sysml-Definition-ownedTransition', type=
+        transition_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedCalculation', name=
-        'ownedCalculation', key='sysml-Definition-ownedCalculation'))
+        'ownedCalculation', key='sysml-Definition-ownedCalculation', type=
+        calculation_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedConstraint', name=
-        'ownedConstraint', key='sysml-Definition-ownedConstraint'))
+        'ownedConstraint', key='sysml-Definition-ownedConstraint', type=
+        i_constraint_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedRequirement', name=
-        'ownedRequirement', key='sysml-Definition-ownedRequirement'))
+        'ownedRequirement', key='sysml-Definition-ownedRequirement', type=
+        requirement_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedConcern', name='ownedConcern',
-        key='sysml-Definition-ownedConcern'))
+        key='sysml-Definition-ownedConcern', type=concern_usage, multiple=
+        True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedCase', name='ownedCase', key=
-        'sysml-Definition-ownedCase'))
+        'sysml-Definition-ownedCase', type=case_usage, multiple=True,
+        optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedAnalysisCase', name=
-        'ownedAnalysisCase', key='sysml-Definition-ownedAnalysisCase'))
+        'ownedAnalysisCase', key='sysml-Definition-ownedAnalysisCase', type
+        =analysis_case_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedVerificationCase', name=
-        'ownedVerificationCase', key='sysml-Definition-ownedVerificationCase'))
+        'ownedVerificationCase', key=
+        'sysml-Definition-ownedVerificationCase', type=
+        verification_case_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedUseCase', name='ownedUseCase',
-        key='sysml-Definition-ownedUseCase'))
+        key='sysml-Definition-ownedUseCase', type=use_case_usage, multiple=
+        True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedView', name='ownedView', key=
-        'sysml-Definition-ownedView'))
+        'sysml-Definition-ownedView', type=view_usage, multiple=True,
+        optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedViewpoint', name=
-        'ownedViewpoint', key='sysml-Definition-ownedViewpoint'))
+        'ownedViewpoint', key='sysml-Definition-ownedViewpoint', type=
+        viewpoint_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedRendering', name=
-        'ownedRendering', key='sysml-Definition-ownedRendering'))
+        'ownedRendering', key='sysml-Definition-ownedRendering', type=
+        rendering_usage, multiple=True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedMetadata', name='ownedMetadata',
-        key='sysml-Definition-ownedMetadata'))
+        key='sysml-Definition-ownedMetadata', type=metadata_usage, multiple
+        =True, optional=True))
     definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-Definition-ownedUsage', name='ownedUsage', key=
-        'sysml-Definition-ownedUsage'))
+        'sysml-Definition-ownedUsage', type=i_usage, multiple=True,
+        optional=True))
     reference_usage.add_implemented_interface(i_usage)
     attribute_usage.add_implemented_interface(i_usage)
     attribute_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-AttributeUsage-attributeDefinition', name=
-        'attributeDefinition', key='sysml-AttributeUsage-attributeDefinition'))
+        'attributeDefinition', key=
+        'sysml-AttributeUsage-attributeDefinition', type=i_data_type,
+        multiple=True, optional=True))
     enumeration_usage.set_extended_concept(attribute_usage)
     enumeration_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-EnumerationUsage-enumerationDefinition', name=
         'enumerationDefinition', key=
-        'sysml-EnumerationUsage-enumerationDefinition'))
+        'sysml-EnumerationUsage-enumerationDefinition', type=
+        enumeration_definition, multiple=False, optional=False))
     enumeration_definition.set_extended_concept(attribute_definition)
     enumeration_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-EnumerationDefinition-enumeratedValue', name=
-        'enumeratedValue', key='sysml-EnumerationDefinition-enumeratedValue'))
+        'enumeratedValue', key=
+        'sysml-EnumerationDefinition-enumeratedValue', type=
+        enumeration_usage, multiple=True, optional=True))
     attribute_definition.set_extended_concept(definition)
     attribute_definition.add_implemented_interface(i_data_type)
     i_occurrence_usage.add_extended_interface(i_usage)
@@ -2193,12 +2431,14 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'sysml-IOccurrenceUsage-occurrenceDefinition', name=
         'occurrenceDefinition', key=
-        'sysml-IOccurrenceUsage-occurrenceDefinition'))
+        'sysml-IOccurrenceUsage-occurrenceDefinition', type=i_class,
+        multiple=True, optional=True))
     i_occurrence_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-IOccurrenceUsage-individualDefinition', name=
         'individualDefinition', key=
-        'sysml-IOccurrenceUsage-individualDefinition'))
+        'sysml-IOccurrenceUsage-individualDefinition', type=
+        occurrence_definition, multiple=False, optional=True))
     i_occurrence_usage.add_feature(Property(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-IOccurrenceUsage-isIndividual', name=
         'isIndividual', key='sysml-IOccurrenceUsage-isIndividual', type=
@@ -2211,7 +2451,8 @@ def get_language() ->Language:
     occurrence_definition.add_implemented_interface(i_class)
     occurrence_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-OccurrenceDefinition-lifeClass',
-        name='lifeClass', key='sysml-OccurrenceDefinition-lifeClass'))
+        name='lifeClass', key='sysml-OccurrenceDefinition-lifeClass', type=
+        life_class, multiple=False, optional=True))
     occurrence_definition.add_feature(Property(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-OccurrenceDefinition-isIndividual', name='isIndividual', key
@@ -2221,44 +2462,52 @@ def get_language() ->Language:
     i_item_usage.add_extended_interface(i_occurrence_usage)
     i_item_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IItemUsage-itemDefinition', name=
-        'itemDefinition', key='sysml-IItemUsage-itemDefinition'))
+        'itemDefinition', key='sysml-IItemUsage-itemDefinition', type=
+        i_structure, multiple=True, optional=True))
     i_part_usage.add_extended_interface(i_item_usage)
     i_part_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IPartUsage-partDefinition', name=
-        'partDefinition', key='sysml-IPartUsage-partDefinition'))
+        'partDefinition', key='sysml-IPartUsage-partDefinition', type=
+        part_definition, multiple=True, optional=True))
     part_definition.set_extended_concept(item_definition)
     item_definition.set_extended_concept(occurrence_definition)
     item_definition.add_implemented_interface(i_structure)
     port_usage.add_implemented_interface(i_occurrence_usage)
     port_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-PortUsage-portDefinition', name='portDefinition',
-        key='sysml-PortUsage-portDefinition'))
+        key='sysml-PortUsage-portDefinition', type=port_definition,
+        multiple=True, optional=True))
     port_definition.set_extended_concept(occurrence_definition)
     port_definition.add_implemented_interface(i_structure)
     port_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-PortDefinition-conjugatedPortDefinition', name=
         'conjugatedPortDefinition', key=
-        'sysml-PortDefinition-conjugatedPortDefinition'))
+        'sysml-PortDefinition-conjugatedPortDefinition', type=
+        conjugated_port_definition, multiple=False, optional=True))
     conjugated_port_definition.set_extended_concept(port_definition)
     conjugated_port_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ConjugatedPortDefinition-ownedPortConjugator', name=
         'ownedPortConjugator', key=
-        'sysml-ConjugatedPortDefinition-ownedPortConjugator'))
+        'sysml-ConjugatedPortDefinition-ownedPortConjugator', type=
+        port_conjugation, multiple=False, optional=False))
     conjugated_port_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ConjugatedPortDefinition-originalPortDefinition', name=
         'originalPortDefinition', key=
-        'sysml-ConjugatedPortDefinition-originalPortDefinition'))
+        'sysml-ConjugatedPortDefinition-originalPortDefinition', type=
+        port_definition, multiple=False, optional=False))
     port_conjugation.set_extended_concept(conjugation)
     port_conjugation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-PortConjugation-originalPortDefinition', name=
         'originalPortDefinition', key=
-        'sysml-PortConjugation-originalPortDefinition'))
+        'sysml-PortConjugation-originalPortDefinition', type=
+        port_definition, multiple=False, optional=False))
     port_conjugation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-PortConjugation-conjugatedPortDefinition', name=
         'conjugatedPortDefinition', key=
-        'sysml-PortConjugation-conjugatedPortDefinition'))
+        'sysml-PortConjugation-conjugatedPortDefinition', type=
+        conjugated_port_definition, multiple=False, optional=False))
     flow_connection_usage.set_extended_concept(connector_as_usage)
     flow_connection_usage.add_implemented_interface(i_action_usage)
     flow_connection_usage.add_implemented_interface(i_item_flow)
@@ -2266,40 +2515,49 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'sysml-FlowConnectionUsage-flowConnectionDefinition', name=
         'flowConnectionDefinition', key=
-        'sysml-FlowConnectionUsage-flowConnectionDefinition'))
+        'sysml-FlowConnectionUsage-flowConnectionDefinition', type=
+        i_interaction, multiple=True, optional=True))
     i_action_usage.add_extended_interface(i_occurrence_usage)
     i_action_usage.add_extended_interface(i_step)
     i_action_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IActionUsage-actionDefinition', name=
-        'actionDefinition', key='sysml-IActionUsage-actionDefinition'))
+        'actionDefinition', key='sysml-IActionUsage-actionDefinition', type
+        =i_behavior, multiple=True, optional=True))
     allocation_usage.set_extended_concept(connection_usage)
     allocation_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-AllocationUsage-allocationDefinition', name=
         'allocationDefinition', key=
-        'sysml-AllocationUsage-allocationDefinition'))
+        'sysml-AllocationUsage-allocationDefinition', type=
+        allocation_definition, multiple=True, optional=True))
     allocation_definition.set_extended_concept(connection_definition)
     allocation_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-AllocationDefinition-allocation',
-        name='allocation', key='sysml-AllocationDefinition-allocation'))
+        name='allocation', key='sysml-AllocationDefinition-allocation',
+        type=allocation_usage, multiple=True, optional=True))
     connection_definition.set_extended_concept(part_definition)
     connection_definition.add_implemented_interface(i_association_structure)
     connection_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ConnectionDefinition-connectionEnd', name='connectionEnd',
-        key='sysml-ConnectionDefinition-connectionEnd'))
+        key='sysml-ConnectionDefinition-connectionEnd', type=i_usage,
+        multiple=True, optional=True))
     state_usage.add_implemented_interface(i_action_usage)
     state_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateUsage-stateDefinition', name=
-        'stateDefinition', key='sysml-StateUsage-stateDefinition'))
+        'stateDefinition', key='sysml-StateUsage-stateDefinition', type=
+        i_behavior, multiple=True, optional=True))
     state_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateUsage-entryAction', name='entryAction', key
-        ='sysml-StateUsage-entryAction'))
+        ='sysml-StateUsage-entryAction', type=i_action_usage, multiple=
+        False, optional=True))
     state_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateUsage-doAction', name='doAction', key=
-        'sysml-StateUsage-doAction'))
+        'sysml-StateUsage-doAction', type=i_action_usage, multiple=False,
+        optional=True))
     state_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateUsage-exitAction', name='exitAction', key=
-        'sysml-StateUsage-exitAction'))
+        'sysml-StateUsage-exitAction', type=i_action_usage, multiple=False,
+        optional=True))
     state_usage.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateUsage-isParallel', name='isParallel', key=
         'sysml-StateUsage-isParallel', type=get_types_language().
@@ -2307,79 +2565,99 @@ def get_language() ->Language:
     transition_usage.add_implemented_interface(i_action_usage)
     transition_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-TransitionUsage-source', name='source', key=
-        'sysml-TransitionUsage-source'))
+        'sysml-TransitionUsage-source', type=i_action_usage, multiple=False,
+        optional=False))
     transition_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-TransitionUsage-target', name='target', key=
-        'sysml-TransitionUsage-target'))
+        'sysml-TransitionUsage-target', type=i_action_usage, multiple=False,
+        optional=False))
     transition_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-TransitionUsage-triggerAction', name=
-        'triggerAction', key='sysml-TransitionUsage-triggerAction'))
+        'triggerAction', key='sysml-TransitionUsage-triggerAction', type=
+        accept_action_usage, multiple=True, optional=True))
     transition_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-TransitionUsage-guardExpression', name=
-        'guardExpression', key='sysml-TransitionUsage-guardExpression'))
+        'guardExpression', key='sysml-TransitionUsage-guardExpression',
+        type=i_expression, multiple=True, optional=True))
     transition_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-TransitionUsage-effectAction', name=
-        'effectAction', key='sysml-TransitionUsage-effectAction'))
+        'effectAction', key='sysml-TransitionUsage-effectAction', type=
+        i_action_usage, multiple=True, optional=True))
     transition_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-TransitionUsage-succession', name='succession',
-        key='sysml-TransitionUsage-succession'))
+        key='sysml-TransitionUsage-succession', type=i_succession, multiple
+        =False, optional=False))
     accept_action_usage.add_implemented_interface(i_action_usage)
     accept_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-AcceptActionUsage-receiverArgument', name='receiverArgument',
-        key='sysml-AcceptActionUsage-receiverArgument'))
+        key='sysml-AcceptActionUsage-receiverArgument', type=i_expression,
+        multiple=False, optional=True))
     accept_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-AcceptActionUsage-payloadParameter', name='payloadParameter',
-        key='sysml-AcceptActionUsage-payloadParameter'))
+        key='sysml-AcceptActionUsage-payloadParameter', type=
+        reference_usage, multiple=False, optional=False))
     accept_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-AcceptActionUsage-payloadArgument', name='payloadArgument',
-        key='sysml-AcceptActionUsage-payloadArgument'))
+        key='sysml-AcceptActionUsage-payloadArgument', type=i_expression,
+        multiple=False, optional=True))
     calculation_usage.add_implemented_interface(i_action_usage)
     calculation_usage.add_implemented_interface(i_expression)
     calculation_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-CalculationUsage-calculationDefinition', name=
         'calculationDefinition', key=
-        'sysml-CalculationUsage-calculationDefinition'))
+        'sysml-CalculationUsage-calculationDefinition', type=i_function,
+        multiple=False, optional=True))
     i_constraint_usage.add_extended_interface(i_occurrence_usage)
     i_constraint_usage.add_extended_interface(i_boolean_expression)
     i_constraint_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-IConstraintUsage-constraintDefinition', name=
         'constraintDefinition', key=
-        'sysml-IConstraintUsage-constraintDefinition'))
+        'sysml-IConstraintUsage-constraintDefinition', type=i_predicate,
+        multiple=False, optional=True))
     requirement_usage.add_implemented_interface(i_constraint_usage)
     requirement_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-RequirementUsage-requirementDefinition', name=
         'requirementDefinition', key=
-        'sysml-RequirementUsage-requirementDefinition'))
+        'sysml-RequirementUsage-requirementDefinition', type=
+        requirement_definition, multiple=False, optional=True))
     requirement_usage.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-RequirementUsage-reqId', name='reqId', key=
         'sysml-RequirementUsage-reqId', type=get_types_language().
         get_primitive_type_by_name('String')))
     requirement_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-RequirementUsage-requiredConstraint', name=
-        'requiredConstraint', key='sysml-RequirementUsage-requiredConstraint'))
+        'requiredConstraint', key=
+        'sysml-RequirementUsage-requiredConstraint', type=
+        i_constraint_usage, multiple=True, optional=True))
     requirement_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-RequirementUsage-assumedConstraint', name=
-        'assumedConstraint', key='sysml-RequirementUsage-assumedConstraint'))
+        'assumedConstraint', key='sysml-RequirementUsage-assumedConstraint',
+        type=i_constraint_usage, multiple=True, optional=True))
     requirement_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-RequirementUsage-subjectParameter', name=
-        'subjectParameter', key='sysml-RequirementUsage-subjectParameter'))
+        'subjectParameter', key='sysml-RequirementUsage-subjectParameter',
+        type=i_usage, multiple=False, optional=False))
     requirement_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-RequirementUsage-framedConcern', name=
-        'framedConcern', key='sysml-RequirementUsage-framedConcern'))
+        'framedConcern', key='sysml-RequirementUsage-framedConcern', type=
+        concern_usage, multiple=True, optional=True))
     requirement_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-RequirementUsage-actorParameter', name=
-        'actorParameter', key='sysml-RequirementUsage-actorParameter'))
+        'actorParameter', key='sysml-RequirementUsage-actorParameter', type
+        =i_part_usage, multiple=True, optional=True))
     requirement_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-RequirementUsage-stakeholderParameter', name=
         'stakeholderParameter', key=
-        'sysml-RequirementUsage-stakeholderParameter'))
+        'sysml-RequirementUsage-stakeholderParameter', type=i_part_usage,
+        multiple=True, optional=True))
     requirement_usage.add_feature(Containment(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-RequirementUsage-textContainer',
-        name='textContainer', key='sysml-RequirementUsage-textContainer'))
+        name='textContainer', key='sysml-RequirementUsage-textContainer',
+        type=text_container, multiple=True, optional=True))
     requirement_definition.set_extended_concept(constraint_definition)
     requirement_definition.add_feature(Property(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-RequirementDefinition-reqId',
@@ -2388,192 +2666,238 @@ def get_language() ->Language:
     requirement_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-RequirementDefinition-subjectParameter', name=
-        'subjectParameter', key='sysml-RequirementDefinition-subjectParameter')
-        )
+        'subjectParameter', key=
+        'sysml-RequirementDefinition-subjectParameter', type=i_usage,
+        multiple=False, optional=False))
     requirement_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-RequirementDefinition-actorParameter', name='actorParameter',
-        key='sysml-RequirementDefinition-actorParameter'))
+        key='sysml-RequirementDefinition-actorParameter', type=i_part_usage,
+        multiple=True, optional=True))
     requirement_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-RequirementDefinition-stakeholderParameter', name=
         'stakeholderParameter', key=
-        'sysml-RequirementDefinition-stakeholderParameter'))
+        'sysml-RequirementDefinition-stakeholderParameter', type=
+        i_part_usage, multiple=True, optional=True))
     requirement_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-RequirementDefinition-assumedConstraint', name=
         'assumedConstraint', key=
-        'sysml-RequirementDefinition-assumedConstraint'))
+        'sysml-RequirementDefinition-assumedConstraint', type=
+        i_constraint_usage, multiple=True, optional=True))
     requirement_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-RequirementDefinition-requiredConstraint', name=
         'requiredConstraint', key=
-        'sysml-RequirementDefinition-requiredConstraint'))
+        'sysml-RequirementDefinition-requiredConstraint', type=
+        i_constraint_usage, multiple=True, optional=True))
     requirement_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-RequirementDefinition-framedConcern', name='framedConcern',
-        key='sysml-RequirementDefinition-framedConcern'))
+        key='sysml-RequirementDefinition-framedConcern', type=concern_usage,
+        multiple=True, optional=True))
     requirement_definition.add_feature(Containment(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-RequirementDefinition-textContainer', name='textContainer',
-        key='sysml-RequirementDefinition-textContainer'))
+        key='sysml-RequirementDefinition-textContainer', type=
+        text_container, multiple=True, optional=True))
     constraint_definition.set_extended_concept(occurrence_definition)
     constraint_definition.add_implemented_interface(i_predicate)
     concern_usage.set_extended_concept(requirement_usage)
     concern_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ConcernUsage-concernDefinition', name=
-        'concernDefinition', key='sysml-ConcernUsage-concernDefinition'))
+        'concernDefinition', key='sysml-ConcernUsage-concernDefinition',
+        type=concern_definition, multiple=False, optional=True))
     concern_definition.set_extended_concept(requirement_definition)
     case_usage.set_extended_concept(calculation_usage)
     case_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-CaseUsage-objectiveRequirement', name=
-        'objectiveRequirement', key='sysml-CaseUsage-objectiveRequirement'))
+        'objectiveRequirement', key='sysml-CaseUsage-objectiveRequirement',
+        type=requirement_usage, multiple=False, optional=True))
     case_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-CaseUsage-caseDefinition', name='caseDefinition',
-        key='sysml-CaseUsage-caseDefinition'))
+        key='sysml-CaseUsage-caseDefinition', type=case_definition,
+        multiple=False, optional=True))
     case_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-CaseUsage-subjectParameter', name=
-        'subjectParameter', key='sysml-CaseUsage-subjectParameter'))
+        'subjectParameter', key='sysml-CaseUsage-subjectParameter', type=
+        i_usage, multiple=False, optional=False))
     case_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-CaseUsage-actorParameter', name='actorParameter',
-        key='sysml-CaseUsage-actorParameter'))
+        key='sysml-CaseUsage-actorParameter', type=i_part_usage, multiple=
+        True, optional=True))
     case_definition.set_extended_concept(calculation_definition)
     case_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-CaseDefinition-objectiveRequirement', name=
         'objectiveRequirement', key=
-        'sysml-CaseDefinition-objectiveRequirement'))
+        'sysml-CaseDefinition-objectiveRequirement', type=requirement_usage,
+        multiple=False, optional=True))
     case_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-CaseDefinition-subjectParameter', name=
-        'subjectParameter', key='sysml-CaseDefinition-subjectParameter'))
+        'subjectParameter', key='sysml-CaseDefinition-subjectParameter',
+        type=i_usage, multiple=False, optional=False))
     case_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-CaseDefinition-actorParameter', name=
-        'actorParameter', key='sysml-CaseDefinition-actorParameter'))
+        'actorParameter', key='sysml-CaseDefinition-actorParameter', type=
+        i_part_usage, multiple=True, optional=True))
     calculation_definition.set_extended_concept(action_definition)
     calculation_definition.add_implemented_interface(i_function)
     calculation_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-CalculationDefinition-calculation', name='calculation', key=
-        'sysml-CalculationDefinition-calculation'))
+        'sysml-CalculationDefinition-calculation', type=calculation_usage,
+        multiple=True, optional=True))
     action_definition.set_extended_concept(occurrence_definition)
     action_definition.add_implemented_interface(i_behavior)
     action_definition.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-ActionDefinition-action', name='action', key=
-        'sysml-ActionDefinition-action'))
+        'sysml-ActionDefinition-action', type=i_action_usage, multiple=True,
+        optional=True))
     analysis_case_usage.set_extended_concept(case_usage)
     analysis_case_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-AnalysisCaseUsage-analysisCaseDefinition', name=
         'analysisCaseDefinition', key=
-        'sysml-AnalysisCaseUsage-analysisCaseDefinition'))
+        'sysml-AnalysisCaseUsage-analysisCaseDefinition', type=
+        analysis_case_definition, multiple=False, optional=True))
     analysis_case_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-AnalysisCaseUsage-resultExpression', name='resultExpression',
-        key='sysml-AnalysisCaseUsage-resultExpression'))
+        key='sysml-AnalysisCaseUsage-resultExpression', type=i_expression,
+        multiple=False, optional=True))
     analysis_case_definition.set_extended_concept(case_definition)
     analysis_case_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-AnalysisCaseDefinition-resultExpression', name=
         'resultExpression', key=
-        'sysml-AnalysisCaseDefinition-resultExpression'))
+        'sysml-AnalysisCaseDefinition-resultExpression', type=i_expression,
+        multiple=False, optional=True))
     verification_case_usage.set_extended_concept(case_usage)
     verification_case_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-VerificationCaseUsage-verificationCaseDefinition', name=
         'verificationCaseDefinition', key=
-        'sysml-VerificationCaseUsage-verificationCaseDefinition'))
+        'sysml-VerificationCaseUsage-verificationCaseDefinition', type=
+        verification_case_definition, multiple=False, optional=True))
     verification_case_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-VerificationCaseUsage-verifiedRequirement', name=
         'verifiedRequirement', key=
-        'sysml-VerificationCaseUsage-verifiedRequirement'))
+        'sysml-VerificationCaseUsage-verifiedRequirement', type=
+        requirement_usage, multiple=True, optional=True))
     verification_case_definition.set_extended_concept(case_definition)
     verification_case_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-VerificationCaseDefinition-verifiedRequirement', name=
         'verifiedRequirement', key=
-        'sysml-VerificationCaseDefinition-verifiedRequirement'))
+        'sysml-VerificationCaseDefinition-verifiedRequirement', type=
+        requirement_usage, multiple=True, optional=True))
     use_case_usage.set_extended_concept(case_usage)
     use_case_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-UseCaseUsage-useCaseDefinition', name=
-        'useCaseDefinition', key='sysml-UseCaseUsage-useCaseDefinition'))
+        'useCaseDefinition', key='sysml-UseCaseUsage-useCaseDefinition',
+        type=use_case_definition, multiple=False, optional=True))
     use_case_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-UseCaseUsage-includedUseCase', name=
-        'includedUseCase', key='sysml-UseCaseUsage-includedUseCase'))
+        'includedUseCase', key='sysml-UseCaseUsage-includedUseCase', type=
+        use_case_usage, multiple=True, optional=True))
     use_case_definition.set_extended_concept(case_definition)
     use_case_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-UseCaseDefinition-includedUseCase', name='includedUseCase',
-        key='sysml-UseCaseDefinition-includedUseCase'))
+        key='sysml-UseCaseDefinition-includedUseCase', type=use_case_usage,
+        multiple=True, optional=True))
     view_usage.add_implemented_interface(i_part_usage)
     view_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewUsage-viewDefinition', name='viewDefinition',
-        key='sysml-ViewUsage-viewDefinition'))
+        key='sysml-ViewUsage-viewDefinition', type=view_definition,
+        multiple=False, optional=True))
     view_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewUsage-satisfiedViewpoint', name=
-        'satisfiedViewpoint', key='sysml-ViewUsage-satisfiedViewpoint'))
+        'satisfiedViewpoint', key='sysml-ViewUsage-satisfiedViewpoint',
+        type=viewpoint_usage, multiple=True, optional=True))
     view_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewUsage-exposedElement', name='exposedElement',
-        key='sysml-ViewUsage-exposedElement'))
+        key='sysml-ViewUsage-exposedElement', type=i_element, multiple=True,
+        optional=True))
     view_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewUsage-viewRendering', name='viewRendering',
-        key='sysml-ViewUsage-viewRendering'))
+        key='sysml-ViewUsage-viewRendering', type=rendering_usage, multiple
+        =False, optional=True))
     view_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewUsage-viewCondition', name='viewCondition',
-        key='sysml-ViewUsage-viewCondition'))
+        key='sysml-ViewUsage-viewCondition', type=i_expression, multiple=
+        True, optional=True))
     view_definition.set_extended_concept(part_definition)
     view_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewDefinition-view', name='view', key=
-        'sysml-ViewDefinition-view'))
+        'sysml-ViewDefinition-view', type=view_usage, multiple=True,
+        optional=True))
     view_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewDefinition-satisfiedViewpoint', name=
-        'satisfiedViewpoint', key='sysml-ViewDefinition-satisfiedViewpoint'))
+        'satisfiedViewpoint', key='sysml-ViewDefinition-satisfiedViewpoint',
+        type=viewpoint_usage, multiple=True, optional=True))
     view_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewDefinition-viewRendering', name=
-        'viewRendering', key='sysml-ViewDefinition-viewRendering'))
+        'viewRendering', key='sysml-ViewDefinition-viewRendering', type=
+        rendering_usage, multiple=False, optional=True))
     view_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewDefinition-viewCondition', name=
-        'viewCondition', key='sysml-ViewDefinition-viewCondition'))
+        'viewCondition', key='sysml-ViewDefinition-viewCondition', type=
+        i_expression, multiple=True, optional=True))
     viewpoint_usage.set_extended_concept(requirement_usage)
     viewpoint_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewpointUsage-viewpointDefinition', name=
-        'viewpointDefinition', key='sysml-ViewpointUsage-viewpointDefinition'))
+        'viewpointDefinition', key=
+        'sysml-ViewpointUsage-viewpointDefinition', type=
+        viewpoint_definition, multiple=False, optional=True))
     viewpoint_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ViewpointUsage-viewpointStakeholder', name=
         'viewpointStakeholder', key=
-        'sysml-ViewpointUsage-viewpointStakeholder'))
+        'sysml-ViewpointUsage-viewpointStakeholder', type=i_part_usage,
+        multiple=True, optional=True))
     viewpoint_definition.set_extended_concept(requirement_definition)
     viewpoint_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ViewpointDefinition-viewpointStakeholder', name=
         'viewpointStakeholder', key=
-        'sysml-ViewpointDefinition-viewpointStakeholder'))
+        'sysml-ViewpointDefinition-viewpointStakeholder', type=i_part_usage,
+        multiple=True, optional=True))
     rendering_usage.add_implemented_interface(i_part_usage)
     rendering_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-RenderingUsage-renderingDefinition', name=
-        'renderingDefinition', key='sysml-RenderingUsage-renderingDefinition'))
+        'renderingDefinition', key=
+        'sysml-RenderingUsage-renderingDefinition', type=
+        rendering_definition, multiple=False, optional=True))
     rendering_definition.set_extended_concept(part_definition)
     rendering_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-RenderingDefinition-rendering',
-        name='rendering', key='sysml-RenderingDefinition-rendering'))
+        name='rendering', key='sysml-RenderingDefinition-rendering', type=
+        rendering_usage, multiple=True, optional=True))
     metadata_usage.set_extended_concept(metadata_feature)
     metadata_usage.add_implemented_interface(i_item_usage)
     metadata_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-MetadataUsage-metadataDefinition', name=
-        'metadataDefinition', key='sysml-MetadataUsage-metadataDefinition'))
+        'metadataDefinition', key='sysml-MetadataUsage-metadataDefinition',
+        type=i_metaclass, multiple=False, optional=True))
     interface_definition.set_extended_concept(connection_definition)
     interface_definition.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-InterfaceDefinition-interfaceEnd',
-        name='interfaceEnd', key='sysml-InterfaceDefinition-interfaceEnd'))
+        name='interfaceEnd', key='sysml-InterfaceDefinition-interfaceEnd',
+        type=port_usage, multiple=True, optional=True))
     conjugated_port_typing.set_extended_concept(feature_typing)
     conjugated_port_typing.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ConjugatedPortTyping-portDefinition', name='portDefinition',
-        key='sysml-ConjugatedPortTyping-portDefinition'))
+        key='sysml-ConjugatedPortTyping-portDefinition', type=
+        port_definition, multiple=False, optional=False))
     conjugated_port_typing.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ConjugatedPortTyping-conjugatedPortDefinition', name=
         'conjugatedPortDefinition', key=
-        'sysml-ConjugatedPortTyping-conjugatedPortDefinition'))
+        'sysml-ConjugatedPortTyping-conjugatedPortDefinition', type=
+        conjugated_port_definition, multiple=False, optional=False))
     transition_feature_membership.set_extended_concept(feature_membership)
     transition_feature_membership.add_feature(Property(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-TransitionFeatureMembership-kind',
@@ -2583,23 +2907,28 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'sysml-TransitionFeatureMembership-transitionFeature', name=
         'transitionFeature', key=
-        'sysml-TransitionFeatureMembership-transitionFeature'))
+        'sysml-TransitionFeatureMembership-transitionFeature', type=i_step,
+        multiple=False, optional=False))
     exhibit_state_usage.set_extended_concept(state_usage)
     exhibit_state_usage.add_implemented_interface(i_perform_action_usage)
     exhibit_state_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-ExhibitStateUsage-exhibitedState',
-        name='exhibitedState', key='sysml-ExhibitStateUsage-exhibitedState'))
+        name='exhibitedState', key='sysml-ExhibitStateUsage-exhibitedState',
+        type=state_usage, multiple=False, optional=False))
     i_perform_action_usage.add_extended_interface(i_action_usage)
     i_perform_action_usage.add_extended_interface(i_event_occurrence_usage)
     i_perform_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-IPerformActionUsage-performedAction', name='performedAction',
-        key='sysml-IPerformActionUsage-performedAction'))
+        key='sysml-IPerformActionUsage-performedAction', type=
+        i_action_usage, multiple=False, optional=False))
     i_event_occurrence_usage.add_extended_interface(i_occurrence_usage)
     i_event_occurrence_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-IEventOccurrenceUsage-eventOccurrence', name=
-        'eventOccurrence', key='sysml-IEventOccurrenceUsage-eventOccurrence'))
+        'eventOccurrence', key=
+        'sysml-IEventOccurrenceUsage-eventOccurrence', type=
+        i_occurrence_usage, multiple=False, optional=False))
     state_subaction_membership.set_extended_concept(feature_membership)
     state_subaction_membership.add_feature(Property(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-StateSubactionMembership-kind',
@@ -2607,20 +2936,25 @@ def get_language() ->Language:
         state_subaction_kind))
     state_subaction_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-StateSubactionMembership-action',
-        name='action', key='sysml-StateSubactionMembership-action'))
+        name='action', key='sysml-StateSubactionMembership-action', type=
+        i_action_usage, multiple=False, optional=False))
     state_definition.set_extended_concept(action_definition)
     state_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateDefinition-state', name='state', key=
-        'sysml-StateDefinition-state'))
+        'sysml-StateDefinition-state', type=state_usage, multiple=True,
+        optional=True))
     state_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateDefinition-entryAction', name='entryAction',
-        key='sysml-StateDefinition-entryAction'))
+        key='sysml-StateDefinition-entryAction', type=i_action_usage,
+        multiple=False, optional=True))
     state_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateDefinition-doAction', name='doAction', key=
-        'sysml-StateDefinition-doAction'))
+        'sysml-StateDefinition-doAction', type=i_action_usage, multiple=
+        False, optional=True))
     state_definition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateDefinition-exitAction', name='exitAction',
-        key='sysml-StateDefinition-exitAction'))
+        key='sysml-StateDefinition-exitAction', type=i_action_usage,
+        multiple=False, optional=True))
     state_definition.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-StateDefinition-isParallel', name='isParallel',
         key='sysml-StateDefinition-isParallel', type=get_types_language().
@@ -2635,19 +2969,22 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'sysml-FlowConnectionDefinition-flowConnectionEnd', name=
         'flowConnectionEnd', key=
-        'sysml-FlowConnectionDefinition-flowConnectionEnd'))
+        'sysml-FlowConnectionDefinition-flowConnectionEnd', type=i_usage,
+        multiple=True, optional=True))
     requirement_verification_membership.set_extended_concept(
         requirement_constraint_membership)
     requirement_verification_membership.add_feature(Reference(
         lion_web_version=LionWebVersion.V2023_1, id=
         'sysml-RequirementVerificationMembership-ownedRequirement', name=
         'ownedRequirement', key=
-        'sysml-RequirementVerificationMembership-ownedRequirement'))
+        'sysml-RequirementVerificationMembership-ownedRequirement', type=
+        requirement_usage, multiple=False, optional=False))
     requirement_verification_membership.add_feature(Reference(
         lion_web_version=LionWebVersion.V2023_1, id=
         'sysml-RequirementVerificationMembership-verifiedRequirement', name
         ='verifiedRequirement', key=
-        'sysml-RequirementVerificationMembership-verifiedRequirement'))
+        'sysml-RequirementVerificationMembership-verifiedRequirement', type
+        =requirement_usage, multiple=False, optional=False))
     requirement_constraint_membership.set_extended_concept(feature_membership)
     requirement_constraint_membership.add_feature(Property(lion_web_version
         =LionWebVersion.V2023_1, id=
@@ -2658,24 +2995,28 @@ def get_language() ->Language:
         lion_web_version=LionWebVersion.V2023_1, id=
         'sysml-RequirementConstraintMembership-ownedConstraint', name=
         'ownedConstraint', key=
-        'sysml-RequirementConstraintMembership-ownedConstraint'))
+        'sysml-RequirementConstraintMembership-ownedConstraint', type=
+        i_constraint_usage, multiple=False, optional=False))
     requirement_constraint_membership.add_feature(Reference(
         lion_web_version=LionWebVersion.V2023_1, id=
         'sysml-RequirementConstraintMembership-referencedConstraint', name=
         'referencedConstraint', key=
-        'sysml-RequirementConstraintMembership-referencedConstraint'))
+        'sysml-RequirementConstraintMembership-referencedConstraint', type=
+        i_constraint_usage, multiple=False, optional=False))
     include_use_case_usage.set_extended_concept(use_case_usage)
     include_use_case_usage.add_implemented_interface(i_perform_action_usage)
     include_use_case_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-IncludeUseCaseUsage-useCaseIncluded', name='useCaseIncluded',
-        key='sysml-IncludeUseCaseUsage-useCaseIncluded'))
+        key='sysml-IncludeUseCaseUsage-useCaseIncluded', type=
+        use_case_usage, multiple=False, optional=False))
     objective_membership.set_extended_concept(feature_membership)
     objective_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ObjectiveMembership-ownedObjectiveRequirement', name=
         'ownedObjectiveRequirement', key=
-        'sysml-ObjectiveMembership-ownedObjectiveRequirement'))
+        'sysml-ObjectiveMembership-ownedObjectiveRequirement', type=
+        requirement_usage, multiple=False, optional=False))
     satisfy_requirement_usage.set_extended_concept(requirement_usage)
     satisfy_requirement_usage.add_implemented_interface(
         i_assert_constraint_usage)
@@ -2683,57 +3024,68 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'sysml-SatisfyRequirementUsage-satisfiedRequirement', name=
         'satisfiedRequirement', key=
-        'sysml-SatisfyRequirementUsage-satisfiedRequirement'))
+        'sysml-SatisfyRequirementUsage-satisfiedRequirement', type=
+        requirement_usage, multiple=False, optional=False))
     satisfy_requirement_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-SatisfyRequirementUsage-satisfyingFeature', name=
         'satisfyingFeature', key=
-        'sysml-SatisfyRequirementUsage-satisfyingFeature'))
+        'sysml-SatisfyRequirementUsage-satisfyingFeature', type=i_feature,
+        multiple=False, optional=False))
     i_assert_constraint_usage.add_extended_interface(i_constraint_usage)
     i_assert_constraint_usage.add_extended_interface(i_invariant)
     i_assert_constraint_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-IAssertConstraintUsage-assertedConstraint', name=
         'assertedConstraint', key=
-        'sysml-IAssertConstraintUsage-assertedConstraint'))
+        'sysml-IAssertConstraintUsage-assertedConstraint', type=
+        i_constraint_usage, multiple=False, optional=False))
     subject_membership.set_extended_concept(parameter_membership)
     subject_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-SubjectMembership-ownedSubjectParameter', name=
         'ownedSubjectParameter', key=
-        'sysml-SubjectMembership-ownedSubjectParameter'))
+        'sysml-SubjectMembership-ownedSubjectParameter', type=i_usage,
+        multiple=False, optional=False))
     stakeholder_membership.set_extended_concept(parameter_membership)
     stakeholder_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-StakeholderMembership-ownedStakeholderParameter', name=
         'ownedStakeholderParameter', key=
-        'sysml-StakeholderMembership-ownedStakeholderParameter'))
+        'sysml-StakeholderMembership-ownedStakeholderParameter', type=
+        i_part_usage, multiple=False, optional=False))
     framed_concern_membership.set_extended_concept(
         requirement_constraint_membership)
     framed_concern_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-FramedConcernMembership-ownedConcern', name='ownedConcern',
-        key='sysml-FramedConcernMembership-ownedConcern'))
+        key='sysml-FramedConcernMembership-ownedConcern', type=
+        concern_usage, multiple=False, optional=False))
     framed_concern_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-FramedConcernMembership-referencedConcern', name=
         'referencedConcern', key=
-        'sysml-FramedConcernMembership-referencedConcern'))
+        'sysml-FramedConcernMembership-referencedConcern', type=
+        concern_usage, multiple=False, optional=False))
     actor_membership.set_extended_concept(parameter_membership)
     actor_membership.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-ActorMembership-ownedActorParameter', name=
-        'ownedActorParameter', key='sysml-ActorMembership-ownedActorParameter')
-        )
+        'ownedActorParameter', key=
+        'sysml-ActorMembership-ownedActorParameter', type=i_part_usage,
+        multiple=False, optional=False))
     view_rendering_membership.set_extended_concept(feature_membership)
     view_rendering_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ViewRenderingMembership-ownedRendering', name=
-        'ownedRendering', key='sysml-ViewRenderingMembership-ownedRendering'))
+        'ownedRendering', key=
+        'sysml-ViewRenderingMembership-ownedRendering', type=
+        rendering_usage, multiple=False, optional=False))
     view_rendering_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-ViewRenderingMembership-referencedRendering', name=
         'referencedRendering', key=
-        'sysml-ViewRenderingMembership-referencedRendering'))
+        'sysml-ViewRenderingMembership-referencedRendering', type=
+        rendering_usage, multiple=False, optional=False))
     namespace_expose.set_extended_concept(namespace_import)
     namespace_expose.add_implemented_interface(i_expose)
     i_expose.add_extended_interface(i_import)
@@ -2749,19 +3101,23 @@ def get_language() ->Language:
     send_action_usage.add_implemented_interface(i_action_usage)
     send_action_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-SendActionUsage-receiverArgument', name=
-        'receiverArgument', key='sysml-SendActionUsage-receiverArgument'))
+        'receiverArgument', key='sysml-SendActionUsage-receiverArgument',
+        type=i_expression, multiple=False, optional=True))
     send_action_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-SendActionUsage-payloadArgument', name=
-        'payloadArgument', key='sysml-SendActionUsage-payloadArgument'))
+        'payloadArgument', key='sysml-SendActionUsage-payloadArgument',
+        type=i_expression, multiple=False, optional=False))
     send_action_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-SendActionUsage-senderArgument', name=
-        'senderArgument', key='sysml-SendActionUsage-senderArgument'))
+        'senderArgument', key='sysml-SendActionUsage-senderArgument', type=
+        i_expression, multiple=False, optional=True))
     decision_node.set_extended_concept(control_node)
     merge_node.set_extended_concept(control_node)
     loop_action_usage.add_implemented_interface(i_action_usage)
     loop_action_usage.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='sysml-LoopActionUsage-bodyAction', name='bodyAction',
-        key='sysml-LoopActionUsage-bodyAction'))
+        key='sysml-LoopActionUsage-bodyAction', type=i_action_usage,
+        multiple=False, optional=False))
     trigger_invocation_expression.set_extended_concept(invocation_expression)
     trigger_invocation_expression.add_feature(Property(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-TriggerInvocationExpression-kind',
@@ -2771,46 +3127,58 @@ def get_language() ->Language:
     assignment_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-AssignmentActionUsage-targetArgument', name='targetArgument',
-        key='sysml-AssignmentActionUsage-targetArgument'))
+        key='sysml-AssignmentActionUsage-targetArgument', type=i_expression,
+        multiple=False, optional=True))
     assignment_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-AssignmentActionUsage-valueExpression', name=
-        'valueExpression', key='sysml-AssignmentActionUsage-valueExpression'))
+        'valueExpression', key=
+        'sysml-AssignmentActionUsage-valueExpression', type=i_expression,
+        multiple=False, optional=True))
     assignment_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-AssignmentActionUsage-referent',
-        name='referent', key='sysml-AssignmentActionUsage-referent'))
+        name='referent', key='sysml-AssignmentActionUsage-referent', type=
+        i_feature, multiple=False, optional=False))
     for_loop_action_usage.set_extended_concept(loop_action_usage)
     for_loop_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-ForLoopActionUsage-seqArgument',
-        name='seqArgument', key='sysml-ForLoopActionUsage-seqArgument'))
+        name='seqArgument', key='sysml-ForLoopActionUsage-seqArgument',
+        type=i_expression, multiple=False, optional=False))
     for_loop_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='sysml-ForLoopActionUsage-loopVariable',
-        name='loopVariable', key='sysml-ForLoopActionUsage-loopVariable'))
+        name='loopVariable', key='sysml-ForLoopActionUsage-loopVariable',
+        type=reference_usage, multiple=False, optional=False))
     if_action_usage.add_implemented_interface(i_action_usage)
     if_action_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IfActionUsage-elseAction', name='elseAction',
-        key='sysml-IfActionUsage-elseAction'))
+        key='sysml-IfActionUsage-elseAction', type=i_action_usage, multiple
+        =False, optional=True))
     if_action_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IfActionUsage-thenAction', name='thenAction',
-        key='sysml-IfActionUsage-thenAction'))
+        key='sysml-IfActionUsage-thenAction', type=i_action_usage, multiple
+        =False, optional=False))
     if_action_usage.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='sysml-IfActionUsage-ifArgument', name='ifArgument',
-        key='sysml-IfActionUsage-ifArgument'))
+        key='sysml-IfActionUsage-ifArgument', type=i_expression, multiple=
+        False, optional=False))
     while_loop_action_usage.set_extended_concept(loop_action_usage)
     while_loop_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-WhileLoopActionUsage-whileArgument', name='whileArgument',
-        key='sysml-WhileLoopActionUsage-whileArgument'))
+        key='sysml-WhileLoopActionUsage-whileArgument', type=i_expression,
+        multiple=False, optional=False))
     while_loop_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-WhileLoopActionUsage-untilArgument', name='untilArgument',
-        key='sysml-WhileLoopActionUsage-untilArgument'))
+        key='sysml-WhileLoopActionUsage-untilArgument', type=i_expression,
+        multiple=False, optional=True))
     terminate_action_usage.add_implemented_interface(i_action_usage)
     terminate_action_usage.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'sysml-TerminateActionUsage-terminatedOccurrenceArgument', name=
         'terminatedOccurrenceArgument', key=
-        'sysml-TerminateActionUsage-terminatedOccurrenceArgument'))
+        'sysml-TerminateActionUsage-terminatedOccurrenceArgument', type=
+        i_expression, multiple=False, optional=True))
     metadata_definition.set_extended_concept(item_definition)
     metadata_definition.add_implemented_interface(i_metaclass)
     alias_ids_container.add_feature(Property(lion_web_version=
@@ -2871,7 +3239,7 @@ def get_specialization() ->Concept:
     return get_language().get_concept_by_name('Specialization')
 
 
-def get_owningmembership() ->Concept:
+def get_owning_membership() ->Concept:
     return get_language().get_concept_by_name('OwningMembership')
 
 
@@ -2891,11 +3259,11 @@ def get_annotation() ->Concept:
     return get_language().get_concept_by_name('Annotation')
 
 
-def get_textualrepresentation() ->Concept:
+def get_textual_representation() ->Concept:
     return get_language().get_concept_by_name('TextualRepresentation')
 
 
-def get_featuremembership() ->Concept:
+def get_feature_membership() ->Concept:
     return get_language().get_concept_by_name('FeatureMembership')
 
 
@@ -2907,27 +3275,27 @@ def get_subsetting() ->Concept:
     return get_language().get_concept_by_name('Subsetting')
 
 
-def get_featuretyping() ->Concept:
+def get_feature_typing() ->Concept:
     return get_language().get_concept_by_name('FeatureTyping')
 
 
-def get_typefeaturing() ->Concept:
+def get_type_featuring() ->Concept:
     return get_language().get_concept_by_name('TypeFeaturing')
 
 
-def get_featureinverting() ->Concept:
+def get_feature_inverting() ->Concept:
     return get_language().get_concept_by_name('FeatureInverting')
 
 
-def get_featurechaining() ->Concept:
+def get_feature_chaining() ->Concept:
     return get_language().get_concept_by_name('FeatureChaining')
 
 
-def get_referencesubsetting() ->Concept:
+def get_reference_subsetting() ->Concept:
     return get_language().get_concept_by_name('ReferenceSubsetting')
 
 
-def get_crosssubsetting() ->Concept:
+def get_cross_subsetting() ->Concept:
     return get_language().get_concept_by_name('CrossSubsetting')
 
 
@@ -2955,43 +3323,43 @@ def get_differencing() ->Concept:
     return get_language().get_concept_by_name('Differencing')
 
 
-def get_endfeaturemembership() ->Concept:
+def get_end_feature_membership() ->Concept:
     return get_language().get_concept_by_name('EndFeatureMembership')
 
 
-def get_resultexpressionmembership() ->Concept:
+def get_result_expression_membership() ->Concept:
     return get_language().get_concept_by_name('ResultExpressionMembership')
 
 
-def get_returnparametermembership() ->Concept:
+def get_return_parameter_membership() ->Concept:
     return get_language().get_concept_by_name('ReturnParameterMembership')
 
 
-def get_parametermembership() ->Concept:
+def get_parameter_membership() ->Concept:
     return get_language().get_concept_by_name('ParameterMembership')
 
 
-def get_multiplicityrange() ->Concept:
+def get_multiplicity_range() ->Concept:
     return get_language().get_concept_by_name('MultiplicityRange')
 
 
-def get_featurevalue() ->Concept:
+def get_feature_value() ->Concept:
     return get_language().get_concept_by_name('FeatureValue')
 
 
-def get_metadatafeature() ->Concept:
+def get_metadata_feature() ->Concept:
     return get_language().get_concept_by_name('MetadataFeature')
 
 
-def get_itemflowend() ->Concept:
+def get_item_flow_end() ->Concept:
     return get_language().get_concept_by_name('ItemFlowEnd')
 
 
-def get_itemfeature() ->Concept:
+def get_item_feature() ->Concept:
     return get_language().get_concept_by_name('ItemFeature')
 
 
-def get_elementfiltermembership() ->Concept:
+def get_element_filter_membership() ->Concept:
     return get_language().get_concept_by_name('ElementFilterMembership')
 
 
@@ -2999,67 +3367,67 @@ def get_package() ->Concept:
     return get_language().get_concept_by_name('Package')
 
 
-def get_librarypackage() ->Concept:
+def get_library_package() ->Concept:
     return get_language().get_concept_by_name('LibraryPackage')
 
 
-def get_featurereferenceexpression() ->Concept:
+def get_feature_reference_expression() ->Concept:
     return get_language().get_concept_by_name('FeatureReferenceExpression')
 
 
-def get_metadataaccessexpression() ->Concept:
+def get_metadata_access_expression() ->Concept:
     return get_language().get_concept_by_name('MetadataAccessExpression')
 
 
-def get_nullexpression() ->Concept:
+def get_null_expression() ->Concept:
     return get_language().get_concept_by_name('NullExpression')
 
 
-def get_indexexpression() ->Concept:
+def get_index_expression() ->Concept:
     return get_language().get_concept_by_name('IndexExpression')
 
 
-def get_operatorexpression() ->Concept:
+def get_operator_expression() ->Concept:
     return get_language().get_concept_by_name('OperatorExpression')
 
 
-def get_invocationexpression() ->Concept:
+def get_invocation_expression() ->Concept:
     return get_language().get_concept_by_name('InvocationExpression')
 
 
-def get_collectexpression() ->Concept:
+def get_collect_expression() ->Concept:
     return get_language().get_concept_by_name('CollectExpression')
 
 
-def get_literalinfinity() ->Concept:
+def get_literal_infinity() ->Concept:
     return get_language().get_concept_by_name('LiteralInfinity')
 
 
-def get_literalexpression() ->Concept:
+def get_literal_expression() ->Concept:
     return get_language().get_concept_by_name('LiteralExpression')
 
 
-def get_literalinteger() ->Concept:
+def get_literal_integer() ->Concept:
     return get_language().get_concept_by_name('LiteralInteger')
 
 
-def get_selectexpression() ->Concept:
+def get_select_expression() ->Concept:
     return get_language().get_concept_by_name('SelectExpression')
 
 
-def get_literalrational() ->Concept:
+def get_literal_rational() ->Concept:
     return get_language().get_concept_by_name('LiteralRational')
 
 
-def get_literalboolean() ->Concept:
+def get_literal_boolean() ->Concept:
     return get_language().get_concept_by_name('LiteralBoolean')
 
 
-def get_literalstring() ->Concept:
+def get_literal_string() ->Concept:
     return get_language().get_concept_by_name('LiteralString')
 
 
-def get_featurechainexpression() ->Concept:
+def get_feature_chain_expression() ->Concept:
     return get_language().get_concept_by_name('FeatureChainExpression')
 
 
@@ -3067,27 +3435,27 @@ def get_dependency() ->Concept:
     return get_language().get_concept_by_name('Dependency')
 
 
-def get_namespaceimport() ->Concept:
+def get_namespace_import() ->Concept:
     return get_language().get_concept_by_name('NamespaceImport')
 
 
-def get_membershipimport() ->Concept:
+def get_membership_import() ->Concept:
     return get_language().get_concept_by_name('MembershipImport')
 
 
-def get_interfaceusage() ->Concept:
+def get_interface_usage() ->Concept:
     return get_language().get_concept_by_name('InterfaceUsage')
 
 
-def get_connectionusage() ->Concept:
+def get_connection_usage() ->Concept:
     return get_language().get_concept_by_name('ConnectionUsage')
 
 
-def get_connectorasusage() ->Concept:
+def get_connector_as_usage() ->Concept:
     return get_language().get_concept_by_name('ConnectorAsUsage')
 
 
-def get_variantmembership() ->Concept:
+def get_variant_membership() ->Concept:
     return get_language().get_concept_by_name('VariantMembership')
 
 
@@ -3095,329 +3463,329 @@ def get_definition() ->Concept:
     return get_language().get_concept_by_name('Definition')
 
 
-def get_referenceusage() ->Concept:
+def get_reference_usage() ->Concept:
     return get_language().get_concept_by_name('ReferenceUsage')
 
 
-def get_attributeusage() ->Concept:
+def get_attribute_usage() ->Concept:
     return get_language().get_concept_by_name('AttributeUsage')
 
 
-def get_enumerationusage() ->Concept:
+def get_enumeration_usage() ->Concept:
     return get_language().get_concept_by_name('EnumerationUsage')
 
 
-def get_enumerationdefinition() ->Concept:
+def get_enumeration_definition() ->Concept:
     return get_language().get_concept_by_name('EnumerationDefinition')
 
 
-def get_attributedefinition() ->Concept:
+def get_attribute_definition() ->Concept:
     return get_language().get_concept_by_name('AttributeDefinition')
 
 
-def get_occurrencedefinition() ->Concept:
+def get_occurrence_definition() ->Concept:
     return get_language().get_concept_by_name('OccurrenceDefinition')
 
 
-def get_lifeclass() ->Concept:
+def get_life_class() ->Concept:
     return get_language().get_concept_by_name('LifeClass')
 
 
-def get_partdefinition() ->Concept:
+def get_part_definition() ->Concept:
     return get_language().get_concept_by_name('PartDefinition')
 
 
-def get_itemdefinition() ->Concept:
+def get_item_definition() ->Concept:
     return get_language().get_concept_by_name('ItemDefinition')
 
 
-def get_portusage() ->Concept:
+def get_port_usage() ->Concept:
     return get_language().get_concept_by_name('PortUsage')
 
 
-def get_portdefinition() ->Concept:
+def get_port_definition() ->Concept:
     return get_language().get_concept_by_name('PortDefinition')
 
 
-def get_conjugatedportdefinition() ->Concept:
+def get_conjugated_port_definition() ->Concept:
     return get_language().get_concept_by_name('ConjugatedPortDefinition')
 
 
-def get_portconjugation() ->Concept:
+def get_port_conjugation() ->Concept:
     return get_language().get_concept_by_name('PortConjugation')
 
 
-def get_flowconnectionusage() ->Concept:
+def get_flow_connection_usage() ->Concept:
     return get_language().get_concept_by_name('FlowConnectionUsage')
 
 
-def get_allocationusage() ->Concept:
+def get_allocation_usage() ->Concept:
     return get_language().get_concept_by_name('AllocationUsage')
 
 
-def get_allocationdefinition() ->Concept:
+def get_allocation_definition() ->Concept:
     return get_language().get_concept_by_name('AllocationDefinition')
 
 
-def get_connectiondefinition() ->Concept:
+def get_connection_definition() ->Concept:
     return get_language().get_concept_by_name('ConnectionDefinition')
 
 
-def get_stateusage() ->Concept:
+def get_state_usage() ->Concept:
     return get_language().get_concept_by_name('StateUsage')
 
 
-def get_transitionusage() ->Concept:
+def get_transition_usage() ->Concept:
     return get_language().get_concept_by_name('TransitionUsage')
 
 
-def get_acceptactionusage() ->Concept:
+def get_accept_action_usage() ->Concept:
     return get_language().get_concept_by_name('AcceptActionUsage')
 
 
-def get_calculationusage() ->Concept:
+def get_calculation_usage() ->Concept:
     return get_language().get_concept_by_name('CalculationUsage')
 
 
-def get_requirementusage() ->Concept:
+def get_requirement_usage() ->Concept:
     return get_language().get_concept_by_name('RequirementUsage')
 
 
-def get_requirementdefinition() ->Concept:
+def get_requirement_definition() ->Concept:
     return get_language().get_concept_by_name('RequirementDefinition')
 
 
-def get_constraintdefinition() ->Concept:
+def get_constraint_definition() ->Concept:
     return get_language().get_concept_by_name('ConstraintDefinition')
 
 
-def get_concernusage() ->Concept:
+def get_concern_usage() ->Concept:
     return get_language().get_concept_by_name('ConcernUsage')
 
 
-def get_concerndefinition() ->Concept:
+def get_concern_definition() ->Concept:
     return get_language().get_concept_by_name('ConcernDefinition')
 
 
-def get_caseusage() ->Concept:
+def get_case_usage() ->Concept:
     return get_language().get_concept_by_name('CaseUsage')
 
 
-def get_casedefinition() ->Concept:
+def get_case_definition() ->Concept:
     return get_language().get_concept_by_name('CaseDefinition')
 
 
-def get_calculationdefinition() ->Concept:
+def get_calculation_definition() ->Concept:
     return get_language().get_concept_by_name('CalculationDefinition')
 
 
-def get_actiondefinition() ->Concept:
+def get_action_definition() ->Concept:
     return get_language().get_concept_by_name('ActionDefinition')
 
 
-def get_analysiscaseusage() ->Concept:
+def get_analysis_case_usage() ->Concept:
     return get_language().get_concept_by_name('AnalysisCaseUsage')
 
 
-def get_analysiscasedefinition() ->Concept:
+def get_analysis_case_definition() ->Concept:
     return get_language().get_concept_by_name('AnalysisCaseDefinition')
 
 
-def get_verificationcaseusage() ->Concept:
+def get_verification_case_usage() ->Concept:
     return get_language().get_concept_by_name('VerificationCaseUsage')
 
 
-def get_verificationcasedefinition() ->Concept:
+def get_verification_case_definition() ->Concept:
     return get_language().get_concept_by_name('VerificationCaseDefinition')
 
 
-def get_usecaseusage() ->Concept:
+def get_use_case_usage() ->Concept:
     return get_language().get_concept_by_name('UseCaseUsage')
 
 
-def get_usecasedefinition() ->Concept:
+def get_use_case_definition() ->Concept:
     return get_language().get_concept_by_name('UseCaseDefinition')
 
 
-def get_viewusage() ->Concept:
+def get_view_usage() ->Concept:
     return get_language().get_concept_by_name('ViewUsage')
 
 
-def get_viewdefinition() ->Concept:
+def get_view_definition() ->Concept:
     return get_language().get_concept_by_name('ViewDefinition')
 
 
-def get_viewpointusage() ->Concept:
+def get_viewpoint_usage() ->Concept:
     return get_language().get_concept_by_name('ViewpointUsage')
 
 
-def get_viewpointdefinition() ->Concept:
+def get_viewpoint_definition() ->Concept:
     return get_language().get_concept_by_name('ViewpointDefinition')
 
 
-def get_renderingusage() ->Concept:
+def get_rendering_usage() ->Concept:
     return get_language().get_concept_by_name('RenderingUsage')
 
 
-def get_renderingdefinition() ->Concept:
+def get_rendering_definition() ->Concept:
     return get_language().get_concept_by_name('RenderingDefinition')
 
 
-def get_metadatausage() ->Concept:
+def get_metadata_usage() ->Concept:
     return get_language().get_concept_by_name('MetadataUsage')
 
 
-def get_interfacedefinition() ->Concept:
+def get_interface_definition() ->Concept:
     return get_language().get_concept_by_name('InterfaceDefinition')
 
 
-def get_conjugatedporttyping() ->Concept:
+def get_conjugated_port_typing() ->Concept:
     return get_language().get_concept_by_name('ConjugatedPortTyping')
 
 
-def get_transitionfeaturemembership() ->Concept:
+def get_transition_feature_membership() ->Concept:
     return get_language().get_concept_by_name('TransitionFeatureMembership')
 
 
-def get_exhibitstateusage() ->Concept:
+def get_exhibit_state_usage() ->Concept:
     return get_language().get_concept_by_name('ExhibitStateUsage')
 
 
-def get_statesubactionmembership() ->Concept:
+def get_state_subaction_membership() ->Concept:
     return get_language().get_concept_by_name('StateSubactionMembership')
 
 
-def get_statedefinition() ->Concept:
+def get_state_definition() ->Concept:
     return get_language().get_concept_by_name('StateDefinition')
 
 
-def get_successionflowconnectionusage() ->Concept:
+def get_succession_flow_connection_usage() ->Concept:
     return get_language().get_concept_by_name('SuccessionFlowConnectionUsage')
 
 
-def get_flowconnectiondefinition() ->Concept:
+def get_flow_connection_definition() ->Concept:
     return get_language().get_concept_by_name('FlowConnectionDefinition')
 
 
-def get_requirementverificationmembership() ->Concept:
+def get_requirement_verification_membership() ->Concept:
     return get_language().get_concept_by_name(
         'RequirementVerificationMembership')
 
 
-def get_requirementconstraintmembership() ->Concept:
+def get_requirement_constraint_membership() ->Concept:
     return get_language().get_concept_by_name('RequirementConstraintMembership'
         )
 
 
-def get_includeusecaseusage() ->Concept:
+def get_include_use_case_usage() ->Concept:
     return get_language().get_concept_by_name('IncludeUseCaseUsage')
 
 
-def get_objectivemembership() ->Concept:
+def get_objective_membership() ->Concept:
     return get_language().get_concept_by_name('ObjectiveMembership')
 
 
-def get_satisfyrequirementusage() ->Concept:
+def get_satisfy_requirement_usage() ->Concept:
     return get_language().get_concept_by_name('SatisfyRequirementUsage')
 
 
-def get_subjectmembership() ->Concept:
+def get_subject_membership() ->Concept:
     return get_language().get_concept_by_name('SubjectMembership')
 
 
-def get_stakeholdermembership() ->Concept:
+def get_stakeholder_membership() ->Concept:
     return get_language().get_concept_by_name('StakeholderMembership')
 
 
-def get_framedconcernmembership() ->Concept:
+def get_framed_concern_membership() ->Concept:
     return get_language().get_concept_by_name('FramedConcernMembership')
 
 
-def get_actormembership() ->Concept:
+def get_actor_membership() ->Concept:
     return get_language().get_concept_by_name('ActorMembership')
 
 
-def get_viewrenderingmembership() ->Concept:
+def get_view_rendering_membership() ->Concept:
     return get_language().get_concept_by_name('ViewRenderingMembership')
 
 
-def get_namespaceexpose() ->Concept:
+def get_namespace_expose() ->Concept:
     return get_language().get_concept_by_name('NamespaceExpose')
 
 
-def get_membershipexpose() ->Concept:
+def get_membership_expose() ->Concept:
     return get_language().get_concept_by_name('MembershipExpose')
 
 
-def get_bindingconnectorasusage() ->Concept:
+def get_binding_connector_as_usage() ->Concept:
     return get_language().get_concept_by_name('BindingConnectorAsUsage')
 
 
-def get_successionasusage() ->Concept:
+def get_succession_as_usage() ->Concept:
     return get_language().get_concept_by_name('SuccessionAsUsage')
 
 
-def get_forknode() ->Concept:
+def get_fork_node() ->Concept:
     return get_language().get_concept_by_name('ForkNode')
 
 
-def get_controlnode() ->Concept:
+def get_control_node() ->Concept:
     return get_language().get_concept_by_name('ControlNode')
 
 
-def get_joinnode() ->Concept:
+def get_join_node() ->Concept:
     return get_language().get_concept_by_name('JoinNode')
 
 
-def get_sendactionusage() ->Concept:
+def get_send_action_usage() ->Concept:
     return get_language().get_concept_by_name('SendActionUsage')
 
 
-def get_decisionnode() ->Concept:
+def get_decision_node() ->Concept:
     return get_language().get_concept_by_name('DecisionNode')
 
 
-def get_mergenode() ->Concept:
+def get_merge_node() ->Concept:
     return get_language().get_concept_by_name('MergeNode')
 
 
-def get_loopactionusage() ->Concept:
+def get_loop_action_usage() ->Concept:
     return get_language().get_concept_by_name('LoopActionUsage')
 
 
-def get_triggerinvocationexpression() ->Concept:
+def get_trigger_invocation_expression() ->Concept:
     return get_language().get_concept_by_name('TriggerInvocationExpression')
 
 
-def get_assignmentactionusage() ->Concept:
+def get_assignment_action_usage() ->Concept:
     return get_language().get_concept_by_name('AssignmentActionUsage')
 
 
-def get_forloopactionusage() ->Concept:
+def get_for_loop_action_usage() ->Concept:
     return get_language().get_concept_by_name('ForLoopActionUsage')
 
 
-def get_ifactionusage() ->Concept:
+def get_if_action_usage() ->Concept:
     return get_language().get_concept_by_name('IfActionUsage')
 
 
-def get_whileloopactionusage() ->Concept:
+def get_while_loop_action_usage() ->Concept:
     return get_language().get_concept_by_name('WhileLoopActionUsage')
 
 
-def get_terminateactionusage() ->Concept:
+def get_terminate_action_usage() ->Concept:
     return get_language().get_concept_by_name('TerminateActionUsage')
 
 
-def get_metadatadefinition() ->Concept:
+def get_metadata_definition() ->Concept:
     return get_language().get_concept_by_name('MetadataDefinition')
 
 
-def get_aliasidscontainer() ->Concept:
+def get_alias_ids_container() ->Concept:
     return get_language().get_concept_by_name('AliasIdsContainer')
 
 
-def get_textcontainer() ->Concept:
+def get_text_container() ->Concept:
     return get_language().get_concept_by_name('TextContainer')
 
 
@@ -3433,7 +3801,7 @@ def get_element() ->Concept:
     return get_language().get_concept_by_name('Element')
 
 
-def get_annotatingelement() ->Concept:
+def get_annotating_element() ->Concept:
     return get_language().get_concept_by_name('AnnotatingElement')
 
 
@@ -3477,15 +3845,15 @@ def get_structure() ->Concept:
     return get_language().get_concept_by_name('Structure')
 
 
-def get_partusage() ->Concept:
+def get_part_usage() ->Concept:
     return get_language().get_concept_by_name('PartUsage')
 
 
-def get_itemusage() ->Concept:
+def get_item_usage() ->Concept:
     return get_language().get_concept_by_name('ItemUsage')
 
 
-def get_occurrenceusage() ->Concept:
+def get_occurrence_usage() ->Concept:
     return get_language().get_concept_by_name('OccurrenceUsage')
 
 
@@ -3493,19 +3861,19 @@ def get_usage() ->Concept:
     return get_language().get_concept_by_name('Usage')
 
 
-def get_datatype() ->Concept:
+def get_data_type() ->Concept:
     return get_language().get_concept_by_name('DataType')
 
 
-def get_actionusage() ->Concept:
+def get_action_usage() ->Concept:
     return get_language().get_concept_by_name('ActionUsage')
 
 
-def get_itemflow() ->Concept:
+def get_item_flow() ->Concept:
     return get_language().get_concept_by_name('ItemFlow')
 
 
-def get_associationstructure() ->Concept:
+def get_association_structure() ->Concept:
     return get_language().get_concept_by_name('AssociationStructure')
 
 
@@ -3521,15 +3889,15 @@ def get_function() ->Concept:
     return get_language().get_concept_by_name('Function')
 
 
-def get_performactionusage() ->Concept:
+def get_perform_action_usage() ->Concept:
     return get_language().get_concept_by_name('PerformActionUsage')
 
 
-def get_eventoccurrenceusage() ->Concept:
+def get_event_occurrence_usage() ->Concept:
     return get_language().get_concept_by_name('EventOccurrenceUsage')
 
 
-def get_successionitemflow() ->Concept:
+def get_succession_item_flow() ->Concept:
     return get_language().get_concept_by_name('SuccessionItemFlow')
 
 
@@ -3537,15 +3905,15 @@ def get_interaction() ->Concept:
     return get_language().get_concept_by_name('Interaction')
 
 
-def get_assertconstraintusage() ->Concept:
+def get_assert_constraint_usage() ->Concept:
     return get_language().get_concept_by_name('AssertConstraintUsage')
 
 
-def get_constraintusage() ->Concept:
+def get_constraint_usage() ->Concept:
     return get_language().get_concept_by_name('ConstraintUsage')
 
 
-def get_booleanexpression() ->Concept:
+def get_boolean_expression() ->Concept:
     return get_language().get_concept_by_name('BooleanExpression')
 
 
@@ -3565,7 +3933,7 @@ def get_import() ->Concept:
     return get_language().get_concept_by_name('Import')
 
 
-def get_bindingconnector() ->Concept:
+def get_binding_connector() ->Concept:
     return get_language().get_concept_by_name('BindingConnector')
 
 

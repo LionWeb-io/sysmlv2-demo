@@ -498,34 +498,43 @@ def get_language() ->Language:
     language.add_element(structure)
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IElement-owningMembership', name='owningMembership', key=
-        'kerml-IElement-owningMembership'))
+        'kerml-IElement-owningMembership', type=owning_membership, multiple
+        =False, optional=True))
     i_element.add_feature(Containment(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IElement-ownedRelationship', name=
-        'ownedRelationship', key='kerml-IElement-ownedRelationship'))
+        'ownedRelationship', key='kerml-IElement-ownedRelationship', type=
+        i_relationship, multiple=True, optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IElement-owningRelationship', name='owningRelationship',
-        key='kerml-IElement-owningRelationship'))
+        key='kerml-IElement-owningRelationship', type=i_relationship,
+        multiple=False, optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IElement-owningNamespace', name='owningNamespace', key=
-        'kerml-IElement-owningNamespace'))
+        'kerml-IElement-owningNamespace', type=i_namespace, multiple=False,
+        optional=True))
     i_element.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IElement-elementId', name='elementId', key=
         'kerml-IElement-elementId', type=get_types_language().
         get_primitive_type_by_name('String')))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='kerml-IElement-owner', name='owner', key='kerml-IElement-owner'))
+        id='kerml-IElement-owner', name='owner', key='kerml-IElement-owner',
+        type=i_element, multiple=False, optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IElement-ownedElement', name='ownedElement', key=
-        'kerml-IElement-ownedElement'))
+        'kerml-IElement-ownedElement', type=i_element, multiple=True,
+        optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IElement-documentation', name='documentation', key=
-        'kerml-IElement-documentation'))
+        'kerml-IElement-documentation', type=documentation, multiple=True,
+        optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IElement-ownedAnnotation', name='ownedAnnotation', key=
-        'kerml-IElement-ownedAnnotation'))
+        'kerml-IElement-ownedAnnotation', type=annotation, multiple=True,
+        optional=True))
     i_element.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IElement-textualRepresentation', name=
-        'textualRepresentation', key='kerml-IElement-textualRepresentation'))
+        'textualRepresentation', key='kerml-IElement-textualRepresentation',
+        type=textual_representation, multiple=True, optional=True))
     i_element.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IElement-declaredShortName', name='declaredShortName',
         key='kerml-IElement-declaredShortName', type=get_types_language().
@@ -555,7 +564,8 @@ def get_language() ->Language:
         get_primitive_type_by_name('Boolean')))
     i_element.add_feature(Containment(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IElement-aliasIdsContainer', name=
-        'aliasIdsContainer', key='kerml-IElement-aliasIdsContainer'))
+        'aliasIdsContainer', key='kerml-IElement-aliasIdsContainer', type=
+        alias_ids_container, multiple=True, optional=True))
     owning_membership.set_extended_concept(membership)
     owning_membership.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-OwningMembership-ownedMemberElementId', name=
@@ -573,12 +583,15 @@ def get_language() ->Language:
         type=get_types_language().get_primitive_type_by_name('String')))
     owning_membership.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='kerml-OwningMembership-ownedMemberElement', name=
-        'ownedMemberElement', key='kerml-OwningMembership-ownedMemberElement'))
+        'ownedMemberElement', key=
+        'kerml-OwningMembership-ownedMemberElement', type=i_element,
+        multiple=False, optional=False))
     membership.add_implemented_interface(i_relationship)
     membership.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Membership-membershipOwningNamespace', name=
         'membershipOwningNamespace', key=
-        'kerml-Membership-membershipOwningNamespace'))
+        'kerml-Membership-membershipOwningNamespace', type=i_namespace,
+        multiple=False, optional=False))
     membership.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Membership-memberElementId', name='memberElementId', key=
         'kerml-Membership-memberElementId', type=get_types_language().
@@ -589,7 +602,8 @@ def get_language() ->Language:
         get_primitive_type_by_name('String')))
     membership.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Membership-memberElement', name='memberElement',
-        key='kerml-Membership-memberElement'))
+        key='kerml-Membership-memberElement', type=i_element, multiple=
+        False, optional=False))
     membership.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Membership-memberName', name='memberName', key=
         'kerml-Membership-memberName', type=get_types_language().
@@ -600,20 +614,26 @@ def get_language() ->Language:
     i_relationship.add_extended_interface(i_element)
     i_relationship.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IRelationship-relatedElement', name=
-        'relatedElement', key='kerml-IRelationship-relatedElement'))
+        'relatedElement', key='kerml-IRelationship-relatedElement', type=
+        i_element, multiple=True, optional=True))
     i_relationship.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IRelationship-target', name='target', key=
-        'kerml-IRelationship-target'))
+        'kerml-IRelationship-target', type=i_element, multiple=True,
+        optional=True))
     i_relationship.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IRelationship-source', name='source', key=
-        'kerml-IRelationship-source'))
+        'kerml-IRelationship-source', type=i_element, multiple=True,
+        optional=True))
     i_relationship.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IRelationship-owningRelatedElement', name=
-        'owningRelatedElement', key='kerml-IRelationship-owningRelatedElement')
-        )
+        'owningRelatedElement', key=
+        'kerml-IRelationship-owningRelatedElement', type=i_element,
+        multiple=False, optional=True))
     i_relationship.add_feature(Containment(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IRelationship-ownedRelatedElement', name=
-        'ownedRelatedElement', key='kerml-IRelationship-ownedRelatedElement'))
+        'ownedRelatedElement', key=
+        'kerml-IRelationship-ownedRelatedElement', type=i_element, multiple
+        =True, optional=True))
     i_relationship.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IRelationship-isImplied', name='isImplied', key=
         'kerml-IRelationship-isImplied', type=get_types_language().
@@ -621,22 +641,28 @@ def get_language() ->Language:
     i_namespace.add_extended_interface(i_element)
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-INamespace-membership', name='membership', key=
-        'kerml-INamespace-membership'))
+        'kerml-INamespace-membership', type=membership, multiple=True,
+        optional=True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-INamespace-ownedImport', name='ownedImport', key
-        ='kerml-INamespace-ownedImport'))
+        ='kerml-INamespace-ownedImport', type=import_, multiple=True,
+        optional=True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-INamespace-member', name='member', key=
-        'kerml-INamespace-member'))
+        'kerml-INamespace-member', type=i_element, multiple=True, optional=
+        True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-INamespace-ownedMember', name='ownedMember', key
-        ='kerml-INamespace-ownedMember'))
+        ='kerml-INamespace-ownedMember', type=i_element, multiple=True,
+        optional=True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-INamespace-ownedMembership', name=
-        'ownedMembership', key='kerml-INamespace-ownedMembership'))
+        'ownedMembership', key='kerml-INamespace-ownedMembership', type=
+        membership, multiple=True, optional=True))
     i_namespace.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-INamespace-importedMembership', name=
-        'importedMembership', key='kerml-INamespace-importedMembership'))
+        'importedMembership', key='kerml-INamespace-importedMembership',
+        type=membership, multiple=True, optional=True))
     import_.add_implemented_interface(i_relationship)
     import_.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Import-visibility', name='visibility', key=
@@ -651,14 +677,17 @@ def get_language() ->Language:
         get_primitive_type_by_name('Boolean')))
     import_.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Import-importedElement', name='importedElement', key=
-        'kerml-Import-importedElement'))
+        'kerml-Import-importedElement', type=i_element, multiple=False,
+        optional=False))
     import_.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Import-importOwningNamespace', name=
-        'importOwningNamespace', key='kerml-Import-importOwningNamespace'))
+        'importOwningNamespace', key='kerml-Import-importOwningNamespace',
+        type=i_namespace, multiple=False, optional=False))
     documentation.set_extended_concept(comment)
     documentation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Documentation-documentedElement', name=
-        'documentedElement', key='kerml-Documentation-documentedElement'))
+        'documentedElement', key='kerml-Documentation-documentedElement',
+        type=i_element, multiple=False, optional=False))
     comment.add_implemented_interface(i_annotating_element)
     comment.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Comment-locale', name='locale', key=
@@ -671,30 +700,37 @@ def get_language() ->Language:
     i_annotating_element.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'kerml-IAnnotatingElement-annotatedElement', name=
-        'annotatedElement', key='kerml-IAnnotatingElement-annotatedElement'))
+        'annotatedElement', key='kerml-IAnnotatingElement-annotatedElement',
+        type=i_element, multiple=True, optional=False))
     i_annotating_element.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'kerml-IAnnotatingElement-ownedAnnotatingRelationship', name=
         'ownedAnnotatingRelationship', key=
-        'kerml-IAnnotatingElement-ownedAnnotatingRelationship'))
+        'kerml-IAnnotatingElement-ownedAnnotatingRelationship', type=
+        annotation, multiple=True, optional=True))
     i_annotating_element.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-IAnnotatingElement-annotation',
-        name='annotation', key='kerml-IAnnotatingElement-annotation'))
+        name='annotation', key='kerml-IAnnotatingElement-annotation', type=
+        annotation, multiple=True, optional=True))
     annotation.add_implemented_interface(i_relationship)
     annotation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Annotation-annotatingElement', name=
-        'annotatingElement', key='kerml-Annotation-annotatingElement'))
+        'annotatingElement', key='kerml-Annotation-annotatingElement', type
+        =i_annotating_element, multiple=False, optional=False))
     annotation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Annotation-annotatedElement', name=
-        'annotatedElement', key='kerml-Annotation-annotatedElement'))
+        'annotatedElement', key='kerml-Annotation-annotatedElement', type=
+        i_element, multiple=False, optional=False))
     annotation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Annotation-owningAnnotatedElement', name=
         'owningAnnotatedElement', key=
-        'kerml-Annotation-owningAnnotatedElement'))
+        'kerml-Annotation-owningAnnotatedElement', type=i_element, multiple
+        =False, optional=True))
     annotation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Annotation-owningAnnotatingElement', name=
         'owningAnnotatingElement', key=
-        'kerml-Annotation-owningAnnotatingElement'))
+        'kerml-Annotation-owningAnnotatingElement', type=
+        i_annotating_element, multiple=False, optional=True))
     textual_representation.add_implemented_interface(i_annotating_element)
     textual_representation.add_feature(Property(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-TextualRepresentation-language',
@@ -708,136 +744,172 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'kerml-TextualRepresentation-representedElement', name=
         'representedElement', key=
-        'kerml-TextualRepresentation-representedElement'))
+        'kerml-TextualRepresentation-representedElement', type=i_element,
+        multiple=False, optional=False))
     dependency.add_implemented_interface(i_relationship)
     dependency.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Dependency-client', name='client', key=
-        'kerml-Dependency-client'))
+        'kerml-Dependency-client', type=i_element, multiple=True, optional=
+        False))
     dependency.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Dependency-supplier', name='supplier', key=
-        'kerml-Dependency-supplier'))
+        'kerml-Dependency-supplier', type=i_element, multiple=True,
+        optional=False))
     membership_import.set_extended_concept(import_)
     membership_import.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='kerml-MembershipImport-importedMembership', name=
-        'importedMembership', key='kerml-MembershipImport-importedMembership'))
+        'importedMembership', key=
+        'kerml-MembershipImport-importedMembership', type=membership,
+        multiple=False, optional=False))
     namespace_import.set_extended_concept(import_)
     namespace_import.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-NamespaceImport-importedNamespace', name=
-        'importedNamespace', key='kerml-NamespaceImport-importedNamespace'))
+        'importedNamespace', key='kerml-NamespaceImport-importedNamespace',
+        type=i_namespace, multiple=False, optional=False))
     subclassification.set_extended_concept(specialization)
     subclassification.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='kerml-Subclassification-superclassifier', name=
-        'superclassifier', key='kerml-Subclassification-superclassifier'))
+        'superclassifier', key='kerml-Subclassification-superclassifier',
+        type=i_classifier, multiple=False, optional=False))
     subclassification.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='kerml-Subclassification-owningClassifier', name=
-        'owningClassifier', key='kerml-Subclassification-owningClassifier'))
+        'owningClassifier', key='kerml-Subclassification-owningClassifier',
+        type=i_classifier, multiple=False, optional=True))
     subclassification.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='kerml-Subclassification-subclassifier', name=
-        'subclassifier', key='kerml-Subclassification-subclassifier'))
+        'subclassifier', key='kerml-Subclassification-subclassifier', type=
+        i_classifier, multiple=False, optional=False))
     specialization.add_implemented_interface(i_relationship)
     specialization.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Specialization-owningType', name='owningType',
-        key='kerml-Specialization-owningType'))
+        key='kerml-Specialization-owningType', type=i_type, multiple=False,
+        optional=True))
     specialization.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Specialization-general', name='general', key=
-        'kerml-Specialization-general'))
+        'kerml-Specialization-general', type=i_type, multiple=False,
+        optional=False))
     specialization.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Specialization-specific', name='specific', key=
-        'kerml-Specialization-specific'))
+        'kerml-Specialization-specific', type=i_type, multiple=False,
+        optional=False))
     i_type.add_extended_interface(i_namespace)
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-ownedFeatureMembership', name=
-        'ownedFeatureMembership', key='kerml-IType-ownedFeatureMembership'))
+        'ownedFeatureMembership', key='kerml-IType-ownedFeatureMembership',
+        type=feature_membership, multiple=True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-ownedFeature', name='ownedFeature', key=
-        'kerml-IType-ownedFeature'))
+        'kerml-IType-ownedFeature', type=i_feature, multiple=True, optional
+        =True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-ownedEndFeature', name='ownedEndFeature', key=
-        'kerml-IType-ownedEndFeature'))
+        'kerml-IType-ownedEndFeature', type=i_feature, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='kerml-IType-feature', name='feature', key='kerml-IType-feature'))
+        id='kerml-IType-feature', name='feature', key='kerml-IType-feature',
+        type=i_feature, multiple=True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='kerml-IType-input', name='input', key='kerml-IType-input'))
+        id='kerml-IType-input', name='input', key='kerml-IType-input', type
+        =i_feature, multiple=True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='kerml-IType-output', name='output', key='kerml-IType-output'))
+        id='kerml-IType-output', name='output', key='kerml-IType-output',
+        type=i_feature, multiple=True, optional=True))
     i_type.add_feature(Property(lion_web_version=LionWebVersion.V2023_1, id
         ='kerml-IType-isAbstract', name='isAbstract', key=
         'kerml-IType-isAbstract', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-inheritedMembership', name='inheritedMembership',
-        key='kerml-IType-inheritedMembership'))
+        key='kerml-IType-inheritedMembership', type=membership, multiple=
+        True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-endFeature', name='endFeature', key=
-        'kerml-IType-endFeature'))
+        'kerml-IType-endFeature', type=i_feature, multiple=True, optional=True)
+        )
     i_type.add_feature(Property(lion_web_version=LionWebVersion.V2023_1, id
         ='kerml-IType-isSufficient', name='isSufficient', key=
         'kerml-IType-isSufficient', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-ownedConjugator', name='ownedConjugator', key=
-        'kerml-IType-ownedConjugator'))
+        'kerml-IType-ownedConjugator', type=conjugation, multiple=False,
+        optional=True))
     i_type.add_feature(Property(lion_web_version=LionWebVersion.V2023_1, id
         ='kerml-IType-isConjugated', name='isConjugated', key=
         'kerml-IType-isConjugated', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-inheritedFeature', name='inheritedFeature', key=
-        'kerml-IType-inheritedFeature'))
+        'kerml-IType-inheritedFeature', type=i_feature, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-multiplicity', name='multiplicity', key=
-        'kerml-IType-multiplicity'))
+        'kerml-IType-multiplicity', type=multiplicity, multiple=False,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-unioningType', name='unioningType', key=
-        'kerml-IType-unioningType'))
+        'kerml-IType-unioningType', type=i_type, multiple=True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-ownedIntersecting', name='ownedIntersecting', key=
-        'kerml-IType-ownedIntersecting'))
+        'kerml-IType-ownedIntersecting', type=intersecting, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-intersectingType', name='intersectingType', key=
-        'kerml-IType-intersectingType'))
+        'kerml-IType-intersectingType', type=i_type, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-ownedUnioning', name='ownedUnioning', key=
-        'kerml-IType-ownedUnioning'))
+        'kerml-IType-ownedUnioning', type=unioning, multiple=True, optional
+        =True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-ownedDisjoining', name='ownedDisjoining', key=
-        'kerml-IType-ownedDisjoining'))
+        'kerml-IType-ownedDisjoining', type=disjoining, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-featureMembership', name='featureMembership', key=
-        'kerml-IType-featureMembership'))
+        'kerml-IType-featureMembership', type=feature_membership, multiple=
+        True, optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-differencingType', name='differencingType', key=
-        'kerml-IType-differencingType'))
+        'kerml-IType-differencingType', type=i_type, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-ownedDifferencing', name='ownedDifferencing', key=
-        'kerml-IType-ownedDifferencing'))
+        'kerml-IType-ownedDifferencing', type=differencing, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-directedFeature', name='directedFeature', key=
-        'kerml-IType-directedFeature'))
+        'kerml-IType-directedFeature', type=i_feature, multiple=True,
+        optional=True))
     i_type.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IType-ownedSpecialization', name='ownedSpecialization',
-        key='kerml-IType-ownedSpecialization'))
+        key='kerml-IType-ownedSpecialization', type=specialization,
+        multiple=True, optional=True))
     feature_membership.set_extended_concept(owning_membership)
     feature_membership.add_implemented_interface(i_featuring)
     feature_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'kerml-FeatureMembership-ownedMemberFeature', name=
-        'ownedMemberFeature', key='kerml-FeatureMembership-ownedMemberFeature')
-        )
+        'ownedMemberFeature', key=
+        'kerml-FeatureMembership-ownedMemberFeature', type=i_feature,
+        multiple=False, optional=False))
     feature_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-FeatureMembership-owningType',
-        name='owningType', key='kerml-FeatureMembership-owningType'))
+        name='owningType', key='kerml-FeatureMembership-owningType', type=
+        i_type, multiple=False, optional=False))
     i_featuring.add_extended_interface(i_relationship)
     i_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IFeaturing-type', name='type', key=
-        'kerml-IFeaturing-type'))
+        'kerml-IFeaturing-type', type=i_type, multiple=False, optional=False))
     i_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IFeaturing-feature', name='feature', key=
-        'kerml-IFeaturing-feature'))
+        'kerml-IFeaturing-feature', type=i_feature, multiple=False,
+        optional=False))
     i_feature.add_extended_interface(i_type)
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-owningType', name='owningType', key=
-        'kerml-IFeature-owningType'))
+        'kerml-IFeature-owningType', type=i_type, multiple=False, optional=
+        True))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-isUnique', name='isUnique', key=
         'kerml-IFeature-isUnique', type=get_types_language().
@@ -847,17 +919,21 @@ def get_language() ->Language:
         'kerml-IFeature-isOrdered', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='kerml-IFeature-type', name='type', key='kerml-IFeature-type'))
+        id='kerml-IFeature-type', name='type', key='kerml-IFeature-type',
+        type=i_type, multiple=True, optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-ownedRedefinition', name='ownedRedefinition',
-        key='kerml-IFeature-ownedRedefinition'))
+        key='kerml-IFeature-ownedRedefinition', type=redefinition, multiple
+        =True, optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-ownedSubsetting', name='ownedSubsetting', key=
-        'kerml-IFeature-ownedSubsetting'))
+        'kerml-IFeature-ownedSubsetting', type=subsetting, multiple=True,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-owningFeatureMembership', name=
         'owningFeatureMembership', key=
-        'kerml-IFeature-owningFeatureMembership'))
+        'kerml-IFeature-owningFeatureMembership', type=feature_membership,
+        multiple=False, optional=True))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-isComposite', name='isComposite', key=
         'kerml-IFeature-isComposite', type=get_types_language().
@@ -867,29 +943,36 @@ def get_language() ->Language:
         type=get_types_language().get_primitive_type_by_name('Boolean')))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-endOwningType', name='endOwningType', key=
-        'kerml-IFeature-endOwningType'))
+        'kerml-IFeature-endOwningType', type=i_type, multiple=False,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-ownedTyping', name='ownedTyping', key=
-        'kerml-IFeature-ownedTyping'))
+        'kerml-IFeature-ownedTyping', type=feature_typing, multiple=True,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-featuringType', name='featuringType', key=
-        'kerml-IFeature-featuringType'))
+        'kerml-IFeature-featuringType', type=i_type, multiple=True,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-ownedTypeFeaturing', name='ownedTypeFeaturing',
-        key='kerml-IFeature-ownedTypeFeaturing'))
+        key='kerml-IFeature-ownedTypeFeaturing', type=type_featuring,
+        multiple=True, optional=True))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-isDerived', name='isDerived', key=
         'kerml-IFeature-isDerived', type=get_types_language().
         get_primitive_type_by_name('Boolean')))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-chainingFeature', name='chainingFeature', key=
-        'kerml-IFeature-chainingFeature'))
+        'kerml-IFeature-chainingFeature', type=i_feature, multiple=True,
+        optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-ownedFeatureInverting', name=
-        'ownedFeatureInverting', key='kerml-IFeature-ownedFeatureInverting'))
+        'ownedFeatureInverting', key='kerml-IFeature-ownedFeatureInverting',
+        type=feature_inverting, multiple=True, optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-ownedFeatureChaining', name=
-        'ownedFeatureChaining', key='kerml-IFeature-ownedFeatureChaining'))
+        'ownedFeatureChaining', key='kerml-IFeature-ownedFeatureChaining',
+        type=feature_chaining, multiple=True, optional=True))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-isReadOnly', name='isReadOnly', key=
         'kerml-IFeature-isReadOnly', type=get_types_language().
@@ -904,10 +987,12 @@ def get_language() ->Language:
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-ownedReferenceSubsetting', name=
         'ownedReferenceSubsetting', key=
-        'kerml-IFeature-ownedReferenceSubsetting'))
+        'kerml-IFeature-ownedReferenceSubsetting', type=
+        reference_subsetting, multiple=False, optional=True))
     i_feature.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-featureTarget', name='featureTarget', key=
-        'kerml-IFeature-featureTarget'))
+        'kerml-IFeature-featureTarget', type=i_feature, multiple=False,
+        optional=False))
     i_feature.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IFeature-isNonunique', name='isNonunique', key=
         'kerml-IFeature-isNonunique', type=get_types_language().
@@ -915,128 +1000,163 @@ def get_language() ->Language:
     redefinition.set_extended_concept(subsetting)
     redefinition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Redefinition-redefiningFeature', name=
-        'redefiningFeature', key='kerml-Redefinition-redefiningFeature'))
+        'redefiningFeature', key='kerml-Redefinition-redefiningFeature',
+        type=i_feature, multiple=False, optional=False))
     redefinition.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Redefinition-redefinedFeature', name=
-        'redefinedFeature', key='kerml-Redefinition-redefinedFeature'))
+        'redefinedFeature', key='kerml-Redefinition-redefinedFeature', type
+        =i_feature, multiple=False, optional=False))
     subsetting.set_extended_concept(specialization)
     subsetting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Subsetting-subsettedFeature', name=
-        'subsettedFeature', key='kerml-Subsetting-subsettedFeature'))
+        'subsettedFeature', key='kerml-Subsetting-subsettedFeature', type=
+        i_feature, multiple=False, optional=False))
     subsetting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Subsetting-subsettingFeature', name=
-        'subsettingFeature', key='kerml-Subsetting-subsettingFeature'))
+        'subsettingFeature', key='kerml-Subsetting-subsettingFeature', type
+        =i_feature, multiple=False, optional=False))
     subsetting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Subsetting-owningFeature', name='owningFeature',
-        key='kerml-Subsetting-owningFeature'))
+        key='kerml-Subsetting-owningFeature', type=i_feature, multiple=
+        False, optional=True))
     feature_typing.set_extended_concept(specialization)
     feature_typing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-FeatureTyping-typedFeature', name='typedFeature',
-        key='kerml-FeatureTyping-typedFeature'))
+        key='kerml-FeatureTyping-typedFeature', type=i_feature, multiple=
+        False, optional=False))
     feature_typing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-FeatureTyping-type', name='type', key=
-        'kerml-FeatureTyping-type'))
+        'kerml-FeatureTyping-type', type=i_type, multiple=False, optional=
+        False))
     feature_typing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-FeatureTyping-owningFeature', name=
-        'owningFeature', key='kerml-FeatureTyping-owningFeature'))
+        'owningFeature', key='kerml-FeatureTyping-owningFeature', type=
+        i_feature, multiple=False, optional=True))
     type_featuring.add_implemented_interface(i_featuring)
     type_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-TypeFeaturing-featureOfType', name=
-        'featureOfType', key='kerml-TypeFeaturing-featureOfType'))
+        'featureOfType', key='kerml-TypeFeaturing-featureOfType', type=
+        i_feature, multiple=False, optional=False))
     type_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-TypeFeaturing-featuringType', name=
-        'featuringType', key='kerml-TypeFeaturing-featuringType'))
+        'featuringType', key='kerml-TypeFeaturing-featuringType', type=
+        i_type, multiple=False, optional=False))
     type_featuring.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-TypeFeaturing-owningFeatureOfType', name=
-        'owningFeatureOfType', key='kerml-TypeFeaturing-owningFeatureOfType'))
+        'owningFeatureOfType', key=
+        'kerml-TypeFeaturing-owningFeatureOfType', type=i_feature, multiple
+        =False, optional=True))
     feature_inverting.add_implemented_interface(i_relationship)
     feature_inverting.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='kerml-FeatureInverting-featureInverted', name=
-        'featureInverted', key='kerml-FeatureInverting-featureInverted'))
+        'featureInverted', key='kerml-FeatureInverting-featureInverted',
+        type=i_feature, multiple=False, optional=False))
     feature_inverting.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='kerml-FeatureInverting-invertingFeature', name=
-        'invertingFeature', key='kerml-FeatureInverting-invertingFeature'))
+        'invertingFeature', key='kerml-FeatureInverting-invertingFeature',
+        type=i_feature, multiple=False, optional=False))
     feature_inverting.add_feature(Reference(lion_web_version=LionWebVersion
         .V2023_1, id='kerml-FeatureInverting-owningFeature', name=
-        'owningFeature', key='kerml-FeatureInverting-owningFeature'))
+        'owningFeature', key='kerml-FeatureInverting-owningFeature', type=
+        i_feature, multiple=False, optional=True))
     feature_chaining.add_implemented_interface(i_relationship)
     feature_chaining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-FeatureChaining-chainingFeature', name=
-        'chainingFeature', key='kerml-FeatureChaining-chainingFeature'))
+        'chainingFeature', key='kerml-FeatureChaining-chainingFeature',
+        type=i_feature, multiple=False, optional=False))
     feature_chaining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-FeatureChaining-featureChained', name=
-        'featureChained', key='kerml-FeatureChaining-featureChained'))
+        'featureChained', key='kerml-FeatureChaining-featureChained', type=
+        i_feature, multiple=False, optional=False))
     reference_subsetting.set_extended_concept(subsetting)
     reference_subsetting.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'kerml-ReferenceSubsetting-referencedFeature', name=
-        'referencedFeature', key='kerml-ReferenceSubsetting-referencedFeature')
-        )
+        'referencedFeature', key=
+        'kerml-ReferenceSubsetting-referencedFeature', type=i_feature,
+        multiple=False, optional=False))
     reference_subsetting.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'kerml-ReferenceSubsetting-referencingFeature', name=
         'referencingFeature', key=
-        'kerml-ReferenceSubsetting-referencingFeature'))
+        'kerml-ReferenceSubsetting-referencingFeature', type=i_feature,
+        multiple=False, optional=False))
     conjugation.add_implemented_interface(i_relationship)
     conjugation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Conjugation-originalType', name='originalType',
-        key='kerml-Conjugation-originalType'))
+        key='kerml-Conjugation-originalType', type=i_type, multiple=False,
+        optional=False))
     conjugation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Conjugation-conjugatedType', name=
-        'conjugatedType', key='kerml-Conjugation-conjugatedType'))
+        'conjugatedType', key='kerml-Conjugation-conjugatedType', type=
+        i_type, multiple=False, optional=False))
     conjugation.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Conjugation-owningType', name='owningType', key=
-        'kerml-Conjugation-owningType'))
+        'kerml-Conjugation-owningType', type=i_type, multiple=False,
+        optional=True))
     multiplicity.add_implemented_interface(i_feature)
     intersecting.add_implemented_interface(i_relationship)
     intersecting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Intersecting-intersectingType', name=
-        'intersectingType', key='kerml-Intersecting-intersectingType'))
+        'intersectingType', key='kerml-Intersecting-intersectingType', type
+        =i_type, multiple=False, optional=False))
     intersecting.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Intersecting-typeIntersected', name=
-        'typeIntersected', key='kerml-Intersecting-typeIntersected'))
+        'typeIntersected', key='kerml-Intersecting-typeIntersected', type=
+        i_type, multiple=False, optional=False))
     unioning.add_implemented_interface(i_relationship)
     unioning.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Unioning-unioningType', name='unioningType', key=
-        'kerml-Unioning-unioningType'))
+        'kerml-Unioning-unioningType', type=i_type, multiple=False,
+        optional=False))
     unioning.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Unioning-typeUnioned', name='typeUnioned', key=
-        'kerml-Unioning-typeUnioned'))
+        'kerml-Unioning-typeUnioned', type=i_type, multiple=False, optional
+        =False))
     disjoining.add_implemented_interface(i_relationship)
     disjoining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Disjoining-typeDisjoined', name='typeDisjoined',
-        key='kerml-Disjoining-typeDisjoined'))
+        key='kerml-Disjoining-typeDisjoined', type=i_type, multiple=False,
+        optional=False))
     disjoining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Disjoining-disjoiningType', name=
-        'disjoiningType', key='kerml-Disjoining-disjoiningType'))
+        'disjoiningType', key='kerml-Disjoining-disjoiningType', type=
+        i_type, multiple=False, optional=False))
     disjoining.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Disjoining-owningType', name='owningType', key=
-        'kerml-Disjoining-owningType'))
+        'kerml-Disjoining-owningType', type=i_type, multiple=False,
+        optional=True))
     differencing.add_implemented_interface(i_relationship)
     differencing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Differencing-differencingType', name=
-        'differencingType', key='kerml-Differencing-differencingType'))
+        'differencingType', key='kerml-Differencing-differencingType', type
+        =i_type, multiple=False, optional=False))
     differencing.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Differencing-typeDifferenced', name=
-        'typeDifferenced', key='kerml-Differencing-typeDifferenced'))
+        'typeDifferenced', key='kerml-Differencing-typeDifferenced', type=
+        i_type, multiple=False, optional=False))
     i_classifier.add_extended_interface(i_type)
     i_classifier.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IClassifier-ownedSubclassification', name=
         'ownedSubclassification', key=
-        'kerml-IClassifier-ownedSubclassification'))
+        'kerml-IClassifier-ownedSubclassification', type=subclassification,
+        multiple=True, optional=True))
     end_feature_membership.set_extended_concept(feature_membership)
     element_filter_membership.set_extended_concept(owning_membership)
     element_filter_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'kerml-ElementFilterMembership-condition', name='condition', key=
-        'kerml-ElementFilterMembership-condition'))
+        'kerml-ElementFilterMembership-condition', type=expression,
+        multiple=False, optional=False))
     expression.add_implemented_interface(i_step)
     expression.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Expression-function', name='function', key=
-        'kerml-Expression-function'))
+        'kerml-Expression-function', type=function, multiple=False,
+        optional=True))
     expression.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Expression-result', name='result', key=
-        'kerml-Expression-result'))
+        'kerml-Expression-result', type=i_feature, multiple=False, optional
+        =False))
     expression.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Expression-isModelLevelEvaluable', name=
         'isModelLevelEvaluable', key=
@@ -1044,26 +1164,29 @@ def get_language() ->Language:
         .get_primitive_type_by_name('Boolean')))
     i_step.add_extended_interface(i_feature)
     i_step.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='kerml-IStep-behavior', name='behavior', key='kerml-IStep-behavior')
-        )
+        id='kerml-IStep-behavior', name='behavior', key=
+        'kerml-IStep-behavior', type=i_behavior, multiple=True, optional=True))
     i_step.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-IStep-parameter', name='parameter', key=
-        'kerml-IStep-parameter'))
+        'kerml-IStep-parameter', type=i_feature, multiple=True, optional=True))
     i_behavior.add_extended_interface(i_class)
     i_behavior.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IBehavior-step', name='step', key=
-        'kerml-IBehavior-step'))
+        'kerml-IBehavior-step', type=i_step, multiple=True, optional=True))
     i_behavior.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IBehavior-parameter', name='parameter', key=
-        'kerml-IBehavior-parameter'))
+        'kerml-IBehavior-parameter', type=i_feature, multiple=True,
+        optional=True))
     i_class.add_extended_interface(i_classifier)
     function.add_implemented_interface(i_behavior)
     function.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Function-expression', name='expression', key=
-        'kerml-Function-expression'))
+        'kerml-Function-expression', type=expression, multiple=True,
+        optional=True))
     function.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
-        id='kerml-Function-result', name='result', key='kerml-Function-result')
-        )
+        id='kerml-Function-result', name='result', key=
+        'kerml-Function-result', type=i_feature, multiple=False, optional=
+        False))
     function.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Function-isModelLevelEvaluable', name=
         'isModelLevelEvaluable', key='kerml-Function-isModelLevelEvaluable',
@@ -1071,7 +1194,8 @@ def get_language() ->Language:
     package.add_implemented_interface(i_namespace)
     package.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Package-filterCondition', name='filterCondition', key=
-        'kerml-Package-filterCondition'))
+        'kerml-Package-filterCondition', type=expression, multiple=True,
+        optional=True))
     library_package.set_extended_concept(package)
     library_package.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-LibraryPackage-isStandard', name='isStandard',
@@ -1080,15 +1204,18 @@ def get_language() ->Language:
     invocation_expression.set_extended_concept(expression)
     invocation_expression.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-InvocationExpression-argument',
-        name='argument', key='kerml-InvocationExpression-argument'))
+        name='argument', key='kerml-InvocationExpression-argument', type=
+        expression, multiple=True, optional=True))
     invocation_expression.add_feature(Containment(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-InvocationExpression-operand',
-        name='operand', key='kerml-InvocationExpression-operand'))
+        name='operand', key='kerml-InvocationExpression-operand', type=
+        expression, multiple=True, optional=True))
     feature_reference_expression.set_extended_concept(expression)
     feature_reference_expression.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'kerml-FeatureReferenceExpression-referent', name='referent', key=
-        'kerml-FeatureReferenceExpression-referent'))
+        'kerml-FeatureReferenceExpression-referent', type=i_feature,
+        multiple=False, optional=False))
     operator_expression.set_extended_concept(invocation_expression)
     operator_expression.add_feature(Property(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-OperatorExpression-operator',
@@ -1116,12 +1243,14 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'kerml-MetadataAccessExpression-referencedElement', name=
         'referencedElement', key=
-        'kerml-MetadataAccessExpression-referencedElement'))
+        'kerml-MetadataAccessExpression-referencedElement', type=i_element,
+        multiple=False, optional=False))
     metadata_feature.add_implemented_interface(i_feature)
     metadata_feature.add_implemented_interface(i_annotating_element)
     metadata_feature.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-MetadataFeature-metaclass', name='metaclass',
-        key='kerml-MetadataFeature-metaclass'))
+        key='kerml-MetadataFeature-metaclass', type=metaclass, multiple=
+        False, optional=True))
     metaclass.add_implemented_interface(i_structure)
     i_structure.add_extended_interface(i_class)
     select_expression.set_extended_concept(operator_expression)
@@ -1129,7 +1258,8 @@ def get_language() ->Language:
     feature_chain_expression.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'kerml-FeatureChainExpression-targetFeature', name='targetFeature',
-        key='kerml-FeatureChainExpression-targetFeature'))
+        key='kerml-FeatureChainExpression-targetFeature', type=i_feature,
+        multiple=False, optional=False))
     collect_expression.set_extended_concept(operator_expression)
     literal_infinity.set_extended_concept(literal_expression)
     literal_rational.set_extended_concept(literal_expression)
@@ -1140,20 +1270,25 @@ def get_language() ->Language:
     multiplicity_range.set_extended_concept(multiplicity)
     multiplicity_range.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-MultiplicityRange-lowerBound',
-        name='lowerBound', key='kerml-MultiplicityRange-lowerBound'))
+        name='lowerBound', key='kerml-MultiplicityRange-lowerBound', type=
+        expression, multiple=False, optional=True))
     multiplicity_range.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-MultiplicityRange-upperBound',
-        name='upperBound', key='kerml-MultiplicityRange-upperBound'))
+        name='upperBound', key='kerml-MultiplicityRange-upperBound', type=
+        expression, multiple=False, optional=False))
     multiplicity_range.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-MultiplicityRange-bound', name=
-        'bound', key='kerml-MultiplicityRange-bound'))
+        'bound', key='kerml-MultiplicityRange-bound', type=expression,
+        multiple=True, optional=False))
     feature_value.set_extended_concept(owning_membership)
     feature_value.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-FeatureValue-featureWithValue', name=
-        'featureWithValue', key='kerml-FeatureValue-featureWithValue'))
+        'featureWithValue', key='kerml-FeatureValue-featureWithValue', type
+        =i_feature, multiple=False, optional=False))
     feature_value.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-FeatureValue-value', name='value', key=
-        'kerml-FeatureValue-value'))
+        'kerml-FeatureValue-value', type=expression, multiple=False,
+        optional=False))
     feature_value.add_feature(Property(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-FeatureValue-isInitial', name='isInitial', key=
         'kerml-FeatureValue-isInitial', type=get_types_language().
@@ -1167,46 +1302,59 @@ def get_language() ->Language:
     i_connector.add_extended_interface(i_relationship)
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IConnector-relatedFeature', name=
-        'relatedFeature', key='kerml-IConnector-relatedFeature'))
+        'relatedFeature', key='kerml-IConnector-relatedFeature', type=
+        i_feature, multiple=True, optional=True))
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IConnector-association', name='association', key
-        ='kerml-IConnector-association'))
+        ='kerml-IConnector-association', type=association, multiple=True,
+        optional=True))
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IConnector-connectorEnd', name='connectorEnd',
-        key='kerml-IConnector-connectorEnd'))
+        key='kerml-IConnector-connectorEnd', type=i_feature, multiple=True,
+        optional=True))
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IConnector-sourceFeature', name='sourceFeature',
-        key='kerml-IConnector-sourceFeature'))
+        key='kerml-IConnector-sourceFeature', type=i_feature, multiple=
+        False, optional=True))
     i_connector.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-IConnector-targetFeature', name='targetFeature',
-        key='kerml-IConnector-targetFeature'))
+        key='kerml-IConnector-targetFeature', type=i_feature, multiple=True,
+        optional=True))
     association.add_implemented_interface(i_classifier)
     association.add_implemented_interface(i_relationship)
     association.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Association-relatedType', name='relatedType',
-        key='kerml-Association-relatedType'))
+        key='kerml-Association-relatedType', type=i_type, multiple=True,
+        optional=True))
     association.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Association-sourceType', name='sourceType', key=
-        'kerml-Association-sourceType'))
+        'kerml-Association-sourceType', type=i_type, multiple=False,
+        optional=True))
     association.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Association-targetType', name='targetType', key=
-        'kerml-Association-targetType'))
+        'kerml-Association-targetType', type=i_type, multiple=True,
+        optional=True))
     association.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-Association-associationEnd', name=
-        'associationEnd', key='kerml-Association-associationEnd'))
+        'associationEnd', key='kerml-Association-associationEnd', type=
+        i_feature, multiple=True, optional=True))
     i_succession.add_extended_interface(i_connector)
     i_succession.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-ISuccession-transitionStep', name=
-        'transitionStep', key='kerml-ISuccession-transitionStep'))
+        'transitionStep', key='kerml-ISuccession-transitionStep', type=
+        i_step, multiple=False, optional=True))
     i_succession.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-ISuccession-triggerStep', name='triggerStep',
-        key='kerml-ISuccession-triggerStep'))
+        key='kerml-ISuccession-triggerStep', type=i_step, multiple=True,
+        optional=True))
     i_succession.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-ISuccession-effectStep', name='effectStep', key=
-        'kerml-ISuccession-effectStep'))
+        'kerml-ISuccession-effectStep', type=i_step, multiple=True,
+        optional=True))
     i_succession.add_feature(Reference(lion_web_version=LionWebVersion.
         V2023_1, id='kerml-ISuccession-guardExpression', name=
-        'guardExpression', key='kerml-ISuccession-guardExpression'))
+        'guardExpression', key='kerml-ISuccession-guardExpression', type=
+        expression, multiple=True, optional=True))
     invariant.set_extended_concept(boolean_expression)
     invariant.add_feature(Property(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-Invariant-isNegated', name='isNegated', key=
@@ -1215,7 +1363,8 @@ def get_language() ->Language:
     boolean_expression.set_extended_concept(expression)
     boolean_expression.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id='kerml-BooleanExpression-predicate',
-        name='predicate', key='kerml-BooleanExpression-predicate'))
+        name='predicate', key='kerml-BooleanExpression-predicate', type=
+        predicate, multiple=False, optional=True))
     predicate.set_extended_concept(function)
     return_parameter_membership.set_extended_concept(parameter_membership)
     parameter_membership.set_extended_concept(feature_membership)
@@ -1223,13 +1372,15 @@ def get_language() ->Language:
         LionWebVersion.V2023_1, id=
         'kerml-ParameterMembership-ownedMemberParameter', name=
         'ownedMemberParameter', key=
-        'kerml-ParameterMembership-ownedMemberParameter'))
+        'kerml-ParameterMembership-ownedMemberParameter', type=i_feature,
+        multiple=False, optional=False))
     result_expression_membership.set_extended_concept(feature_membership)
     result_expression_membership.add_feature(Reference(lion_web_version=
         LionWebVersion.V2023_1, id=
         'kerml-ResultExpressionMembership-ownedResultExpression', name=
         'ownedResultExpression', key=
-        'kerml-ResultExpressionMembership-ownedResultExpression'))
+        'kerml-ResultExpressionMembership-ownedResultExpression', type=
+        expression, multiple=False, optional=False))
     data_type.add_implemented_interface(i_classifier)
     interaction.set_extended_concept(association)
     interaction.add_implemented_interface(i_behavior)
@@ -1238,22 +1389,28 @@ def get_language() ->Language:
     item_flow.add_implemented_interface(i_step)
     item_flow.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-ItemFlow-itemType', name='itemType', key=
-        'kerml-ItemFlow-itemType'))
+        'kerml-ItemFlow-itemType', type=i_classifier, multiple=True,
+        optional=True))
     item_flow.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-ItemFlow-targetInputFeature', name='targetInputFeature',
-        key='kerml-ItemFlow-targetInputFeature'))
+        key='kerml-ItemFlow-targetInputFeature', type=i_feature, multiple=
+        False, optional=True))
     item_flow.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-ItemFlow-sourceOutputFeature', name='sourceOutputFeature',
-        key='kerml-ItemFlow-sourceOutputFeature'))
+        key='kerml-ItemFlow-sourceOutputFeature', type=i_feature, multiple=
+        False, optional=True))
     item_flow.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-ItemFlow-itemFlowEnd', name='itemFlowEnd', key=
-        'kerml-ItemFlow-itemFlowEnd'))
+        'kerml-ItemFlow-itemFlowEnd', type=item_flow_end, multiple=True,
+        optional=True))
     item_flow.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-ItemFlow-itemFeature', name='itemFeature', key=
-        'kerml-ItemFlow-itemFeature'))
+        'kerml-ItemFlow-itemFeature', type=item_feature, multiple=False,
+        optional=True))
     item_flow.add_feature(Reference(lion_web_version=LionWebVersion.V2023_1,
         id='kerml-ItemFlow-interaction', name='interaction', key=
-        'kerml-ItemFlow-interaction'))
+        'kerml-ItemFlow-interaction', type=interaction, multiple=True,
+        optional=True))
     item_feature.add_implemented_interface(i_feature)
     succession_item_flow.set_extended_concept(item_flow)
     succession_item_flow.add_implemented_interface(i_succession)
@@ -1280,7 +1437,7 @@ def get_language() ->Language:
     return language
 
 
-def get_owningmembership() ->Concept:
+def get_owning_membership() ->Concept:
     return get_language().get_concept_by_name('OwningMembership')
 
 
@@ -1304,7 +1461,7 @@ def get_annotation() ->Concept:
     return get_language().get_concept_by_name('Annotation')
 
 
-def get_textualrepresentation() ->Concept:
+def get_textual_representation() ->Concept:
     return get_language().get_concept_by_name('TextualRepresentation')
 
 
@@ -1312,11 +1469,11 @@ def get_dependency() ->Concept:
     return get_language().get_concept_by_name('Dependency')
 
 
-def get_membershipimport() ->Concept:
+def get_membership_import() ->Concept:
     return get_language().get_concept_by_name('MembershipImport')
 
 
-def get_namespaceimport() ->Concept:
+def get_namespace_import() ->Concept:
     return get_language().get_concept_by_name('NamespaceImport')
 
 
@@ -1328,7 +1485,7 @@ def get_specialization() ->Concept:
     return get_language().get_concept_by_name('Specialization')
 
 
-def get_featuremembership() ->Concept:
+def get_feature_membership() ->Concept:
     return get_language().get_concept_by_name('FeatureMembership')
 
 
@@ -1340,23 +1497,23 @@ def get_subsetting() ->Concept:
     return get_language().get_concept_by_name('Subsetting')
 
 
-def get_featuretyping() ->Concept:
+def get_feature_typing() ->Concept:
     return get_language().get_concept_by_name('FeatureTyping')
 
 
-def get_typefeaturing() ->Concept:
+def get_type_featuring() ->Concept:
     return get_language().get_concept_by_name('TypeFeaturing')
 
 
-def get_featureinverting() ->Concept:
+def get_feature_inverting() ->Concept:
     return get_language().get_concept_by_name('FeatureInverting')
 
 
-def get_featurechaining() ->Concept:
+def get_feature_chaining() ->Concept:
     return get_language().get_concept_by_name('FeatureChaining')
 
 
-def get_referencesubsetting() ->Concept:
+def get_reference_subsetting() ->Concept:
     return get_language().get_concept_by_name('ReferenceSubsetting')
 
 
@@ -1384,11 +1541,11 @@ def get_differencing() ->Concept:
     return get_language().get_concept_by_name('Differencing')
 
 
-def get_endfeaturemembership() ->Concept:
+def get_end_feature_membership() ->Concept:
     return get_language().get_concept_by_name('EndFeatureMembership')
 
 
-def get_elementfiltermembership() ->Concept:
+def get_element_filter_membership() ->Concept:
     return get_language().get_concept_by_name('ElementFilterMembership')
 
 
@@ -1404,47 +1561,47 @@ def get_package() ->Concept:
     return get_language().get_concept_by_name('Package')
 
 
-def get_librarypackage() ->Concept:
+def get_library_package() ->Concept:
     return get_language().get_concept_by_name('LibraryPackage')
 
 
-def get_invocationexpression() ->Concept:
+def get_invocation_expression() ->Concept:
     return get_language().get_concept_by_name('InvocationExpression')
 
 
-def get_featurereferenceexpression() ->Concept:
+def get_feature_reference_expression() ->Concept:
     return get_language().get_concept_by_name('FeatureReferenceExpression')
 
 
-def get_operatorexpression() ->Concept:
+def get_operator_expression() ->Concept:
     return get_language().get_concept_by_name('OperatorExpression')
 
 
-def get_literalstring() ->Concept:
+def get_literal_string() ->Concept:
     return get_language().get_concept_by_name('LiteralString')
 
 
-def get_literalexpression() ->Concept:
+def get_literal_expression() ->Concept:
     return get_language().get_concept_by_name('LiteralExpression')
 
 
-def get_literalboolean() ->Concept:
+def get_literal_boolean() ->Concept:
     return get_language().get_concept_by_name('LiteralBoolean')
 
 
-def get_literalinteger() ->Concept:
+def get_literal_integer() ->Concept:
     return get_language().get_concept_by_name('LiteralInteger')
 
 
-def get_nullexpression() ->Concept:
+def get_null_expression() ->Concept:
     return get_language().get_concept_by_name('NullExpression')
 
 
-def get_metadataaccessexpression() ->Concept:
+def get_metadata_access_expression() ->Concept:
     return get_language().get_concept_by_name('MetadataAccessExpression')
 
 
-def get_metadatafeature() ->Concept:
+def get_metadata_feature() ->Concept:
     return get_language().get_concept_by_name('MetadataFeature')
 
 
@@ -1452,35 +1609,35 @@ def get_metaclass() ->Concept:
     return get_language().get_concept_by_name('Metaclass')
 
 
-def get_selectexpression() ->Concept:
+def get_select_expression() ->Concept:
     return get_language().get_concept_by_name('SelectExpression')
 
 
-def get_featurechainexpression() ->Concept:
+def get_feature_chain_expression() ->Concept:
     return get_language().get_concept_by_name('FeatureChainExpression')
 
 
-def get_collectexpression() ->Concept:
+def get_collect_expression() ->Concept:
     return get_language().get_concept_by_name('CollectExpression')
 
 
-def get_literalinfinity() ->Concept:
+def get_literal_infinity() ->Concept:
     return get_language().get_concept_by_name('LiteralInfinity')
 
 
-def get_literalrational() ->Concept:
+def get_literal_rational() ->Concept:
     return get_language().get_concept_by_name('LiteralRational')
 
 
-def get_multiplicityrange() ->Concept:
+def get_multiplicity_range() ->Concept:
     return get_language().get_concept_by_name('MultiplicityRange')
 
 
-def get_featurevalue() ->Concept:
+def get_feature_value() ->Concept:
     return get_language().get_concept_by_name('FeatureValue')
 
 
-def get_bindingconnector() ->Concept:
+def get_binding_connector() ->Concept:
     return get_language().get_concept_by_name('BindingConnector')
 
 
@@ -1492,7 +1649,7 @@ def get_invariant() ->Concept:
     return get_language().get_concept_by_name('Invariant')
 
 
-def get_booleanexpression() ->Concept:
+def get_boolean_expression() ->Concept:
     return get_language().get_concept_by_name('BooleanExpression')
 
 
@@ -1500,19 +1657,19 @@ def get_predicate() ->Concept:
     return get_language().get_concept_by_name('Predicate')
 
 
-def get_returnparametermembership() ->Concept:
+def get_return_parameter_membership() ->Concept:
     return get_language().get_concept_by_name('ReturnParameterMembership')
 
 
-def get_parametermembership() ->Concept:
+def get_parameter_membership() ->Concept:
     return get_language().get_concept_by_name('ParameterMembership')
 
 
-def get_resultexpressionmembership() ->Concept:
+def get_result_expression_membership() ->Concept:
     return get_language().get_concept_by_name('ResultExpressionMembership')
 
 
-def get_datatype() ->Concept:
+def get_data_type() ->Concept:
     return get_language().get_concept_by_name('DataType')
 
 
@@ -1520,27 +1677,27 @@ def get_interaction() ->Concept:
     return get_language().get_concept_by_name('Interaction')
 
 
-def get_itemflowend() ->Concept:
+def get_item_flow_end() ->Concept:
     return get_language().get_concept_by_name('ItemFlowEnd')
 
 
-def get_itemflow() ->Concept:
+def get_item_flow() ->Concept:
     return get_language().get_concept_by_name('ItemFlow')
 
 
-def get_itemfeature() ->Concept:
+def get_item_feature() ->Concept:
     return get_language().get_concept_by_name('ItemFeature')
 
 
-def get_successionitemflow() ->Concept:
+def get_succession_item_flow() ->Concept:
     return get_language().get_concept_by_name('SuccessionItemFlow')
 
 
-def get_associationstructure() ->Concept:
+def get_association_structure() ->Concept:
     return get_language().get_concept_by_name('AssociationStructure')
 
 
-def get_aliasidscontainer() ->Concept:
+def get_alias_ids_container() ->Concept:
     return get_language().get_concept_by_name('AliasIdsContainer')
 
 
@@ -1556,7 +1713,7 @@ def get_element() ->Concept:
     return get_language().get_concept_by_name('Element')
 
 
-def get_annotatingelement() ->Concept:
+def get_annotating_element() ->Concept:
     return get_language().get_concept_by_name('AnnotatingElement')
 
 

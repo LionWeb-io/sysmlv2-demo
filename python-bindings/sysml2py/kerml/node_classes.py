@@ -4,9 +4,9 @@ from enum import Enum
 from typing import Optional, cast, List
 from lionweb.model.classifier_instance_utils import get_only_reference_value_by_reference_name, get_property_value_by_name
 from lionweb.model.impl.dynamic_node import DynamicNode
-from .language import get_language, get_owningmembership, get_membership, get_import, get_documentation, get_comment, get_annotation, get_textualrepresentation, get_dependency, get_membershipimport, get_namespaceimport, get_subclassification, get_specialization, get_featuremembership, get_redefinition, get_subsetting, get_featuretyping, get_typefeaturing, get_featureinverting, get_featurechaining, get_referencesubsetting, get_conjugation, get_multiplicity, get_intersecting, get_unioning, get_disjoining, get_differencing, get_endfeaturemembership, get_elementfiltermembership, get_expression, get_function, get_package, get_librarypackage, get_invocationexpression, get_featurereferenceexpression, get_operatorexpression, get_literalstring, get_literalexpression, get_literalboolean, get_literalinteger, get_nullexpression, get_metadataaccessexpression, get_metadatafeature, get_metaclass, get_selectexpression, get_featurechainexpression, get_collectexpression, get_literalinfinity, get_literalrational, get_multiplicityrange, get_featurevalue, get_bindingconnector, get_association, get_invariant, get_booleanexpression, get_predicate, get_returnparametermembership, get_parametermembership, get_resultexpressionmembership, get_datatype, get_interaction, get_itemflowend, get_itemflow, get_itemfeature, get_successionitemflow, get_associationstructure, get_aliasidscontainer, get_featuring, get_relationship, get_element, get_annotatingelement, get_behavior, get_class, get_classifier, get_type, get_namespace, get_step, get_feature, get_succession, get_connector, get_structure
 from lionweb.model.reference_value import ReferenceValue
 from lionweb.model import Node
+from .language import get_language, get_owning_membership, get_membership, get_import, get_documentation, get_comment, get_annotation, get_textual_representation, get_dependency, get_membership_import, get_namespace_import, get_subclassification, get_specialization, get_feature_membership, get_redefinition, get_subsetting, get_feature_typing, get_type_featuring, get_feature_inverting, get_feature_chaining, get_reference_subsetting, get_conjugation, get_multiplicity, get_intersecting, get_unioning, get_disjoining, get_differencing, get_end_feature_membership, get_element_filter_membership, get_expression, get_function, get_package, get_library_package, get_invocation_expression, get_feature_reference_expression, get_operator_expression, get_literal_string, get_literal_expression, get_literal_boolean, get_literal_integer, get_null_expression, get_metadata_access_expression, get_metadata_feature, get_metaclass, get_select_expression, get_feature_chain_expression, get_collect_expression, get_literal_infinity, get_literal_rational, get_multiplicity_range, get_feature_value, get_binding_connector, get_association, get_invariant, get_boolean_expression, get_predicate, get_return_parameter_membership, get_parameter_membership, get_result_expression_membership, get_data_type, get_interaction, get_item_flow_end, get_item_flow, get_item_feature, get_succession_item_flow, get_association_structure, get_alias_ids_container, get_featuring, get_relationship, get_element, get_annotating_element, get_behavior, get_class, get_classifier, get_type, get_namespace, get_step, get_feature, get_succession, get_connector, get_structure
 
 
 class VisibilityKind(Enum):
@@ -29,7 +29,7 @@ class AliasIdsContainer(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_aliasidscontainer()
+        self.concept = get_alias_ids_container()
 
     @property
     def aliasIds(self) ->str:
@@ -379,7 +379,7 @@ class OwningMembership(Membership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_owningmembership()
+        self.concept = get_owning_membership()
 
     @property
     def ownedMemberElementId(self) ->str:
@@ -1359,7 +1359,7 @@ class TextualRepresentation(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_textualrepresentation()
+        self.concept = get_textual_representation()
 
     @property
     def language(self) ->str:
@@ -1894,7 +1894,7 @@ class MembershipImport(Import):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_membershipimport()
+        self.concept = get_membership_import()
 
     @property
     def importedMembership(self) ->Optional['Membership']:
@@ -1919,7 +1919,7 @@ class NamespaceImport(Import):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_namespaceimport()
+        self.concept = get_namespace_import()
 
     @property
     def importedNamespace(self) ->Optional['INamespace']:
@@ -2313,7 +2313,7 @@ class FeatureMembership(OwningMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featuremembership()
+        self.concept = get_feature_membership()
 
     @property
     def ownedMemberFeature(self) ->Optional['IFeature']:
@@ -2738,7 +2738,7 @@ class FeatureTyping(Specialization):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featuretyping()
+        self.concept = get_feature_typing()
 
     @property
     def typedFeature(self) ->Optional['IFeature']:
@@ -2793,7 +2793,7 @@ class TypeFeaturing(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_typefeaturing()
+        self.concept = get_type_featuring()
 
     @property
     def featureOfType(self) ->Optional['IFeature']:
@@ -3129,7 +3129,7 @@ class FeatureInverting(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featureinverting()
+        self.concept = get_feature_inverting()
 
     @property
     def featureInverted(self) ->Optional['IFeature']:
@@ -3435,7 +3435,7 @@ class FeatureChaining(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featurechaining()
+        self.concept = get_feature_chaining()
 
     @property
     def chainingFeature(self) ->Optional['IFeature']:
@@ -3724,7 +3724,7 @@ class ReferenceSubsetting(Subsetting):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_referencesubsetting()
+        self.concept = get_reference_subsetting()
 
     @property
     def referencedFeature(self) ->Optional['IFeature']:
@@ -6019,14 +6019,14 @@ class EndFeatureMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_endfeaturemembership()
+        self.concept = get_end_feature_membership()
 
 
 class ElementFilterMembership(OwningMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_elementfiltermembership()
+        self.concept = get_element_filter_membership()
 
     @property
     def condition(self) ->Optional['Expression']:
@@ -7749,7 +7749,7 @@ class LibraryPackage(Package):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_librarypackage()
+        self.concept = get_library_package()
 
     @property
     def isStandard(self) ->bool:
@@ -7766,7 +7766,7 @@ class InvocationExpression(Expression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_invocationexpression()
+        self.concept = get_invocation_expression()
 
     @property
     def argument(self) ->List['Expression']:
@@ -7783,7 +7783,7 @@ class FeatureReferenceExpression(Expression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featurereferenceexpression()
+        self.concept = get_feature_reference_expression()
 
     @property
     def referent(self) ->Optional['IFeature']:
@@ -7806,7 +7806,7 @@ class OperatorExpression(InvocationExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_operatorexpression()
+        self.concept = get_operator_expression()
 
     @property
     def operator(self) ->str:
@@ -7822,14 +7822,14 @@ class LiteralExpression(Expression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalexpression()
+        self.concept = get_literal_expression()
 
 
 class LiteralString(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalstring()
+        self.concept = get_literal_string()
 
     @property
     def value(self) ->str:
@@ -7845,7 +7845,7 @@ class LiteralBoolean(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalboolean()
+        self.concept = get_literal_boolean()
 
     @property
     def value(self) ->bool:
@@ -7861,7 +7861,7 @@ class LiteralInteger(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalinteger()
+        self.concept = get_literal_integer()
 
     @property
     def value(self) ->int:
@@ -7877,14 +7877,14 @@ class NullExpression(Expression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_nullexpression()
+        self.concept = get_null_expression()
 
 
 class MetadataAccessExpression(Expression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_metadataaccessexpression()
+        self.concept = get_metadata_access_expression()
 
     @property
     def referencedElement(self) ->Optional['IElement']:
@@ -7909,7 +7909,7 @@ class MetadataFeature(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_metadatafeature()
+        self.concept = get_metadata_feature()
 
     @property
     def metaclass(self) ->Optional['Metaclass']:
@@ -9261,14 +9261,14 @@ class SelectExpression(OperatorExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_selectexpression()
+        self.concept = get_select_expression()
 
 
 class FeatureChainExpression(OperatorExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featurechainexpression()
+        self.concept = get_feature_chain_expression()
 
     @property
     def targetFeature(self) ->Optional['IFeature']:
@@ -9292,21 +9292,21 @@ class CollectExpression(OperatorExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_collectexpression()
+        self.concept = get_collect_expression()
 
 
 class LiteralInfinity(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalinfinity()
+        self.concept = get_literal_infinity()
 
 
 class LiteralRational(LiteralExpression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_literalrational()
+        self.concept = get_literal_rational()
 
     @property
     def value(self) ->float:
@@ -9322,7 +9322,7 @@ class MultiplicityRange(Multiplicity):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_multiplicityrange()
+        self.concept = get_multiplicity_range()
 
     @property
     def lowerBound(self) ->Optional['Expression']:
@@ -9371,7 +9371,7 @@ class FeatureValue(OwningMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_featurevalue()
+        self.concept = get_feature_value()
 
     @property
     def featureWithValue(self) ->Optional['IFeature']:
@@ -9433,7 +9433,7 @@ class BindingConnector(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_bindingconnector()
+        self.concept = get_binding_connector()
 
     @property
     def relatedFeature(self) ->List['IFeature']:
@@ -10956,7 +10956,7 @@ class BooleanExpression(Expression):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_booleanexpression()
+        self.concept = get_boolean_expression()
 
     @property
     def predicate(self) ->Optional['Predicate']:
@@ -11002,7 +11002,7 @@ class ParameterMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_parametermembership()
+        self.concept = get_parameter_membership()
 
     @property
     def ownedMemberParameter(self) ->Optional['IFeature']:
@@ -11027,14 +11027,14 @@ class ReturnParameterMembership(ParameterMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_returnparametermembership()
+        self.concept = get_return_parameter_membership()
 
 
 class ResultExpressionMembership(FeatureMembership):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_resultexpressionmembership()
+        self.concept = get_result_expression_membership()
 
     @property
     def ownedResultExpression(self) ->Optional['Expression']:
@@ -11059,7 +11059,7 @@ class DataType(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_datatype()
+        self.concept = get_data_type()
 
     @property
     def ownedSubclassification(self) ->List['Subclassification']:
@@ -12127,7 +12127,7 @@ class ItemFlowEnd(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_itemflowend()
+        self.concept = get_item_flow_end()
 
     @property
     def owningType(self) ->Optional['IType']:
@@ -12905,7 +12905,7 @@ class ItemFlow(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_itemflow()
+        self.concept = get_item_flow()
 
     @property
     def itemType(self) ->List['IClassifier']:
@@ -13899,7 +13899,7 @@ class ItemFeature(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_itemfeature()
+        self.concept = get_item_feature()
 
     @property
     def owningType(self) ->Optional['IType']:
@@ -14677,7 +14677,7 @@ class SuccessionItemFlow(ItemFlow):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_successionitemflow()
+        self.concept = get_succession_item_flow()
 
     @property
     def transitionStep(self) ->Optional['IStep']:
@@ -15617,7 +15617,7 @@ class AssociationStructure(Association):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_associationstructure()
+        self.concept = get_association_structure()
 
     @property
     def ownedSubclassification(self) ->List['Subclassification']:
@@ -16874,7 +16874,7 @@ class AnnotatingElement(DynamicNode):
 
     def __init__(self, id: str):
         super().__init__(id)
-        self.concept = get_annotatingelement()
+        self.concept = get_annotating_element()
 
     @property
     def annotatedElement(self) ->List['IElement']:

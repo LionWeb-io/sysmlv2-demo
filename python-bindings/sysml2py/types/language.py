@@ -38,7 +38,7 @@ def get_real() ->PrimitiveType:
     return get_language().get_primitive_type_by_name('Real')
 
 
-def get_unlimitednatural() ->PrimitiveType:
+def get_unlimited_natural() ->PrimitiveType:
     return get_language().get_primitive_type_by_name('UnlimitedNatural')
 
 
