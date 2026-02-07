@@ -1,0 +1,3679 @@
+package io.lionweb.sysml2;
+
+import io.lionweb.language.Concept;
+import io.lionweb.language.Containment;
+import io.lionweb.language.Property;
+import io.lionweb.language.Reference;
+import io.lionweb.model.ClassifierInstance;
+import io.lionweb.model.HasSettableParent;
+import io.lionweb.model.Node;
+import io.lionweb.model.ReferenceValue;
+import io.lionweb.model.impl.AbstractNode;
+import java.lang.Boolean;
+import java.lang.IllegalStateException;
+import java.lang.Object;
+import java.lang.Override;
+import java.lang.String;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+public class Function extends AbstractNode implements HasSettableParent, IFunction {
+  @NotNull
+  private String id;
+
+  @Nullable
+  private ClassifierInstance<?> parent;
+
+  protected List<ReferenceValue> expression = new ArrayList<>();
+
+  protected ReferenceValue result = null;
+
+  protected Boolean isModelLevelEvaluable;
+
+  protected List<ReferenceValue> step = new ArrayList<>();
+
+  protected List<ReferenceValue> parameter = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedSubclassification = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedFeatureMembership = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedFeature = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedEndFeature = new ArrayList<>();
+
+  protected List<ReferenceValue> feature = new ArrayList<>();
+
+  protected List<ReferenceValue> input = new ArrayList<>();
+
+  protected List<ReferenceValue> output = new ArrayList<>();
+
+  protected Boolean isAbstract;
+
+  protected List<ReferenceValue> inheritedMembership = new ArrayList<>();
+
+  protected List<ReferenceValue> endFeature = new ArrayList<>();
+
+  protected Boolean isSufficient;
+
+  protected ReferenceValue ownedConjugator = null;
+
+  protected Boolean isConjugated;
+
+  protected List<ReferenceValue> inheritedFeature = new ArrayList<>();
+
+  protected ReferenceValue multiplicity = null;
+
+  protected List<ReferenceValue> unioningType = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedIntersecting = new ArrayList<>();
+
+  protected List<ReferenceValue> intersectingType = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedUnioning = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedDisjoining = new ArrayList<>();
+
+  protected List<ReferenceValue> featureMembership = new ArrayList<>();
+
+  protected List<ReferenceValue> differencingType = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedDifferencing = new ArrayList<>();
+
+  protected List<ReferenceValue> directedFeature = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedSpecialization = new ArrayList<>();
+
+  protected List<ReferenceValue> membership = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedImport = new ArrayList<>();
+
+  protected List<ReferenceValue> member = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedMember = new ArrayList<>();
+
+  protected List<ReferenceValue> importedMembership = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedMembership = new ArrayList<>();
+
+  protected ReferenceValue owningMembership = null;
+
+  protected ReferenceValue owningNamespace = null;
+
+  protected ReferenceValue owningRelationship = null;
+
+  protected String elementId;
+
+  protected List<IRelationship> ownedRelationship = new ArrayList<>();
+
+  protected ReferenceValue owner = null;
+
+  protected List<ReferenceValue> ownedElement = new ArrayList<>();
+
+  protected List<ReferenceValue> documentation = new ArrayList<>();
+
+  protected List<ReferenceValue> ownedAnnotation = new ArrayList<>();
+
+  protected List<ReferenceValue> textualRepresentation = new ArrayList<>();
+
+  protected String declaredShortName;
+
+  protected String declaredName;
+
+  protected String shortName;
+
+  protected String name;
+
+  protected String qualifiedName;
+
+  protected Boolean isImpliedIncluded;
+
+  protected Boolean isLibraryElement;
+
+  protected List<AliasIdsContainer> aliasIdsContainer = new ArrayList<>();
+
+  public Function(@NotNull String id) {
+    Objects.requireNonNull(id, "id must not be null");
+    this.id = id;
+  }
+
+  @NotNull
+  public String getID() {
+    return this.id;
+  }
+
+  @Override
+  public ClassifierInstance<?> getParent() {
+    return this.parent;
+  }
+
+  @Override
+  public ClassifierInstance setParent(@Nullable ClassifierInstance<?> parent) {
+    this.parent = parent;
+    return this;
+  }
+
+  @Override
+  public Concept getClassifier() {
+    return SysmlLanguage.getInstance().getFunction();
+  }
+
+  public int addToExpression(ReferenceValue referenceValue, int index) {
+    if (index > expression.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("expression"), index, referenceValue);
+    }
+    expression.add(index, referenceValue);
+    return expression.size() - 1;
+  }
+
+  public List<ReferenceValue> getExpression() {
+    return expression;
+  }
+
+  public int addToExpression(IExpression referred) {
+    return addToExpression(new ReferenceValue(referred, null), expression.size());
+  }
+
+  public int addToExpression(IExpression referred, int index) {
+    return addToExpression(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearExpression() {
+    while (!expression.isEmpty()) {
+            removeFromExpression(0);
+        };
+  }
+
+  public void removeFromExpression(@NotNull ReferenceValue child) {
+    int index = expression.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromExpression(index);;
+  }
+
+  public void removeFromExpression(int index) {
+    if (expression.size() > index) {
+
+            ReferenceValue removed = expression.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("expression"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + expression.size());
+          }
+  }
+
+  public void setExpression(@NotNull List<? extends ReferenceValue> newValue) {
+    clearExpression();
+          for (ReferenceValue referenceValue : newValue) {
+              addToExpression(referenceValue, expression.size());
+          }
+  }
+
+  public void setResult(ReferenceValue value) {
+    if (value == null) {
+      if (partitionObserverCache != null) {
+        partitionObserverCache.referenceValueRemoved(this, this.getClassifier().requireReferenceByName("result"), 0, result);
+      }
+      result = null;
+    } else {
+      if (partitionObserverCache != null) {
+        if (result != null) {
+          ReferenceValue oldValue = result;
+          partitionObserverCache.referenceValueChanged(this, this.getClassifier().requireReferenceByName("result"), 0, oldValue.getReferredID(), oldValue.getResolveInfo(), value.getReferredID(), value.getResolveInfo());
+        } else {
+          partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("result"), 0, value);
+        }
+      }
+      this.result = value;
+    }
+  }
+
+  public ReferenceValue getResult() {
+    return result;
+  }
+
+  public Boolean getIsModelLevelEvaluable() {
+    return isModelLevelEvaluable;
+  }
+
+  public void setIsModelLevelEvaluable(Boolean value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("isModelLevelEvaluable"), getIsModelLevelEvaluable(), value);
+        }
+    this.isModelLevelEvaluable = value;
+  }
+
+  public int addToStep(ReferenceValue referenceValue, int index) {
+    if (index > step.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("step"), index, referenceValue);
+    }
+    step.add(index, referenceValue);
+    return step.size() - 1;
+  }
+
+  public List<ReferenceValue> getStep() {
+    return step;
+  }
+
+  public int addToStep(IStep referred) {
+    return addToStep(new ReferenceValue(referred, null), step.size());
+  }
+
+  public int addToStep(IStep referred, int index) {
+    return addToStep(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearStep() {
+    while (!step.isEmpty()) {
+            removeFromStep(0);
+        };
+  }
+
+  public void removeFromStep(@NotNull ReferenceValue child) {
+    int index = step.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromStep(index);;
+  }
+
+  public void removeFromStep(int index) {
+    if (step.size() > index) {
+
+            ReferenceValue removed = step.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("step"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + step.size());
+          }
+  }
+
+  public void setStep(@NotNull List<? extends ReferenceValue> newValue) {
+    clearStep();
+          for (ReferenceValue referenceValue : newValue) {
+              addToStep(referenceValue, step.size());
+          }
+  }
+
+  public int addToParameter(ReferenceValue referenceValue, int index) {
+    if (index > parameter.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("parameter"), index, referenceValue);
+    }
+    parameter.add(index, referenceValue);
+    return parameter.size() - 1;
+  }
+
+  public List<ReferenceValue> getParameter() {
+    return parameter;
+  }
+
+  public int addToParameter(IFeature referred) {
+    return addToParameter(new ReferenceValue(referred, null), parameter.size());
+  }
+
+  public int addToParameter(IFeature referred, int index) {
+    return addToParameter(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearParameter() {
+    while (!parameter.isEmpty()) {
+            removeFromParameter(0);
+        };
+  }
+
+  public void removeFromParameter(@NotNull ReferenceValue child) {
+    int index = parameter.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromParameter(index);;
+  }
+
+  public void removeFromParameter(int index) {
+    if (parameter.size() > index) {
+
+            ReferenceValue removed = parameter.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("parameter"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + parameter.size());
+          }
+  }
+
+  public void setParameter(@NotNull List<? extends ReferenceValue> newValue) {
+    clearParameter();
+          for (ReferenceValue referenceValue : newValue) {
+              addToParameter(referenceValue, parameter.size());
+          }
+  }
+
+  public int addToOwnedSubclassification(ReferenceValue referenceValue, int index) {
+    if (index > ownedSubclassification.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedSubclassification"), index, referenceValue);
+    }
+    ownedSubclassification.add(index, referenceValue);
+    return ownedSubclassification.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedSubclassification() {
+    return ownedSubclassification;
+  }
+
+  public int addToOwnedSubclassification(Subclassification referred) {
+    return addToOwnedSubclassification(new ReferenceValue(referred, null), ownedSubclassification.size());
+  }
+
+  public int addToOwnedSubclassification(Subclassification referred, int index) {
+    return addToOwnedSubclassification(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedSubclassification() {
+    while (!ownedSubclassification.isEmpty()) {
+            removeFromOwnedSubclassification(0);
+        };
+  }
+
+  public void removeFromOwnedSubclassification(@NotNull ReferenceValue child) {
+    int index = ownedSubclassification.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedSubclassification(index);;
+  }
+
+  public void removeFromOwnedSubclassification(int index) {
+    if (ownedSubclassification.size() > index) {
+
+            ReferenceValue removed = ownedSubclassification.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedSubclassification"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedSubclassification.size());
+          }
+  }
+
+  public void setOwnedSubclassification(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedSubclassification();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedSubclassification(referenceValue, ownedSubclassification.size());
+          }
+  }
+
+  public int addToOwnedFeatureMembership(ReferenceValue referenceValue, int index) {
+    if (index > ownedFeatureMembership.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedFeatureMembership"), index, referenceValue);
+    }
+    ownedFeatureMembership.add(index, referenceValue);
+    return ownedFeatureMembership.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedFeatureMembership() {
+    return ownedFeatureMembership;
+  }
+
+  public int addToOwnedFeatureMembership(FeatureMembership referred) {
+    return addToOwnedFeatureMembership(new ReferenceValue(referred, null), ownedFeatureMembership.size());
+  }
+
+  public int addToOwnedFeatureMembership(FeatureMembership referred, int index) {
+    return addToOwnedFeatureMembership(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedFeatureMembership() {
+    while (!ownedFeatureMembership.isEmpty()) {
+            removeFromOwnedFeatureMembership(0);
+        };
+  }
+
+  public void removeFromOwnedFeatureMembership(@NotNull ReferenceValue child) {
+    int index = ownedFeatureMembership.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedFeatureMembership(index);;
+  }
+
+  public void removeFromOwnedFeatureMembership(int index) {
+    if (ownedFeatureMembership.size() > index) {
+
+            ReferenceValue removed = ownedFeatureMembership.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedFeatureMembership"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedFeatureMembership.size());
+          }
+  }
+
+  public void setOwnedFeatureMembership(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedFeatureMembership();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedFeatureMembership(referenceValue, ownedFeatureMembership.size());
+          }
+  }
+
+  public int addToOwnedFeature(ReferenceValue referenceValue, int index) {
+    if (index > ownedFeature.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedFeature"), index, referenceValue);
+    }
+    ownedFeature.add(index, referenceValue);
+    return ownedFeature.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedFeature() {
+    return ownedFeature;
+  }
+
+  public int addToOwnedFeature(IFeature referred) {
+    return addToOwnedFeature(new ReferenceValue(referred, null), ownedFeature.size());
+  }
+
+  public int addToOwnedFeature(IFeature referred, int index) {
+    return addToOwnedFeature(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedFeature() {
+    while (!ownedFeature.isEmpty()) {
+            removeFromOwnedFeature(0);
+        };
+  }
+
+  public void removeFromOwnedFeature(@NotNull ReferenceValue child) {
+    int index = ownedFeature.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedFeature(index);;
+  }
+
+  public void removeFromOwnedFeature(int index) {
+    if (ownedFeature.size() > index) {
+
+            ReferenceValue removed = ownedFeature.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedFeature"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedFeature.size());
+          }
+  }
+
+  public void setOwnedFeature(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedFeature();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedFeature(referenceValue, ownedFeature.size());
+          }
+  }
+
+  public int addToOwnedEndFeature(ReferenceValue referenceValue, int index) {
+    if (index > ownedEndFeature.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedEndFeature"), index, referenceValue);
+    }
+    ownedEndFeature.add(index, referenceValue);
+    return ownedEndFeature.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedEndFeature() {
+    return ownedEndFeature;
+  }
+
+  public int addToOwnedEndFeature(IFeature referred) {
+    return addToOwnedEndFeature(new ReferenceValue(referred, null), ownedEndFeature.size());
+  }
+
+  public int addToOwnedEndFeature(IFeature referred, int index) {
+    return addToOwnedEndFeature(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedEndFeature() {
+    while (!ownedEndFeature.isEmpty()) {
+            removeFromOwnedEndFeature(0);
+        };
+  }
+
+  public void removeFromOwnedEndFeature(@NotNull ReferenceValue child) {
+    int index = ownedEndFeature.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedEndFeature(index);;
+  }
+
+  public void removeFromOwnedEndFeature(int index) {
+    if (ownedEndFeature.size() > index) {
+
+            ReferenceValue removed = ownedEndFeature.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedEndFeature"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedEndFeature.size());
+          }
+  }
+
+  public void setOwnedEndFeature(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedEndFeature();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedEndFeature(referenceValue, ownedEndFeature.size());
+          }
+  }
+
+  public int addToFeature(ReferenceValue referenceValue, int index) {
+    if (index > feature.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("feature"), index, referenceValue);
+    }
+    feature.add(index, referenceValue);
+    return feature.size() - 1;
+  }
+
+  public List<ReferenceValue> getFeature() {
+    return feature;
+  }
+
+  public int addToFeature(IFeature referred) {
+    return addToFeature(new ReferenceValue(referred, null), feature.size());
+  }
+
+  public int addToFeature(IFeature referred, int index) {
+    return addToFeature(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearFeature() {
+    while (!feature.isEmpty()) {
+            removeFromFeature(0);
+        };
+  }
+
+  public void removeFromFeature(@NotNull ReferenceValue child) {
+    int index = feature.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromFeature(index);;
+  }
+
+  public void removeFromFeature(int index) {
+    if (feature.size() > index) {
+
+            ReferenceValue removed = feature.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("feature"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + feature.size());
+          }
+  }
+
+  public void setFeature(@NotNull List<? extends ReferenceValue> newValue) {
+    clearFeature();
+          for (ReferenceValue referenceValue : newValue) {
+              addToFeature(referenceValue, feature.size());
+          }
+  }
+
+  public int addToInput(ReferenceValue referenceValue, int index) {
+    if (index > input.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("input"), index, referenceValue);
+    }
+    input.add(index, referenceValue);
+    return input.size() - 1;
+  }
+
+  public List<ReferenceValue> getInput() {
+    return input;
+  }
+
+  public int addToInput(IFeature referred) {
+    return addToInput(new ReferenceValue(referred, null), input.size());
+  }
+
+  public int addToInput(IFeature referred, int index) {
+    return addToInput(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearInput() {
+    while (!input.isEmpty()) {
+            removeFromInput(0);
+        };
+  }
+
+  public void removeFromInput(@NotNull ReferenceValue child) {
+    int index = input.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromInput(index);;
+  }
+
+  public void removeFromInput(int index) {
+    if (input.size() > index) {
+
+            ReferenceValue removed = input.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("input"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + input.size());
+          }
+  }
+
+  public void setInput(@NotNull List<? extends ReferenceValue> newValue) {
+    clearInput();
+          for (ReferenceValue referenceValue : newValue) {
+              addToInput(referenceValue, input.size());
+          }
+  }
+
+  public int addToOutput(ReferenceValue referenceValue, int index) {
+    if (index > output.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("output"), index, referenceValue);
+    }
+    output.add(index, referenceValue);
+    return output.size() - 1;
+  }
+
+  public List<ReferenceValue> getOutput() {
+    return output;
+  }
+
+  public int addToOutput(IFeature referred) {
+    return addToOutput(new ReferenceValue(referred, null), output.size());
+  }
+
+  public int addToOutput(IFeature referred, int index) {
+    return addToOutput(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOutput() {
+    while (!output.isEmpty()) {
+            removeFromOutput(0);
+        };
+  }
+
+  public void removeFromOutput(@NotNull ReferenceValue child) {
+    int index = output.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOutput(index);;
+  }
+
+  public void removeFromOutput(int index) {
+    if (output.size() > index) {
+
+            ReferenceValue removed = output.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("output"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + output.size());
+          }
+  }
+
+  public void setOutput(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOutput();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOutput(referenceValue, output.size());
+          }
+  }
+
+  public Boolean getIsAbstract() {
+    return isAbstract;
+  }
+
+  public void setIsAbstract(Boolean value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("isAbstract"), getIsAbstract(), value);
+        }
+    this.isAbstract = value;
+  }
+
+  public int addToInheritedMembership(ReferenceValue referenceValue, int index) {
+    if (index > inheritedMembership.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("inheritedMembership"), index, referenceValue);
+    }
+    inheritedMembership.add(index, referenceValue);
+    return inheritedMembership.size() - 1;
+  }
+
+  public List<ReferenceValue> getInheritedMembership() {
+    return inheritedMembership;
+  }
+
+  public int addToInheritedMembership(Membership referred) {
+    return addToInheritedMembership(new ReferenceValue(referred, null), inheritedMembership.size());
+  }
+
+  public int addToInheritedMembership(Membership referred, int index) {
+    return addToInheritedMembership(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearInheritedMembership() {
+    while (!inheritedMembership.isEmpty()) {
+            removeFromInheritedMembership(0);
+        };
+  }
+
+  public void removeFromInheritedMembership(@NotNull ReferenceValue child) {
+    int index = inheritedMembership.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromInheritedMembership(index);;
+  }
+
+  public void removeFromInheritedMembership(int index) {
+    if (inheritedMembership.size() > index) {
+
+            ReferenceValue removed = inheritedMembership.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("inheritedMembership"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + inheritedMembership.size());
+          }
+  }
+
+  public void setInheritedMembership(@NotNull List<? extends ReferenceValue> newValue) {
+    clearInheritedMembership();
+          for (ReferenceValue referenceValue : newValue) {
+              addToInheritedMembership(referenceValue, inheritedMembership.size());
+          }
+  }
+
+  public int addToEndFeature(ReferenceValue referenceValue, int index) {
+    if (index > endFeature.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("endFeature"), index, referenceValue);
+    }
+    endFeature.add(index, referenceValue);
+    return endFeature.size() - 1;
+  }
+
+  public List<ReferenceValue> getEndFeature() {
+    return endFeature;
+  }
+
+  public int addToEndFeature(IFeature referred) {
+    return addToEndFeature(new ReferenceValue(referred, null), endFeature.size());
+  }
+
+  public int addToEndFeature(IFeature referred, int index) {
+    return addToEndFeature(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearEndFeature() {
+    while (!endFeature.isEmpty()) {
+            removeFromEndFeature(0);
+        };
+  }
+
+  public void removeFromEndFeature(@NotNull ReferenceValue child) {
+    int index = endFeature.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromEndFeature(index);;
+  }
+
+  public void removeFromEndFeature(int index) {
+    if (endFeature.size() > index) {
+
+            ReferenceValue removed = endFeature.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("endFeature"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + endFeature.size());
+          }
+  }
+
+  public void setEndFeature(@NotNull List<? extends ReferenceValue> newValue) {
+    clearEndFeature();
+          for (ReferenceValue referenceValue : newValue) {
+              addToEndFeature(referenceValue, endFeature.size());
+          }
+  }
+
+  public Boolean getIsSufficient() {
+    return isSufficient;
+  }
+
+  public void setIsSufficient(Boolean value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("isSufficient"), getIsSufficient(), value);
+        }
+    this.isSufficient = value;
+  }
+
+  public void setOwnedConjugator(ReferenceValue value) {
+    if (value == null) {
+      if (partitionObserverCache != null) {
+        partitionObserverCache.referenceValueRemoved(this, this.getClassifier().requireReferenceByName("ownedConjugator"), 0, ownedConjugator);
+      }
+      ownedConjugator = null;
+    } else {
+      if (partitionObserverCache != null) {
+        if (ownedConjugator != null) {
+          ReferenceValue oldValue = ownedConjugator;
+          partitionObserverCache.referenceValueChanged(this, this.getClassifier().requireReferenceByName("ownedConjugator"), 0, oldValue.getReferredID(), oldValue.getResolveInfo(), value.getReferredID(), value.getResolveInfo());
+        } else {
+          partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedConjugator"), 0, value);
+        }
+      }
+      this.ownedConjugator = value;
+    }
+  }
+
+  public ReferenceValue getOwnedConjugator() {
+    return ownedConjugator;
+  }
+
+  public Boolean getIsConjugated() {
+    return isConjugated;
+  }
+
+  public void setIsConjugated(Boolean value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("isConjugated"), getIsConjugated(), value);
+        }
+    this.isConjugated = value;
+  }
+
+  public int addToInheritedFeature(ReferenceValue referenceValue, int index) {
+    if (index > inheritedFeature.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("inheritedFeature"), index, referenceValue);
+    }
+    inheritedFeature.add(index, referenceValue);
+    return inheritedFeature.size() - 1;
+  }
+
+  public List<ReferenceValue> getInheritedFeature() {
+    return inheritedFeature;
+  }
+
+  public int addToInheritedFeature(IFeature referred) {
+    return addToInheritedFeature(new ReferenceValue(referred, null), inheritedFeature.size());
+  }
+
+  public int addToInheritedFeature(IFeature referred, int index) {
+    return addToInheritedFeature(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearInheritedFeature() {
+    while (!inheritedFeature.isEmpty()) {
+            removeFromInheritedFeature(0);
+        };
+  }
+
+  public void removeFromInheritedFeature(@NotNull ReferenceValue child) {
+    int index = inheritedFeature.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromInheritedFeature(index);;
+  }
+
+  public void removeFromInheritedFeature(int index) {
+    if (inheritedFeature.size() > index) {
+
+            ReferenceValue removed = inheritedFeature.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("inheritedFeature"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + inheritedFeature.size());
+          }
+  }
+
+  public void setInheritedFeature(@NotNull List<? extends ReferenceValue> newValue) {
+    clearInheritedFeature();
+          for (ReferenceValue referenceValue : newValue) {
+              addToInheritedFeature(referenceValue, inheritedFeature.size());
+          }
+  }
+
+  public void setMultiplicity(ReferenceValue value) {
+    if (value == null) {
+      if (partitionObserverCache != null) {
+        partitionObserverCache.referenceValueRemoved(this, this.getClassifier().requireReferenceByName("multiplicity"), 0, multiplicity);
+      }
+      multiplicity = null;
+    } else {
+      if (partitionObserverCache != null) {
+        if (multiplicity != null) {
+          ReferenceValue oldValue = multiplicity;
+          partitionObserverCache.referenceValueChanged(this, this.getClassifier().requireReferenceByName("multiplicity"), 0, oldValue.getReferredID(), oldValue.getResolveInfo(), value.getReferredID(), value.getResolveInfo());
+        } else {
+          partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("multiplicity"), 0, value);
+        }
+      }
+      this.multiplicity = value;
+    }
+  }
+
+  public ReferenceValue getMultiplicity() {
+    return multiplicity;
+  }
+
+  public int addToUnioningType(ReferenceValue referenceValue, int index) {
+    if (index > unioningType.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("unioningType"), index, referenceValue);
+    }
+    unioningType.add(index, referenceValue);
+    return unioningType.size() - 1;
+  }
+
+  public List<ReferenceValue> getUnioningType() {
+    return unioningType;
+  }
+
+  public int addToUnioningType(IType referred) {
+    return addToUnioningType(new ReferenceValue(referred, null), unioningType.size());
+  }
+
+  public int addToUnioningType(IType referred, int index) {
+    return addToUnioningType(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearUnioningType() {
+    while (!unioningType.isEmpty()) {
+            removeFromUnioningType(0);
+        };
+  }
+
+  public void removeFromUnioningType(@NotNull ReferenceValue child) {
+    int index = unioningType.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromUnioningType(index);;
+  }
+
+  public void removeFromUnioningType(int index) {
+    if (unioningType.size() > index) {
+
+            ReferenceValue removed = unioningType.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("unioningType"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + unioningType.size());
+          }
+  }
+
+  public void setUnioningType(@NotNull List<? extends ReferenceValue> newValue) {
+    clearUnioningType();
+          for (ReferenceValue referenceValue : newValue) {
+              addToUnioningType(referenceValue, unioningType.size());
+          }
+  }
+
+  public int addToOwnedIntersecting(ReferenceValue referenceValue, int index) {
+    if (index > ownedIntersecting.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedIntersecting"), index, referenceValue);
+    }
+    ownedIntersecting.add(index, referenceValue);
+    return ownedIntersecting.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedIntersecting() {
+    return ownedIntersecting;
+  }
+
+  public int addToOwnedIntersecting(Intersecting referred) {
+    return addToOwnedIntersecting(new ReferenceValue(referred, null), ownedIntersecting.size());
+  }
+
+  public int addToOwnedIntersecting(Intersecting referred, int index) {
+    return addToOwnedIntersecting(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedIntersecting() {
+    while (!ownedIntersecting.isEmpty()) {
+            removeFromOwnedIntersecting(0);
+        };
+  }
+
+  public void removeFromOwnedIntersecting(@NotNull ReferenceValue child) {
+    int index = ownedIntersecting.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedIntersecting(index);;
+  }
+
+  public void removeFromOwnedIntersecting(int index) {
+    if (ownedIntersecting.size() > index) {
+
+            ReferenceValue removed = ownedIntersecting.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedIntersecting"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedIntersecting.size());
+          }
+  }
+
+  public void setOwnedIntersecting(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedIntersecting();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedIntersecting(referenceValue, ownedIntersecting.size());
+          }
+  }
+
+  public int addToIntersectingType(ReferenceValue referenceValue, int index) {
+    if (index > intersectingType.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("intersectingType"), index, referenceValue);
+    }
+    intersectingType.add(index, referenceValue);
+    return intersectingType.size() - 1;
+  }
+
+  public List<ReferenceValue> getIntersectingType() {
+    return intersectingType;
+  }
+
+  public int addToIntersectingType(IType referred) {
+    return addToIntersectingType(new ReferenceValue(referred, null), intersectingType.size());
+  }
+
+  public int addToIntersectingType(IType referred, int index) {
+    return addToIntersectingType(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearIntersectingType() {
+    while (!intersectingType.isEmpty()) {
+            removeFromIntersectingType(0);
+        };
+  }
+
+  public void removeFromIntersectingType(@NotNull ReferenceValue child) {
+    int index = intersectingType.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromIntersectingType(index);;
+  }
+
+  public void removeFromIntersectingType(int index) {
+    if (intersectingType.size() > index) {
+
+            ReferenceValue removed = intersectingType.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("intersectingType"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + intersectingType.size());
+          }
+  }
+
+  public void setIntersectingType(@NotNull List<? extends ReferenceValue> newValue) {
+    clearIntersectingType();
+          for (ReferenceValue referenceValue : newValue) {
+              addToIntersectingType(referenceValue, intersectingType.size());
+          }
+  }
+
+  public int addToOwnedUnioning(ReferenceValue referenceValue, int index) {
+    if (index > ownedUnioning.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedUnioning"), index, referenceValue);
+    }
+    ownedUnioning.add(index, referenceValue);
+    return ownedUnioning.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedUnioning() {
+    return ownedUnioning;
+  }
+
+  public int addToOwnedUnioning(Unioning referred) {
+    return addToOwnedUnioning(new ReferenceValue(referred, null), ownedUnioning.size());
+  }
+
+  public int addToOwnedUnioning(Unioning referred, int index) {
+    return addToOwnedUnioning(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedUnioning() {
+    while (!ownedUnioning.isEmpty()) {
+            removeFromOwnedUnioning(0);
+        };
+  }
+
+  public void removeFromOwnedUnioning(@NotNull ReferenceValue child) {
+    int index = ownedUnioning.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedUnioning(index);;
+  }
+
+  public void removeFromOwnedUnioning(int index) {
+    if (ownedUnioning.size() > index) {
+
+            ReferenceValue removed = ownedUnioning.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedUnioning"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedUnioning.size());
+          }
+  }
+
+  public void setOwnedUnioning(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedUnioning();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedUnioning(referenceValue, ownedUnioning.size());
+          }
+  }
+
+  public int addToOwnedDisjoining(ReferenceValue referenceValue, int index) {
+    if (index > ownedDisjoining.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedDisjoining"), index, referenceValue);
+    }
+    ownedDisjoining.add(index, referenceValue);
+    return ownedDisjoining.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedDisjoining() {
+    return ownedDisjoining;
+  }
+
+  public int addToOwnedDisjoining(Disjoining referred) {
+    return addToOwnedDisjoining(new ReferenceValue(referred, null), ownedDisjoining.size());
+  }
+
+  public int addToOwnedDisjoining(Disjoining referred, int index) {
+    return addToOwnedDisjoining(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedDisjoining() {
+    while (!ownedDisjoining.isEmpty()) {
+            removeFromOwnedDisjoining(0);
+        };
+  }
+
+  public void removeFromOwnedDisjoining(@NotNull ReferenceValue child) {
+    int index = ownedDisjoining.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedDisjoining(index);;
+  }
+
+  public void removeFromOwnedDisjoining(int index) {
+    if (ownedDisjoining.size() > index) {
+
+            ReferenceValue removed = ownedDisjoining.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedDisjoining"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedDisjoining.size());
+          }
+  }
+
+  public void setOwnedDisjoining(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedDisjoining();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedDisjoining(referenceValue, ownedDisjoining.size());
+          }
+  }
+
+  public int addToFeatureMembership(ReferenceValue referenceValue, int index) {
+    if (index > featureMembership.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("featureMembership"), index, referenceValue);
+    }
+    featureMembership.add(index, referenceValue);
+    return featureMembership.size() - 1;
+  }
+
+  public List<ReferenceValue> getFeatureMembership() {
+    return featureMembership;
+  }
+
+  public int addToFeatureMembership(FeatureMembership referred) {
+    return addToFeatureMembership(new ReferenceValue(referred, null), featureMembership.size());
+  }
+
+  public int addToFeatureMembership(FeatureMembership referred, int index) {
+    return addToFeatureMembership(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearFeatureMembership() {
+    while (!featureMembership.isEmpty()) {
+            removeFromFeatureMembership(0);
+        };
+  }
+
+  public void removeFromFeatureMembership(@NotNull ReferenceValue child) {
+    int index = featureMembership.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromFeatureMembership(index);;
+  }
+
+  public void removeFromFeatureMembership(int index) {
+    if (featureMembership.size() > index) {
+
+            ReferenceValue removed = featureMembership.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("featureMembership"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + featureMembership.size());
+          }
+  }
+
+  public void setFeatureMembership(@NotNull List<? extends ReferenceValue> newValue) {
+    clearFeatureMembership();
+          for (ReferenceValue referenceValue : newValue) {
+              addToFeatureMembership(referenceValue, featureMembership.size());
+          }
+  }
+
+  public int addToDifferencingType(ReferenceValue referenceValue, int index) {
+    if (index > differencingType.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("differencingType"), index, referenceValue);
+    }
+    differencingType.add(index, referenceValue);
+    return differencingType.size() - 1;
+  }
+
+  public List<ReferenceValue> getDifferencingType() {
+    return differencingType;
+  }
+
+  public int addToDifferencingType(IType referred) {
+    return addToDifferencingType(new ReferenceValue(referred, null), differencingType.size());
+  }
+
+  public int addToDifferencingType(IType referred, int index) {
+    return addToDifferencingType(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearDifferencingType() {
+    while (!differencingType.isEmpty()) {
+            removeFromDifferencingType(0);
+        };
+  }
+
+  public void removeFromDifferencingType(@NotNull ReferenceValue child) {
+    int index = differencingType.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromDifferencingType(index);;
+  }
+
+  public void removeFromDifferencingType(int index) {
+    if (differencingType.size() > index) {
+
+            ReferenceValue removed = differencingType.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("differencingType"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + differencingType.size());
+          }
+  }
+
+  public void setDifferencingType(@NotNull List<? extends ReferenceValue> newValue) {
+    clearDifferencingType();
+          for (ReferenceValue referenceValue : newValue) {
+              addToDifferencingType(referenceValue, differencingType.size());
+          }
+  }
+
+  public int addToOwnedDifferencing(ReferenceValue referenceValue, int index) {
+    if (index > ownedDifferencing.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedDifferencing"), index, referenceValue);
+    }
+    ownedDifferencing.add(index, referenceValue);
+    return ownedDifferencing.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedDifferencing() {
+    return ownedDifferencing;
+  }
+
+  public int addToOwnedDifferencing(Differencing referred) {
+    return addToOwnedDifferencing(new ReferenceValue(referred, null), ownedDifferencing.size());
+  }
+
+  public int addToOwnedDifferencing(Differencing referred, int index) {
+    return addToOwnedDifferencing(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedDifferencing() {
+    while (!ownedDifferencing.isEmpty()) {
+            removeFromOwnedDifferencing(0);
+        };
+  }
+
+  public void removeFromOwnedDifferencing(@NotNull ReferenceValue child) {
+    int index = ownedDifferencing.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedDifferencing(index);;
+  }
+
+  public void removeFromOwnedDifferencing(int index) {
+    if (ownedDifferencing.size() > index) {
+
+            ReferenceValue removed = ownedDifferencing.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedDifferencing"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedDifferencing.size());
+          }
+  }
+
+  public void setOwnedDifferencing(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedDifferencing();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedDifferencing(referenceValue, ownedDifferencing.size());
+          }
+  }
+
+  public int addToDirectedFeature(ReferenceValue referenceValue, int index) {
+    if (index > directedFeature.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("directedFeature"), index, referenceValue);
+    }
+    directedFeature.add(index, referenceValue);
+    return directedFeature.size() - 1;
+  }
+
+  public List<ReferenceValue> getDirectedFeature() {
+    return directedFeature;
+  }
+
+  public int addToDirectedFeature(IFeature referred) {
+    return addToDirectedFeature(new ReferenceValue(referred, null), directedFeature.size());
+  }
+
+  public int addToDirectedFeature(IFeature referred, int index) {
+    return addToDirectedFeature(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearDirectedFeature() {
+    while (!directedFeature.isEmpty()) {
+            removeFromDirectedFeature(0);
+        };
+  }
+
+  public void removeFromDirectedFeature(@NotNull ReferenceValue child) {
+    int index = directedFeature.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromDirectedFeature(index);;
+  }
+
+  public void removeFromDirectedFeature(int index) {
+    if (directedFeature.size() > index) {
+
+            ReferenceValue removed = directedFeature.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("directedFeature"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + directedFeature.size());
+          }
+  }
+
+  public void setDirectedFeature(@NotNull List<? extends ReferenceValue> newValue) {
+    clearDirectedFeature();
+          for (ReferenceValue referenceValue : newValue) {
+              addToDirectedFeature(referenceValue, directedFeature.size());
+          }
+  }
+
+  public int addToOwnedSpecialization(ReferenceValue referenceValue, int index) {
+    if (index > ownedSpecialization.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedSpecialization"), index, referenceValue);
+    }
+    ownedSpecialization.add(index, referenceValue);
+    return ownedSpecialization.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedSpecialization() {
+    return ownedSpecialization;
+  }
+
+  public int addToOwnedSpecialization(Specialization referred) {
+    return addToOwnedSpecialization(new ReferenceValue(referred, null), ownedSpecialization.size());
+  }
+
+  public int addToOwnedSpecialization(Specialization referred, int index) {
+    return addToOwnedSpecialization(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedSpecialization() {
+    while (!ownedSpecialization.isEmpty()) {
+            removeFromOwnedSpecialization(0);
+        };
+  }
+
+  public void removeFromOwnedSpecialization(@NotNull ReferenceValue child) {
+    int index = ownedSpecialization.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedSpecialization(index);;
+  }
+
+  public void removeFromOwnedSpecialization(int index) {
+    if (ownedSpecialization.size() > index) {
+
+            ReferenceValue removed = ownedSpecialization.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedSpecialization"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedSpecialization.size());
+          }
+  }
+
+  public void setOwnedSpecialization(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedSpecialization();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedSpecialization(referenceValue, ownedSpecialization.size());
+          }
+  }
+
+  public int addToMembership(ReferenceValue referenceValue, int index) {
+    if (index > membership.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("membership"), index, referenceValue);
+    }
+    membership.add(index, referenceValue);
+    return membership.size() - 1;
+  }
+
+  public List<ReferenceValue> getMembership() {
+    return membership;
+  }
+
+  public int addToMembership(Membership referred) {
+    return addToMembership(new ReferenceValue(referred, null), membership.size());
+  }
+
+  public int addToMembership(Membership referred, int index) {
+    return addToMembership(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearMembership() {
+    while (!membership.isEmpty()) {
+            removeFromMembership(0);
+        };
+  }
+
+  public void removeFromMembership(@NotNull ReferenceValue child) {
+    int index = membership.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromMembership(index);;
+  }
+
+  public void removeFromMembership(int index) {
+    if (membership.size() > index) {
+
+            ReferenceValue removed = membership.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("membership"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + membership.size());
+          }
+  }
+
+  public void setMembership(@NotNull List<? extends ReferenceValue> newValue) {
+    clearMembership();
+          for (ReferenceValue referenceValue : newValue) {
+              addToMembership(referenceValue, membership.size());
+          }
+  }
+
+  public int addToOwnedImport(ReferenceValue referenceValue, int index) {
+    if (index > ownedImport.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedImport"), index, referenceValue);
+    }
+    ownedImport.add(index, referenceValue);
+    return ownedImport.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedImport() {
+    return ownedImport;
+  }
+
+  public int addToOwnedImport(IImport referred) {
+    return addToOwnedImport(new ReferenceValue(referred, null), ownedImport.size());
+  }
+
+  public int addToOwnedImport(IImport referred, int index) {
+    return addToOwnedImport(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedImport() {
+    while (!ownedImport.isEmpty()) {
+            removeFromOwnedImport(0);
+        };
+  }
+
+  public void removeFromOwnedImport(@NotNull ReferenceValue child) {
+    int index = ownedImport.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedImport(index);;
+  }
+
+  public void removeFromOwnedImport(int index) {
+    if (ownedImport.size() > index) {
+
+            ReferenceValue removed = ownedImport.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedImport"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedImport.size());
+          }
+  }
+
+  public void setOwnedImport(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedImport();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedImport(referenceValue, ownedImport.size());
+          }
+  }
+
+  public int addToMember(ReferenceValue referenceValue, int index) {
+    if (index > member.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("member"), index, referenceValue);
+    }
+    member.add(index, referenceValue);
+    return member.size() - 1;
+  }
+
+  public List<ReferenceValue> getMember() {
+    return member;
+  }
+
+  public int addToMember(IElement referred) {
+    return addToMember(new ReferenceValue(referred, null), member.size());
+  }
+
+  public int addToMember(IElement referred, int index) {
+    return addToMember(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearMember() {
+    while (!member.isEmpty()) {
+            removeFromMember(0);
+        };
+  }
+
+  public void removeFromMember(@NotNull ReferenceValue child) {
+    int index = member.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromMember(index);;
+  }
+
+  public void removeFromMember(int index) {
+    if (member.size() > index) {
+
+            ReferenceValue removed = member.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("member"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + member.size());
+          }
+  }
+
+  public void setMember(@NotNull List<? extends ReferenceValue> newValue) {
+    clearMember();
+          for (ReferenceValue referenceValue : newValue) {
+              addToMember(referenceValue, member.size());
+          }
+  }
+
+  public int addToOwnedMember(ReferenceValue referenceValue, int index) {
+    if (index > ownedMember.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedMember"), index, referenceValue);
+    }
+    ownedMember.add(index, referenceValue);
+    return ownedMember.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedMember() {
+    return ownedMember;
+  }
+
+  public int addToOwnedMember(IElement referred) {
+    return addToOwnedMember(new ReferenceValue(referred, null), ownedMember.size());
+  }
+
+  public int addToOwnedMember(IElement referred, int index) {
+    return addToOwnedMember(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedMember() {
+    while (!ownedMember.isEmpty()) {
+            removeFromOwnedMember(0);
+        };
+  }
+
+  public void removeFromOwnedMember(@NotNull ReferenceValue child) {
+    int index = ownedMember.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedMember(index);;
+  }
+
+  public void removeFromOwnedMember(int index) {
+    if (ownedMember.size() > index) {
+
+            ReferenceValue removed = ownedMember.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedMember"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedMember.size());
+          }
+  }
+
+  public void setOwnedMember(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedMember();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedMember(referenceValue, ownedMember.size());
+          }
+  }
+
+  public int addToImportedMembership(ReferenceValue referenceValue, int index) {
+    if (index > importedMembership.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("importedMembership"), index, referenceValue);
+    }
+    importedMembership.add(index, referenceValue);
+    return importedMembership.size() - 1;
+  }
+
+  public List<ReferenceValue> getImportedMembership() {
+    return importedMembership;
+  }
+
+  public int addToImportedMembership(Membership referred) {
+    return addToImportedMembership(new ReferenceValue(referred, null), importedMembership.size());
+  }
+
+  public int addToImportedMembership(Membership referred, int index) {
+    return addToImportedMembership(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearImportedMembership() {
+    while (!importedMembership.isEmpty()) {
+            removeFromImportedMembership(0);
+        };
+  }
+
+  public void removeFromImportedMembership(@NotNull ReferenceValue child) {
+    int index = importedMembership.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromImportedMembership(index);;
+  }
+
+  public void removeFromImportedMembership(int index) {
+    if (importedMembership.size() > index) {
+
+            ReferenceValue removed = importedMembership.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("importedMembership"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + importedMembership.size());
+          }
+  }
+
+  public void setImportedMembership(@NotNull List<? extends ReferenceValue> newValue) {
+    clearImportedMembership();
+          for (ReferenceValue referenceValue : newValue) {
+              addToImportedMembership(referenceValue, importedMembership.size());
+          }
+  }
+
+  public int addToOwnedMembership(ReferenceValue referenceValue, int index) {
+    if (index > ownedMembership.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedMembership"), index, referenceValue);
+    }
+    ownedMembership.add(index, referenceValue);
+    return ownedMembership.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedMembership() {
+    return ownedMembership;
+  }
+
+  public int addToOwnedMembership(Membership referred) {
+    return addToOwnedMembership(new ReferenceValue(referred, null), ownedMembership.size());
+  }
+
+  public int addToOwnedMembership(Membership referred, int index) {
+    return addToOwnedMembership(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedMembership() {
+    while (!ownedMembership.isEmpty()) {
+            removeFromOwnedMembership(0);
+        };
+  }
+
+  public void removeFromOwnedMembership(@NotNull ReferenceValue child) {
+    int index = ownedMembership.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedMembership(index);;
+  }
+
+  public void removeFromOwnedMembership(int index) {
+    if (ownedMembership.size() > index) {
+
+            ReferenceValue removed = ownedMembership.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedMembership"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedMembership.size());
+          }
+  }
+
+  public void setOwnedMembership(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedMembership();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedMembership(referenceValue, ownedMembership.size());
+          }
+  }
+
+  public void setOwningMembership(ReferenceValue value) {
+    if (value == null) {
+      if (partitionObserverCache != null) {
+        partitionObserverCache.referenceValueRemoved(this, this.getClassifier().requireReferenceByName("owningMembership"), 0, owningMembership);
+      }
+      owningMembership = null;
+    } else {
+      if (partitionObserverCache != null) {
+        if (owningMembership != null) {
+          ReferenceValue oldValue = owningMembership;
+          partitionObserverCache.referenceValueChanged(this, this.getClassifier().requireReferenceByName("owningMembership"), 0, oldValue.getReferredID(), oldValue.getResolveInfo(), value.getReferredID(), value.getResolveInfo());
+        } else {
+          partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("owningMembership"), 0, value);
+        }
+      }
+      this.owningMembership = value;
+    }
+  }
+
+  public ReferenceValue getOwningMembership() {
+    return owningMembership;
+  }
+
+  public void setOwningNamespace(ReferenceValue value) {
+    if (value == null) {
+      if (partitionObserverCache != null) {
+        partitionObserverCache.referenceValueRemoved(this, this.getClassifier().requireReferenceByName("owningNamespace"), 0, owningNamespace);
+      }
+      owningNamespace = null;
+    } else {
+      if (partitionObserverCache != null) {
+        if (owningNamespace != null) {
+          ReferenceValue oldValue = owningNamespace;
+          partitionObserverCache.referenceValueChanged(this, this.getClassifier().requireReferenceByName("owningNamespace"), 0, oldValue.getReferredID(), oldValue.getResolveInfo(), value.getReferredID(), value.getResolveInfo());
+        } else {
+          partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("owningNamespace"), 0, value);
+        }
+      }
+      this.owningNamespace = value;
+    }
+  }
+
+  public ReferenceValue getOwningNamespace() {
+    return owningNamespace;
+  }
+
+  public void setOwningRelationship(ReferenceValue value) {
+    if (value == null) {
+      if (partitionObserverCache != null) {
+        partitionObserverCache.referenceValueRemoved(this, this.getClassifier().requireReferenceByName("owningRelationship"), 0, owningRelationship);
+      }
+      owningRelationship = null;
+    } else {
+      if (partitionObserverCache != null) {
+        if (owningRelationship != null) {
+          ReferenceValue oldValue = owningRelationship;
+          partitionObserverCache.referenceValueChanged(this, this.getClassifier().requireReferenceByName("owningRelationship"), 0, oldValue.getReferredID(), oldValue.getResolveInfo(), value.getReferredID(), value.getResolveInfo());
+        } else {
+          partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("owningRelationship"), 0, value);
+        }
+      }
+      this.owningRelationship = value;
+    }
+  }
+
+  public ReferenceValue getOwningRelationship() {
+    return owningRelationship;
+  }
+
+  public String getElementId() {
+    return elementId;
+  }
+
+  public void setElementId(String value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("elementId"), getElementId(), value);
+        }
+    this.elementId = value;
+  }
+
+  public @NotNull List<IRelationship> getOwnedRelationship() {
+    return Collections.unmodifiableList(ownedRelationship);
+  }
+
+  public void clearOwnedRelationship() {
+    while (!ownedRelationship.isEmpty()) {
+            removeFromOwnedRelationship(0);
+        };
+  }
+
+  public int addToOwnedRelationship(@NotNull IRelationship child) {
+    return addToOwnedRelationship(child, ownedRelationship.size());
+  }
+
+  public int addToOwnedRelationship(@NotNull IRelationship child, int index) {
+    if (child instanceof HasSettableParent) {
+      ((HasSettableParent) child).setParent(this);
+    }
+    ownedRelationship.add(index, (IRelationship)child);
+    if (partitionObserverCache != null) {
+      partitionObserverCache.childAdded(this, this.getClassifier().requireContainmentByName("ownedRelationship"), ownedRelationship.size() - 1, child);
+    }
+    return ownedRelationship.size() - 1;
+  }
+
+  public void removeFromOwnedRelationship(@NotNull IRelationship child) {
+    int index = ownedRelationship.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedRelationship(index);;
+  }
+
+  public void removeFromOwnedRelationship(int index) {
+    if (ownedRelationship.size() > index) {
+                Node removed = ownedRelationship.remove(index);
+                if (removed instanceof HasSettableParent) { ((HasSettableParent) removed).setParent(null); }
+                if (partitionObserverCache != null) {
+                  partitionObserverCache.childRemoved(this, this.getClassifier().requireContainmentByName("ownedRelationship"), index, removed);
+                }
+              } else {
+                throw new IllegalArgumentException(
+                    "Invalid index " + index + " when children are " + ownedRelationship.size());
+              };
+  }
+
+  public void setOwnedRelationship(@NotNull List<IRelationship> newValue) {
+    clearOwnedRelationship();
+              for (IRelationship child : newValue) { addToOwnedRelationship(child); };
+  }
+
+  public void setOwner(ReferenceValue value) {
+    if (value == null) {
+      if (partitionObserverCache != null) {
+        partitionObserverCache.referenceValueRemoved(this, this.getClassifier().requireReferenceByName("owner"), 0, owner);
+      }
+      owner = null;
+    } else {
+      if (partitionObserverCache != null) {
+        if (owner != null) {
+          ReferenceValue oldValue = owner;
+          partitionObserverCache.referenceValueChanged(this, this.getClassifier().requireReferenceByName("owner"), 0, oldValue.getReferredID(), oldValue.getResolveInfo(), value.getReferredID(), value.getResolveInfo());
+        } else {
+          partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("owner"), 0, value);
+        }
+      }
+      this.owner = value;
+    }
+  }
+
+  public ReferenceValue getOwner() {
+    return owner;
+  }
+
+  public int addToOwnedElement(ReferenceValue referenceValue, int index) {
+    if (index > ownedElement.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedElement"), index, referenceValue);
+    }
+    ownedElement.add(index, referenceValue);
+    return ownedElement.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedElement() {
+    return ownedElement;
+  }
+
+  public int addToOwnedElement(IElement referred) {
+    return addToOwnedElement(new ReferenceValue(referred, null), ownedElement.size());
+  }
+
+  public int addToOwnedElement(IElement referred, int index) {
+    return addToOwnedElement(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedElement() {
+    while (!ownedElement.isEmpty()) {
+            removeFromOwnedElement(0);
+        };
+  }
+
+  public void removeFromOwnedElement(@NotNull ReferenceValue child) {
+    int index = ownedElement.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedElement(index);;
+  }
+
+  public void removeFromOwnedElement(int index) {
+    if (ownedElement.size() > index) {
+
+            ReferenceValue removed = ownedElement.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedElement"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedElement.size());
+          }
+  }
+
+  public void setOwnedElement(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedElement();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedElement(referenceValue, ownedElement.size());
+          }
+  }
+
+  public int addToDocumentation(ReferenceValue referenceValue, int index) {
+    if (index > documentation.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("documentation"), index, referenceValue);
+    }
+    documentation.add(index, referenceValue);
+    return documentation.size() - 1;
+  }
+
+  public List<ReferenceValue> getDocumentation() {
+    return documentation;
+  }
+
+  public int addToDocumentation(Documentation referred) {
+    return addToDocumentation(new ReferenceValue(referred, null), documentation.size());
+  }
+
+  public int addToDocumentation(Documentation referred, int index) {
+    return addToDocumentation(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearDocumentation() {
+    while (!documentation.isEmpty()) {
+            removeFromDocumentation(0);
+        };
+  }
+
+  public void removeFromDocumentation(@NotNull ReferenceValue child) {
+    int index = documentation.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromDocumentation(index);;
+  }
+
+  public void removeFromDocumentation(int index) {
+    if (documentation.size() > index) {
+
+            ReferenceValue removed = documentation.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("documentation"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + documentation.size());
+          }
+  }
+
+  public void setDocumentation(@NotNull List<? extends ReferenceValue> newValue) {
+    clearDocumentation();
+          for (ReferenceValue referenceValue : newValue) {
+              addToDocumentation(referenceValue, documentation.size());
+          }
+  }
+
+  public int addToOwnedAnnotation(ReferenceValue referenceValue, int index) {
+    if (index > ownedAnnotation.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("ownedAnnotation"), index, referenceValue);
+    }
+    ownedAnnotation.add(index, referenceValue);
+    return ownedAnnotation.size() - 1;
+  }
+
+  public List<ReferenceValue> getOwnedAnnotation() {
+    return ownedAnnotation;
+  }
+
+  public int addToOwnedAnnotation(Annotation referred) {
+    return addToOwnedAnnotation(new ReferenceValue(referred, null), ownedAnnotation.size());
+  }
+
+  public int addToOwnedAnnotation(Annotation referred, int index) {
+    return addToOwnedAnnotation(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearOwnedAnnotation() {
+    while (!ownedAnnotation.isEmpty()) {
+            removeFromOwnedAnnotation(0);
+        };
+  }
+
+  public void removeFromOwnedAnnotation(@NotNull ReferenceValue child) {
+    int index = ownedAnnotation.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromOwnedAnnotation(index);;
+  }
+
+  public void removeFromOwnedAnnotation(int index) {
+    if (ownedAnnotation.size() > index) {
+
+            ReferenceValue removed = ownedAnnotation.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("ownedAnnotation"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + ownedAnnotation.size());
+          }
+  }
+
+  public void setOwnedAnnotation(@NotNull List<? extends ReferenceValue> newValue) {
+    clearOwnedAnnotation();
+          for (ReferenceValue referenceValue : newValue) {
+              addToOwnedAnnotation(referenceValue, ownedAnnotation.size());
+          }
+  }
+
+  public int addToTextualRepresentation(ReferenceValue referenceValue, int index) {
+    if (index > textualRepresentation.size()) {
+      throw new IllegalArgumentException("Index must be less than or equal to size");
+    }
+    if (partitionObserverCache != null) {
+      partitionObserverCache.referenceValueAdded(this, this.getClassifier().requireReferenceByName("textualRepresentation"), index, referenceValue);
+    }
+    textualRepresentation.add(index, referenceValue);
+    return textualRepresentation.size() - 1;
+  }
+
+  public List<ReferenceValue> getTextualRepresentation() {
+    return textualRepresentation;
+  }
+
+  public int addToTextualRepresentation(TextualRepresentation referred) {
+    return addToTextualRepresentation(new ReferenceValue(referred, null), textualRepresentation.size());
+  }
+
+  public int addToTextualRepresentation(TextualRepresentation referred, int index) {
+    return addToTextualRepresentation(new ReferenceValue(referred, null), index);
+  }
+
+  public void clearTextualRepresentation() {
+    while (!textualRepresentation.isEmpty()) {
+            removeFromTextualRepresentation(0);
+        };
+  }
+
+  public void removeFromTextualRepresentation(@NotNull ReferenceValue child) {
+    int index = textualRepresentation.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromTextualRepresentation(index);;
+  }
+
+  public void removeFromTextualRepresentation(int index) {
+    if (textualRepresentation.size() > index) {
+
+            ReferenceValue removed = textualRepresentation.remove(index);
+            if (partitionObserverCache != null) {
+              partitionObserverCache.referenceValueRemoved(this, getClassifier().requireReferenceByName("textualRepresentation"), index, removed);
+            }
+          } else {
+            throw new IllegalArgumentException(
+                "Invalid index "
+                    + index
+                    + " when reference values are "
+                    + textualRepresentation.size());
+          }
+  }
+
+  public void setTextualRepresentation(@NotNull List<? extends ReferenceValue> newValue) {
+    clearTextualRepresentation();
+          for (ReferenceValue referenceValue : newValue) {
+              addToTextualRepresentation(referenceValue, textualRepresentation.size());
+          }
+  }
+
+  public String getDeclaredShortName() {
+    return declaredShortName;
+  }
+
+  public void setDeclaredShortName(String value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("declaredShortName"), getDeclaredShortName(), value);
+        }
+    this.declaredShortName = value;
+  }
+
+  public String getDeclaredName() {
+    return declaredName;
+  }
+
+  public void setDeclaredName(String value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("declaredName"), getDeclaredName(), value);
+        }
+    this.declaredName = value;
+  }
+
+  public String getShortName() {
+    return shortName;
+  }
+
+  public void setShortName(String value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("shortName"), getShortName(), value);
+        }
+    this.shortName = value;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("name"), getName(), value);
+        }
+    this.name = value;
+  }
+
+  public String getQualifiedName() {
+    return qualifiedName;
+  }
+
+  public void setQualifiedName(String value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("qualifiedName"), getQualifiedName(), value);
+        }
+    this.qualifiedName = value;
+  }
+
+  public Boolean getIsImpliedIncluded() {
+    return isImpliedIncluded;
+  }
+
+  public void setIsImpliedIncluded(Boolean value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("isImpliedIncluded"), getIsImpliedIncluded(), value);
+        }
+    this.isImpliedIncluded = value;
+  }
+
+  public Boolean getIsLibraryElement() {
+    return isLibraryElement;
+  }
+
+  public void setIsLibraryElement(Boolean value) {
+    if (partitionObserverCache != null) {
+          partitionObserverCache.propertyChanged(
+              this, this.getClassifier().requirePropertyByName("isLibraryElement"), getIsLibraryElement(), value);
+        }
+    this.isLibraryElement = value;
+  }
+
+  public @NotNull List<AliasIdsContainer> getAliasIdsContainer() {
+    return Collections.unmodifiableList(aliasIdsContainer);
+  }
+
+  public void clearAliasIdsContainer() {
+    while (!aliasIdsContainer.isEmpty()) {
+            removeFromAliasIdsContainer(0);
+        };
+  }
+
+  public int addToAliasIdsContainer(@NotNull AliasIdsContainer child) {
+    return addToAliasIdsContainer(child, aliasIdsContainer.size());
+  }
+
+  public int addToAliasIdsContainer(@NotNull AliasIdsContainer child, int index) {
+    if (child instanceof HasSettableParent) {
+      ((HasSettableParent) child).setParent(this);
+    }
+    aliasIdsContainer.add(index, (AliasIdsContainer)child);
+    if (partitionObserverCache != null) {
+      partitionObserverCache.childAdded(this, this.getClassifier().requireContainmentByName("aliasIdsContainer"), aliasIdsContainer.size() - 1, child);
+    }
+    return aliasIdsContainer.size() - 1;
+  }
+
+  public void removeFromAliasIdsContainer(@NotNull AliasIdsContainer child) {
+    int index = aliasIdsContainer.indexOf(child);
+             if (index == -1) {
+                 throw new IllegalArgumentException("Child not found: " + child);
+             }
+             removeFromAliasIdsContainer(index);;
+  }
+
+  public void removeFromAliasIdsContainer(int index) {
+    if (aliasIdsContainer.size() > index) {
+                Node removed = aliasIdsContainer.remove(index);
+                if (removed instanceof HasSettableParent) { ((HasSettableParent) removed).setParent(null); }
+                if (partitionObserverCache != null) {
+                  partitionObserverCache.childRemoved(this, this.getClassifier().requireContainmentByName("aliasIdsContainer"), index, removed);
+                }
+              } else {
+                throw new IllegalArgumentException(
+                    "Invalid index " + index + " when children are " + aliasIdsContainer.size());
+              };
+  }
+
+  public void setAliasIdsContainer(@NotNull List<AliasIdsContainer> newValue) {
+    clearAliasIdsContainer();
+              for (AliasIdsContainer child : newValue) { addToAliasIdsContainer(child); };
+  }
+
+  @Override
+  public Object getPropertyValue(Property property) {
+    if (Objects.equals(property.getKey(), "sysml-IFunction-isModelLevelEvaluable")) {
+      return isModelLevelEvaluable;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IType-isAbstract")) {
+      return isAbstract;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IType-isSufficient")) {
+      return isSufficient;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IType-isConjugated")) {
+      return isConjugated;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-elementId")) {
+      return elementId;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-declaredShortName")) {
+      return declaredShortName;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-declaredName")) {
+      return declaredName;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-shortName")) {
+      return shortName;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-name")) {
+      return name;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-qualifiedName")) {
+      return qualifiedName;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-isImpliedIncluded")) {
+      return isImpliedIncluded;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-isLibraryElement")) {
+      return isLibraryElement;
+    }
+    throw new IllegalStateException("Property " + property + " not found.");
+  }
+
+  @Override
+  public void setPropertyValue(Property property, Object value) {
+    Objects.requireNonNull(property, "Property should not be null");;
+    Objects.requireNonNull(property.getKey(), "Cannot assign a property with no Key specified");;
+    if (Objects.equals(property.getKey(), "sysml-IFunction-isModelLevelEvaluable")) {
+      setIsModelLevelEvaluable((Boolean) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IType-isAbstract")) {
+      setIsAbstract((Boolean) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IType-isSufficient")) {
+      setIsSufficient((Boolean) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IType-isConjugated")) {
+      setIsConjugated((Boolean) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-elementId")) {
+      setElementId((String) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-declaredShortName")) {
+      setDeclaredShortName((String) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-declaredName")) {
+      setDeclaredName((String) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-shortName")) {
+      setShortName((String) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-name")) {
+      setName((String) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-qualifiedName")) {
+      setQualifiedName((String) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-isImpliedIncluded")) {
+      setIsImpliedIncluded((Boolean) value);
+      return;
+    }
+    if (Objects.equals(property.getKey(), "sysml-IElement-isLibraryElement")) {
+      setIsLibraryElement((Boolean) value);
+      return;
+    }
+    throw new IllegalStateException("Property " + property + " not found.");
+  }
+
+  @Override
+  public List<? extends Node> getChildren(Containment containment) {
+    if (Objects.equals(containment.getKey(), "sysml-IElement-ownedRelationship")) {
+      return ownedRelationship;
+    }
+    if (Objects.equals(containment.getKey(), "sysml-IElement-aliasIdsContainer")) {
+      return aliasIdsContainer;
+    }
+    throw new IllegalStateException("Containment " + containment + " not found.");
+  }
+
+  @Override
+  public void addChild(@NotNull Containment containment, @NotNull Node child) {
+    Objects.requireNonNull(containment, "Containment should not be null");
+    Objects.requireNonNull(child, "Child should not be null");
+    if (containment.getKey().equals("sysml-IElement-ownedRelationship")) {
+      addToOwnedRelationship((IRelationship) child);
+      return;
+    }
+    if (containment.getKey().equals("sysml-IElement-aliasIdsContainer")) {
+      addToAliasIdsContainer((AliasIdsContainer) child);
+      return;
+    }
+    throw new IllegalStateException("Containment " + containment + " not found.");
+  }
+
+  @Override
+  public void addChild(@NotNull Containment containment, @NotNull Node child, int index) {
+    Objects.requireNonNull(containment, "containment must not be null");
+    Objects.requireNonNull(child, "child must not be null");
+    if (index < 0) throw new IllegalArgumentException("index should be non-negative");;
+    if (containment.getKey().equals("sysml-IElement-ownedRelationship")) {
+      addToOwnedRelationship((IRelationship) child, index);
+      return;
+    }
+    if (containment.getKey().equals("sysml-IElement-aliasIdsContainer")) {
+      addToAliasIdsContainer((AliasIdsContainer) child, index);
+      return;
+    }
+    throw new IllegalStateException("Containment " + containment + " not found.");
+  }
+
+  @Override
+  public List<ReferenceValue> getReferenceValues(@NotNull Reference reference) {
+    Objects.requireNonNull(reference, "reference should not be null");;
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-expression")) {
+      return expression;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-result")) {
+      return Collections.singletonList(result);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-step")) {
+      return step;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-parameter")) {
+      return parameter;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IClassifier-ownedSubclassification")) {
+      return ownedSubclassification;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeatureMembership")) {
+      return ownedFeatureMembership;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeature")) {
+      return ownedFeature;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedEndFeature")) {
+      return ownedEndFeature;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-feature")) {
+      return feature;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-input")) {
+      return input;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-output")) {
+      return output;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedMembership")) {
+      return inheritedMembership;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-endFeature")) {
+      return endFeature;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedConjugator")) {
+      return Collections.singletonList(ownedConjugator);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedFeature")) {
+      return inheritedFeature;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-multiplicity")) {
+      return Collections.singletonList(multiplicity);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-unioningType")) {
+      return unioningType;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedIntersecting")) {
+      return ownedIntersecting;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-intersectingType")) {
+      return intersectingType;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedUnioning")) {
+      return ownedUnioning;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDisjoining")) {
+      return ownedDisjoining;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-featureMembership")) {
+      return featureMembership;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-differencingType")) {
+      return differencingType;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDifferencing")) {
+      return ownedDifferencing;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-directedFeature")) {
+      return directedFeature;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedSpecialization")) {
+      return ownedSpecialization;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-membership")) {
+      return membership;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedImport")) {
+      return ownedImport;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-member")) {
+      return member;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMember")) {
+      return ownedMember;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-importedMembership")) {
+      return importedMembership;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMembership")) {
+      return ownedMembership;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningMembership")) {
+      return Collections.singletonList(owningMembership);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningNamespace")) {
+      return Collections.singletonList(owningNamespace);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningRelationship")) {
+      return Collections.singletonList(owningRelationship);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owner")) {
+      return Collections.singletonList(owner);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedElement")) {
+      return ownedElement;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-documentation")) {
+      return documentation;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedAnnotation")) {
+      return ownedAnnotation;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-textualRepresentation")) {
+      return textualRepresentation;
+    }
+    throw new IllegalStateException("Reference " + reference + " not found.");
+  }
+
+  @Override
+  public int addReferenceValue(Reference reference, ReferenceValue referredNode) {
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-expression")) {
+      return addToExpression(referredNode, expression.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-step")) {
+      return addToStep(referredNode, step.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-parameter")) {
+      return addToParameter(referredNode, parameter.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IClassifier-ownedSubclassification")) {
+      return addToOwnedSubclassification(referredNode, ownedSubclassification.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeatureMembership")) {
+      return addToOwnedFeatureMembership(referredNode, ownedFeatureMembership.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeature")) {
+      return addToOwnedFeature(referredNode, ownedFeature.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedEndFeature")) {
+      return addToOwnedEndFeature(referredNode, ownedEndFeature.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-feature")) {
+      return addToFeature(referredNode, feature.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-input")) {
+      return addToInput(referredNode, input.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-output")) {
+      return addToOutput(referredNode, output.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedMembership")) {
+      return addToInheritedMembership(referredNode, inheritedMembership.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-endFeature")) {
+      return addToEndFeature(referredNode, endFeature.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedFeature")) {
+      return addToInheritedFeature(referredNode, inheritedFeature.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-unioningType")) {
+      return addToUnioningType(referredNode, unioningType.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedIntersecting")) {
+      return addToOwnedIntersecting(referredNode, ownedIntersecting.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-intersectingType")) {
+      return addToIntersectingType(referredNode, intersectingType.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedUnioning")) {
+      return addToOwnedUnioning(referredNode, ownedUnioning.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDisjoining")) {
+      return addToOwnedDisjoining(referredNode, ownedDisjoining.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-featureMembership")) {
+      return addToFeatureMembership(referredNode, featureMembership.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-differencingType")) {
+      return addToDifferencingType(referredNode, differencingType.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDifferencing")) {
+      return addToOwnedDifferencing(referredNode, ownedDifferencing.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-directedFeature")) {
+      return addToDirectedFeature(referredNode, directedFeature.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedSpecialization")) {
+      return addToOwnedSpecialization(referredNode, ownedSpecialization.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-membership")) {
+      return addToMembership(referredNode, membership.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedImport")) {
+      return addToOwnedImport(referredNode, ownedImport.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-member")) {
+      return addToMember(referredNode, member.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMember")) {
+      return addToOwnedMember(referredNode, ownedMember.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-importedMembership")) {
+      return addToImportedMembership(referredNode, importedMembership.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMembership")) {
+      return addToOwnedMembership(referredNode, ownedMembership.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedElement")) {
+      return addToOwnedElement(referredNode, ownedElement.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-documentation")) {
+      return addToDocumentation(referredNode, documentation.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedAnnotation")) {
+      return addToOwnedAnnotation(referredNode, ownedAnnotation.size());
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-textualRepresentation")) {
+      return addToTextualRepresentation(referredNode, textualRepresentation.size());
+    }
+    throw new IllegalStateException("Reference " + reference + " not found.");
+  }
+
+  @Override
+  public int addReferenceValue(Reference reference, int index, ReferenceValue referredNode) {
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-expression")) {
+      return addToExpression(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-step")) {
+      return addToStep(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-parameter")) {
+      return addToParameter(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IClassifier-ownedSubclassification")) {
+      return addToOwnedSubclassification(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeatureMembership")) {
+      return addToOwnedFeatureMembership(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeature")) {
+      return addToOwnedFeature(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedEndFeature")) {
+      return addToOwnedEndFeature(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-feature")) {
+      return addToFeature(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-input")) {
+      return addToInput(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-output")) {
+      return addToOutput(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedMembership")) {
+      return addToInheritedMembership(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-endFeature")) {
+      return addToEndFeature(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedFeature")) {
+      return addToInheritedFeature(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-unioningType")) {
+      return addToUnioningType(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedIntersecting")) {
+      return addToOwnedIntersecting(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-intersectingType")) {
+      return addToIntersectingType(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedUnioning")) {
+      return addToOwnedUnioning(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDisjoining")) {
+      return addToOwnedDisjoining(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-featureMembership")) {
+      return addToFeatureMembership(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-differencingType")) {
+      return addToDifferencingType(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDifferencing")) {
+      return addToOwnedDifferencing(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-directedFeature")) {
+      return addToDirectedFeature(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedSpecialization")) {
+      return addToOwnedSpecialization(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-membership")) {
+      return addToMembership(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedImport")) {
+      return addToOwnedImport(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-member")) {
+      return addToMember(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMember")) {
+      return addToOwnedMember(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-importedMembership")) {
+      return addToImportedMembership(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMembership")) {
+      return addToOwnedMembership(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedElement")) {
+      return addToOwnedElement(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-documentation")) {
+      return addToDocumentation(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedAnnotation")) {
+      return addToOwnedAnnotation(referredNode, index);
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-textualRepresentation")) {
+      return addToTextualRepresentation(referredNode, index);
+    }
+    throw new IllegalStateException("Reference " + reference + " not found.");
+  }
+
+  @Override
+  public void setReferenceValues(@NotNull Reference reference,
+      @NotNull List<? extends ReferenceValue> values) {
+    Objects.requireNonNull(reference, "reference cannot be null");
+    Objects.requireNonNull(values, "values cannot be null");
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-expression")) {
+      setExpression(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-result")) {
+      if (values.size() > 0) throw new IllegalArgumentException("Cannot specifiy more than one value for a single-valued reference");
+      setResult(values.isEmpty() ? null : values.get(0));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-step")) {
+      setStep(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-parameter")) {
+      setParameter(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IClassifier-ownedSubclassification")) {
+      setOwnedSubclassification(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeatureMembership")) {
+      setOwnedFeatureMembership(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeature")) {
+      setOwnedFeature(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedEndFeature")) {
+      setOwnedEndFeature(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-feature")) {
+      setFeature(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-input")) {
+      setInput(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-output")) {
+      setOutput(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedMembership")) {
+      setInheritedMembership(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-endFeature")) {
+      setEndFeature(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedConjugator")) {
+      if (values.size() > 0) throw new IllegalArgumentException("Cannot specifiy more than one value for a single-valued reference");
+      setOwnedConjugator(values.isEmpty() ? null : values.get(0));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedFeature")) {
+      setInheritedFeature(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-multiplicity")) {
+      if (values.size() > 0) throw new IllegalArgumentException("Cannot specifiy more than one value for a single-valued reference");
+      setMultiplicity(values.isEmpty() ? null : values.get(0));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-unioningType")) {
+      setUnioningType(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedIntersecting")) {
+      setOwnedIntersecting(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-intersectingType")) {
+      setIntersectingType(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedUnioning")) {
+      setOwnedUnioning(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDisjoining")) {
+      setOwnedDisjoining(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-featureMembership")) {
+      setFeatureMembership(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-differencingType")) {
+      setDifferencingType(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDifferencing")) {
+      setOwnedDifferencing(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-directedFeature")) {
+      setDirectedFeature(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedSpecialization")) {
+      setOwnedSpecialization(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-membership")) {
+      setMembership(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedImport")) {
+      setOwnedImport(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-member")) {
+      setMember(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMember")) {
+      setOwnedMember(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-importedMembership")) {
+      setImportedMembership(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMembership")) {
+      setOwnedMembership(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningMembership")) {
+      if (values.size() > 0) throw new IllegalArgumentException("Cannot specifiy more than one value for a single-valued reference");
+      setOwningMembership(values.isEmpty() ? null : values.get(0));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningNamespace")) {
+      if (values.size() > 0) throw new IllegalArgumentException("Cannot specifiy more than one value for a single-valued reference");
+      setOwningNamespace(values.isEmpty() ? null : values.get(0));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningRelationship")) {
+      if (values.size() > 0) throw new IllegalArgumentException("Cannot specifiy more than one value for a single-valued reference");
+      setOwningRelationship(values.isEmpty() ? null : values.get(0));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owner")) {
+      if (values.size() > 0) throw new IllegalArgumentException("Cannot specifiy more than one value for a single-valued reference");
+      setOwner(values.isEmpty() ? null : values.get(0));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedElement")) {
+      setOwnedElement(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-documentation")) {
+      setDocumentation(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedAnnotation")) {
+      setOwnedAnnotation(values);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-textualRepresentation")) {
+      setTextualRepresentation(values);
+      return;
+    }
+    throw new IllegalStateException("Reference " + reference + " not found.");
+  }
+
+  @Override
+  public void setReferred(@NotNull Reference reference, int index, @Nullable Node referredNode) {
+    Objects.requireNonNull(reference, "reference cannot be null");
+    if (index < 0) throw new IllegalArgumentException("index should be non-negative");;
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-expression")) {
+      if (index >= expression.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = expression.get(index);
+      expression.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-result")) {
+      if (index >= 1 || result == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      result = result.withReferred(referredNode);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-step")) {
+      if (index >= step.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = step.get(index);
+      step.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-parameter")) {
+      if (index >= parameter.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = parameter.get(index);
+      parameter.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IClassifier-ownedSubclassification")) {
+      if (index >= ownedSubclassification.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedSubclassification.get(index);
+      ownedSubclassification.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeatureMembership")) {
+      if (index >= ownedFeatureMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedFeatureMembership.get(index);
+      ownedFeatureMembership.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeature")) {
+      if (index >= ownedFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedFeature.get(index);
+      ownedFeature.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedEndFeature")) {
+      if (index >= ownedEndFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedEndFeature.get(index);
+      ownedEndFeature.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-feature")) {
+      if (index >= feature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = feature.get(index);
+      feature.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-input")) {
+      if (index >= input.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = input.get(index);
+      input.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-output")) {
+      if (index >= output.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = output.get(index);
+      output.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedMembership")) {
+      if (index >= inheritedMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = inheritedMembership.get(index);
+      inheritedMembership.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-endFeature")) {
+      if (index >= endFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = endFeature.get(index);
+      endFeature.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedConjugator")) {
+      if (index >= 1 || ownedConjugator == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ownedConjugator = ownedConjugator.withReferred(referredNode);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedFeature")) {
+      if (index >= inheritedFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = inheritedFeature.get(index);
+      inheritedFeature.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-multiplicity")) {
+      if (index >= 1 || multiplicity == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      multiplicity = multiplicity.withReferred(referredNode);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-unioningType")) {
+      if (index >= unioningType.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = unioningType.get(index);
+      unioningType.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedIntersecting")) {
+      if (index >= ownedIntersecting.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedIntersecting.get(index);
+      ownedIntersecting.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-intersectingType")) {
+      if (index >= intersectingType.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = intersectingType.get(index);
+      intersectingType.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedUnioning")) {
+      if (index >= ownedUnioning.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedUnioning.get(index);
+      ownedUnioning.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDisjoining")) {
+      if (index >= ownedDisjoining.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedDisjoining.get(index);
+      ownedDisjoining.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-featureMembership")) {
+      if (index >= featureMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = featureMembership.get(index);
+      featureMembership.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-differencingType")) {
+      if (index >= differencingType.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = differencingType.get(index);
+      differencingType.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDifferencing")) {
+      if (index >= ownedDifferencing.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedDifferencing.get(index);
+      ownedDifferencing.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-directedFeature")) {
+      if (index >= directedFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = directedFeature.get(index);
+      directedFeature.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedSpecialization")) {
+      if (index >= ownedSpecialization.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedSpecialization.get(index);
+      ownedSpecialization.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-membership")) {
+      if (index >= membership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = membership.get(index);
+      membership.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedImport")) {
+      if (index >= ownedImport.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedImport.get(index);
+      ownedImport.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-member")) {
+      if (index >= member.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = member.get(index);
+      member.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMember")) {
+      if (index >= ownedMember.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedMember.get(index);
+      ownedMember.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-importedMembership")) {
+      if (index >= importedMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = importedMembership.get(index);
+      importedMembership.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMembership")) {
+      if (index >= ownedMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedMembership.get(index);
+      ownedMembership.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningMembership")) {
+      if (index >= 1 || owningMembership == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      owningMembership = owningMembership.withReferred(referredNode);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningNamespace")) {
+      if (index >= 1 || owningNamespace == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      owningNamespace = owningNamespace.withReferred(referredNode);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningRelationship")) {
+      if (index >= 1 || owningRelationship == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      owningRelationship = owningRelationship.withReferred(referredNode);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owner")) {
+      if (index >= 1 || owner == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      owner = owner.withReferred(referredNode);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedElement")) {
+      if (index >= ownedElement.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedElement.get(index);
+      ownedElement.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-documentation")) {
+      if (index >= documentation.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = documentation.get(index);
+      documentation.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedAnnotation")) {
+      if (index >= ownedAnnotation.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedAnnotation.get(index);
+      ownedAnnotation.set(index, original.withReferred(referredNode));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-textualRepresentation")) {
+      if (index >= textualRepresentation.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = textualRepresentation.get(index);
+      textualRepresentation.set(index, original.withReferred(referredNode));
+      return;
+    }
+    throw new IllegalStateException("Reference " + reference + " not found.");
+  }
+
+  @Override
+  public void setResolveInfo(@NotNull Reference reference, int index,
+      @Nullable String resolveInfo) {
+    Objects.requireNonNull(reference, "reference cannot be null");
+    if (index < 0) throw new IllegalArgumentException("index should be non-negative");;
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-expression")) {
+      if (index >= expression.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = expression.get(index);
+      expression.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IFunction-result")) {
+      if (index >= 1 || result == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      result = result.withResolveInfo(resolveInfo);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-step")) {
+      if (index >= step.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = step.get(index);
+      step.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IBehavior-parameter")) {
+      if (index >= parameter.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = parameter.get(index);
+      parameter.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IClassifier-ownedSubclassification")) {
+      if (index >= ownedSubclassification.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedSubclassification.get(index);
+      ownedSubclassification.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeatureMembership")) {
+      if (index >= ownedFeatureMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedFeatureMembership.get(index);
+      ownedFeatureMembership.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedFeature")) {
+      if (index >= ownedFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedFeature.get(index);
+      ownedFeature.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedEndFeature")) {
+      if (index >= ownedEndFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedEndFeature.get(index);
+      ownedEndFeature.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-feature")) {
+      if (index >= feature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = feature.get(index);
+      feature.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-input")) {
+      if (index >= input.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = input.get(index);
+      input.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-output")) {
+      if (index >= output.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = output.get(index);
+      output.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedMembership")) {
+      if (index >= inheritedMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = inheritedMembership.get(index);
+      inheritedMembership.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-endFeature")) {
+      if (index >= endFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = endFeature.get(index);
+      endFeature.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedConjugator")) {
+      if (index >= 1 || ownedConjugator == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ownedConjugator = ownedConjugator.withResolveInfo(resolveInfo);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-inheritedFeature")) {
+      if (index >= inheritedFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = inheritedFeature.get(index);
+      inheritedFeature.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-multiplicity")) {
+      if (index >= 1 || multiplicity == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      multiplicity = multiplicity.withResolveInfo(resolveInfo);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-unioningType")) {
+      if (index >= unioningType.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = unioningType.get(index);
+      unioningType.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedIntersecting")) {
+      if (index >= ownedIntersecting.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedIntersecting.get(index);
+      ownedIntersecting.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-intersectingType")) {
+      if (index >= intersectingType.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = intersectingType.get(index);
+      intersectingType.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedUnioning")) {
+      if (index >= ownedUnioning.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedUnioning.get(index);
+      ownedUnioning.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDisjoining")) {
+      if (index >= ownedDisjoining.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedDisjoining.get(index);
+      ownedDisjoining.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-featureMembership")) {
+      if (index >= featureMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = featureMembership.get(index);
+      featureMembership.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-differencingType")) {
+      if (index >= differencingType.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = differencingType.get(index);
+      differencingType.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedDifferencing")) {
+      if (index >= ownedDifferencing.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedDifferencing.get(index);
+      ownedDifferencing.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-directedFeature")) {
+      if (index >= directedFeature.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = directedFeature.get(index);
+      directedFeature.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IType-ownedSpecialization")) {
+      if (index >= ownedSpecialization.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedSpecialization.get(index);
+      ownedSpecialization.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-membership")) {
+      if (index >= membership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = membership.get(index);
+      membership.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedImport")) {
+      if (index >= ownedImport.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedImport.get(index);
+      ownedImport.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-member")) {
+      if (index >= member.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = member.get(index);
+      member.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMember")) {
+      if (index >= ownedMember.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedMember.get(index);
+      ownedMember.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-importedMembership")) {
+      if (index >= importedMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = importedMembership.get(index);
+      importedMembership.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-INamespace-ownedMembership")) {
+      if (index >= ownedMembership.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedMembership.get(index);
+      ownedMembership.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningMembership")) {
+      if (index >= 1 || owningMembership == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      owningMembership = owningMembership.withResolveInfo(resolveInfo);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningNamespace")) {
+      if (index >= 1 || owningNamespace == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      owningNamespace = owningNamespace.withResolveInfo(resolveInfo);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owningRelationship")) {
+      if (index >= 1 || owningRelationship == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      owningRelationship = owningRelationship.withResolveInfo(resolveInfo);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-owner")) {
+      if (index >= 1 || owner == null) throw new IllegalArgumentException("index should be less than the size of the list");;
+      owner = owner.withResolveInfo(resolveInfo);
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedElement")) {
+      if (index >= ownedElement.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedElement.get(index);
+      ownedElement.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-documentation")) {
+      if (index >= documentation.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = documentation.get(index);
+      documentation.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-ownedAnnotation")) {
+      if (index >= ownedAnnotation.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = ownedAnnotation.get(index);
+      ownedAnnotation.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    if (Objects.equals(reference.getKey(), "sysml-IElement-textualRepresentation")) {
+      if (index >= textualRepresentation.size()) throw new IllegalArgumentException("index should be less than the size of the list");;
+      ReferenceValue original = textualRepresentation.get(index);
+      textualRepresentation.set(index, original.withResolveInfo(resolveInfo));
+      return;
+    }
+    throw new IllegalStateException("Reference " + reference + " not found.");
+  }
+}
