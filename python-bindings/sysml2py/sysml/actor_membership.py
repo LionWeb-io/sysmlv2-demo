@@ -1,0 +1,32 @@
+from typing import TYPE_CHECKING, Optional, cast, List
+from lionweb.model.classifier_instance_utils import get_only_reference_value_by_reference_name, get_property_value_by_name, get_reference_value_by_name
+from lionweb.model.reference_value import ReferenceValue
+from .language import get_actor_membership
+from .parameter_membership import ParameterMembership
+if TYPE_CHECKING:
+    from .i_part_usage import IPartUsage
+
+
+class ActorMembership(ParameterMembership):
+
+    def __init__(self, id: str):
+        super().__init__(id)
+        self.concept = get_actor_membership()
+
+    @property
+    def ownedActorParameter(self) ->'Optional["IPartUsage"]':
+        res = get_only_reference_value_by_reference_name(self,
+            'ownedActorParameter')
+        if res:
+            return cast('IPartUsage', res.referred)
+        else:
+            return None
+
+    @ownedActorParameter.setter
+    def ownedActorParameter(self, ownedActorParameter: '"IPartUsage"'):
+        reference = self.get_classifier().get_reference_by_name(
+            'ownedActorParameter')
+        if self.ownedActorParameter:
+            self.remove_reference_value_by_index(reference, 0)
+        self.add_reference_value(reference, ReferenceValue(
+            ownedActorParameter, ownedActorParameter.name))
